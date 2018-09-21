@@ -5,7 +5,8 @@ import java.awt.event.*;
 import java.applet.Applet;
 import javax.swing.*;
 
-public class GameboardGui extends Applet {
+public class GameboardGui extends Applet 
+{
     JPanel panel_1;
     JPanel panel_2;
     JButton button_1;
