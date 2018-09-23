@@ -20,10 +20,12 @@ public class GameMenu {
 		frame.setLayout(layout);
 		
 		joinExistingButton = new JButton("Join existing game");
-		frame.add(joinExistingButton, BorderLayout.WEST);
+		joinExistingButton.setEnabled(false);
+		frame.add(joinExistingButton, BorderLayout.EAST);
 		
 		createNewButton = new JButton("Create a new game");
-		frame.add(createNewButton, BorderLayout.EAST);
+		createNewButton.setEnabled(false);
+		frame.add(createNewButton, BorderLayout.WEST);
 		
 		south = new JPanel();
 		frame.add(south, BorderLayout.SOUTH);
@@ -34,6 +36,7 @@ public class GameMenu {
 		south.add(namePrompt);
 		
 		name = new JTextField();
+		name.addKeyListener(new TextFieldHandler());
 		south.add(name);
 		
 		frame.addWindowListener(new WindowAdapter() {
@@ -42,6 +45,44 @@ public class GameMenu {
 		    }
 		});
 		frame.setVisible(true);
+	}
+	
+	private static class ButtonHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			
+			
+		}
+		
+	}
+	private static class TextFieldHandler implements KeyListener{
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			if(name.getText().equals("")){
+				joinExistingButton.setEnabled(false);
+				createNewButton.setEnabled(false);
+			}
+			else {
+				joinExistingButton.setEnabled(true);
+				createNewButton.setEnabled(true);
+			}
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 
 }
