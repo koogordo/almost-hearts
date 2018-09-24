@@ -11,7 +11,8 @@ public class GameMenu extends Applet {
     JTextField textfield_1;
     JLabel label_1;
 
-    public void init() {
+    public void init() 
+    {
         GameMenuLayout customLayout = new GameMenuLayout();
 
         setFont(new Font("Helvetica", Font.PLAIN, 12));
