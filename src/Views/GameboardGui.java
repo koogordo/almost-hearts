@@ -18,7 +18,8 @@ public class GameboardGui extends Applet
     JPanel panel_4;
     JPanel panel_5;
 
-    public void init() {
+    public void init() 
+    {
         GameboardGuiLayout customLayout = new GameboardGuiLayout();
 
         setFont(new Font("Helvetica", Font.PLAIN, 12));
@@ -58,12 +59,15 @@ public class GameboardGui extends Applet
 
     }
 
-    public static void main(String args[]) {
+    public static void main(String args[]) 
+    {
         GameboardGui applet = new GameboardGui();
         Frame window = new Frame("GameboardGui");
 
-        window.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
+        window.addWindowListener(new WindowAdapter() 
+        {
+            public void windowClosing(WindowEvent e) 
+            {
                 System.exit(0);
             }
         });
@@ -75,18 +79,26 @@ public class GameboardGui extends Applet
     }
 }
 
-class GameboardGuiLayout implements LayoutManager {
+class GameboardGuiLayout implements LayoutManager 
+{
 
-    public GameboardGuiLayout() {
+    public GameboardGuiLayout() 
+    {
+    	
     }
 
-    public void addLayoutComponent(String name, Component comp) {
+    public void addLayoutComponent(String name, Component comp) 
+    {
+    
     }
 
-    public void removeLayoutComponent(Component comp) {
+    public void removeLayoutComponent(Component comp) 
+    {
+    	
     }
 
-    public Dimension preferredLayoutSize(Container parent) {
+    public Dimension preferredLayoutSize(Container parent) 
+    {
         Dimension dim = new Dimension(0, 0);
 
         Insets insets = parent.getInsets();
@@ -96,12 +108,14 @@ class GameboardGuiLayout implements LayoutManager {
         return dim;
     }
 
-    public Dimension minimumLayoutSize(Container parent) {
+    public Dimension minimumLayoutSize(Container parent) 
+    {
         Dimension dim = new Dimension(0, 0);
         return dim;
     }
 
-    public void layoutContainer(Container parent) {
+    public void layoutContainer(Container parent) 
+    {
         Insets insets = parent.getInsets();
 
         Component c;

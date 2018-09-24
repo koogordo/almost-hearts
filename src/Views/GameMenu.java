@@ -5,7 +5,8 @@ import java.awt.event.*;
 import java.applet.Applet;
 import javax.swing.*;
 
-public class GameMenu extends Applet {
+public class GameMenu extends Applet 
+{
     JButton button_2;
     JButton button_3;
     JTextField textfield_1;
@@ -31,15 +32,17 @@ public class GameMenu extends Applet {
         add(label_1);
 
         setSize(getPreferredSize());
-
     }
 
-    public static void main(String args[]) {
+    public static void main(String args[]) 
+    {
         GameMenu applet = new GameMenu();
         Frame window = new Frame("GameMenu");
 
-        window.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
+        window.addWindowListener(new WindowAdapter() 
+        {
+            public void windowClosing(WindowEvent e) 
+            {
                 System.exit(0);
             }
         });
@@ -51,18 +54,26 @@ public class GameMenu extends Applet {
     }
 }
 
-class GameMenuLayout implements LayoutManager {
+class GameMenuLayout implements LayoutManager 
+{
 
-    public GameMenuLayout() {
+    public GameMenuLayout() 
+    {
+    	
     }
 
-    public void addLayoutComponent(String name, Component comp) {
+    public void addLayoutComponent(String name, Component comp) 
+    {
+    	
     }
 
-    public void removeLayoutComponent(Component comp) {
+    public void removeLayoutComponent(Component comp) 
+    {
+    	
     }
-
-    public Dimension preferredLayoutSize(Container parent) {
+    
+    public Dimension preferredLayoutSize(Container parent) 
+    {
         Dimension dim = new Dimension(0, 0);
 
         Insets insets = parent.getInsets();
@@ -72,12 +83,14 @@ class GameMenuLayout implements LayoutManager {
         return dim;
     }
 
-    public Dimension minimumLayoutSize(Container parent) {
+    public Dimension minimumLayoutSize(Container parent) 
+    {
         Dimension dim = new Dimension(0, 0);
         return dim;
     }
 
-    public void layoutContainer(Container parent) {
+    public void layoutContainer(Container parent) 
+    {
         Insets insets = parent.getInsets();
 
         Component c;
