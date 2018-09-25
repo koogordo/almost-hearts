@@ -35,9 +35,9 @@ public class Deck
 			deck.add(temp);
 		}
 	}
-	
+
 	public void Shuffle() 
 	{
-	Collections.shuffle(deck);
+		Collections.shuffle(deck);
 	}
 }
