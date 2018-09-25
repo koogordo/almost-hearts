@@ -28,7 +28,8 @@ public class GameboardGui extends JFrame
 				{
 					GameboardGui frame = new GameboardGui();
 					frame.setVisible(true);
-				} catch (Exception e) 
+				} 
+				catch (Exception e) 
 				{
 					e.printStackTrace();
 				}

@@ -10,12 +10,15 @@ import java.net.*;
  * The response is received and uses the ip-address that it received from the server to 
  * attempt a TCP connection with server using the port 12345.
  */
-public class Client {
+public class Client 
+{
 	Socket socket;
-	public Client(String name) {
+	public Client(String name) 
+	{
 		DatagramSocket ds;
 		
-		try {
+		try 
+		{
 			ds = new DatagramSocket(12344);
 			//ds.setBroadcast(true);
 			byte[] bytesToSend = name.getBytes();
@@ -28,13 +31,15 @@ public class Client {
 			socket = new Socket(dp.getAddress().getHostAddress(), 12345);
 			System.out.println("Client - connection established");
 			
-		} catch (IOException e) {
+		} 
+		catch (IOException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
-	public Socket getSocket() {
+	public Socket getSocket() 
+	{
 		return socket;
 	}
 }
