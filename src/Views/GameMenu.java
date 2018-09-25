@@ -5,6 +5,8 @@ import java.awt.event.*;
 import java.applet.Applet;
 import javax.swing.*;
 
+import AppTools.*;
+
 public class GameMenu {
 	static JButton joinExistingButton;
 	static JButton createNewButton;
@@ -21,10 +23,12 @@ public class GameMenu {
 		
 		joinExistingButton = new JButton("Join existing game");
 		joinExistingButton.setEnabled(false);
+		joinExistingButton.addActionListener(new ButtonHandler());
 		frame.add(joinExistingButton, BorderLayout.EAST);
 		
 		createNewButton = new JButton("Create a new game");
 		createNewButton.setEnabled(false);
+		createNewButton.addActionListener(new ButtonHandler());
 		frame.add(createNewButton, BorderLayout.WEST);
 		
 		south = new JPanel();
@@ -51,8 +55,13 @@ public class GameMenu {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
+			if(event.getActionCommand().equals(createNewButton.getText())) {
+				new Thread(new Server());	
+			}
+			Client client = new Client(name.getText());
 			
-			
+			//here we use client.getSocket() function to return the socket from client
+			//and use that socket for entering the start of the game/waiting area
 		}
 		
 	}
