@@ -5,7 +5,8 @@ import java.net.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Server implements Runnable{
+public class Server implements Runnable
+{
 	ServerSocket server;
 	Socket[] sockets;
 	String[] usernames;
@@ -26,9 +27,11 @@ public class Server implements Runnable{
 	 * 
 	 */
 	@Override
-	public void run() {
+	public void run() 
+	{
 		// TODO Auto-generated method stub
-		try {
+		try 
+		{
 			server = new ServerSocket(12345);
 			ds = new DatagramSocket(12343);
 			sockets = new Socket[numOfPlayers];
@@ -44,23 +47,24 @@ public class Server implements Runnable{
 				System.out.println("Server - Received request from " + usernames[i]);
 				DatagramPacket packetToSend = new DatagramPacket("accepted".getBytes(), "accepted".length(), dp.getAddress(), 12344);
 				ds.send(packetToSend);
-				sockets[i] = server.accept();
-				
+				sockets[i] = server.accept();	
 			}
 			ds.close();
 			//need to make Runnable class to make each socket it's own thread
 			//this is how you simulate the players actions
 			//recommended that the Runnable class contain a reference to this server(or different shared resource)
 			
-			
-		} catch (IOException e) {
+		} catch (IOException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public String byteArrayToString(byte[] b) {
+	public String byteArrayToString(byte[] b) 
+	{
 		String result = "";
-		for(int i = 0; i < b.length; ++i) {
+		for(int i = 0; i < b.length; ++i) 
+		{
 			result += (char) b[i];
 		}
 		return result;
