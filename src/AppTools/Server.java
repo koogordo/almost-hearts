@@ -8,6 +8,7 @@ public class Server implements Runnable{
 	Socket[] sockets;
 	String[] usernames;
 	DatagramSocket ds;
+	int numOfPlayers = 3;
 	/*
 	 * Class Server implements Runnable so that it is possible to make this a separate thread because the
 	 * machine running the Server is also going to be a Client(player).
@@ -26,14 +27,14 @@ public class Server implements Runnable{
 		// TODO Auto-generated method stub
 		try {
 			server = new ServerSocket(12345);
-			sockets = new Socket[3];
-			usernames = new String[3];
+			sockets = new Socket[numOfPlayers];
+			usernames = new String[numOfPlayers];
 			ds = new DatagramSocket(12343);
-			DatagramPacket dp = new DatagramPacket(new byte[0],0);
-			for(int i = 0; i < 1; ++i) {
+			DatagramPacket dp = new DatagramPacket(new byte[100],100);
+			for(int i = 0; i < numOfPlayers; ++i) {
 				System.out.println("Server - Ready to receive request");
 				ds.receive(dp);	
-				usernames[i] = dp.getData().toString();
+				usernames[i] = byteArrayToString(dp.getData());
 				System.out.println("Server - Received request from " + usernames[i]);
 				dp = new DatagramPacket(new byte[0], 0, InetAddress.getLocalHost(), 12344);
 				ds.send(dp);
@@ -41,12 +42,19 @@ public class Server implements Runnable{
 			}
 			
 			//need to make Runnable class to make each socket it's own thread
-			//recommended that the Runnable class contain a reference to this server(or different shared resources)
+			//recommended that the Runnable class contain a reference to this server(or different shared resource)
 			
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public String byteArrayToString(byte[] b) {
+		String result = "";
+		for(int i = 0; i < b.length; ++i) {
+			result += (char) b[i];
+		}
+		return result;
 	}
 }
