@@ -19,8 +19,7 @@ public class Client {
 			ds = new DatagramSocket(12344);
 			//ds.setBroadcast(true);
 			byte[] bytesToSend = name.getBytes();
-			DatagramPacket dp = new DatagramPacket(bytesToSend, bytesToSend.length, InetAddress.getLocalHost(), 12343);
-			
+			DatagramPacket dp = new DatagramPacket(bytesToSend, bytesToSend.length, InetAddress.getByName("10.19.80.32"), 12343);
 			System.out.println("Attempting to find server");
 			ds.send(dp);
 			ds.receive(dp);
