@@ -42,6 +42,7 @@ public class Server implements Runnable{
 			}
 			
 			//need to make Runnable class to make each socket it's own thread
+			//this is how you simulate the players actions
 			//recommended that the Runnable class contain a reference to this server(or different shared resource)
 			
 			
