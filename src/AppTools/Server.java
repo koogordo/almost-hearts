@@ -3,12 +3,15 @@ package AppTools;
 import java.io.IOException;
 import java.net.*;
 
-public class Server{
+public class Server implements Runnable{
 	ServerSocket server;
 	Socket[] sockets;
 	String[] usernames;
 	DatagramSocket ds;
-	public Server() {
+	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 		try {
 			server = new ServerSocket(12345);
 			sockets = new Socket[3];
