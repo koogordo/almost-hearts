@@ -2,6 +2,7 @@ package Views;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.concurrent.*;
 import java.applet.Applet;
 import javax.swing.*;
 
@@ -56,7 +57,8 @@ public class GameMenu {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			if(event.getActionCommand().equals(createNewButton.getText())) {
-				new Thread(new Server());	
+				ExecutorService executorService = Executors.newCachedThreadPool();
+				executorService.execute(new Server());
 			}
 			Client client = new Client(name.getText());
 			
