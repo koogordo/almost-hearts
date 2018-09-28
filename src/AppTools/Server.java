@@ -48,6 +48,12 @@ public class Server implements Runnable{
 				
 			}
 			ds.close();
+			
+			Game game = new Game(usernames, sockets);
+			ExecutorService executorService = Executors.newCachedThreadPool();
+			for (int i = 0; i < numOfPlayers; i++) {
+				executorService.execute(new ServerPlayer(sockets[i], game, i));
+			}
 			//need to make Runnable class to make each socket it's own thread
 			//this is how you simulate the players actions
 			//recommended that the Runnable class contain a reference to this server(or different shared resource)
