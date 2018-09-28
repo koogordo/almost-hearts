@@ -19,20 +19,24 @@ public class Client {
 			ds = new DatagramSocket(12344);
 			ds.setBroadcast(true);
 			byte[] bytesToSend = name.getBytes();
-			DatagramPacket dp = new DatagramPacket(bytesToSend, bytesToSend.length, InetAddress.getByName("255.255.255.255"), 12343);
+			DatagramPacket dp = new DatagramPacket(bytesToSend, bytesToSend.length, 
+					InetAddress.getByName(makeBroadcastAddress(InetAddress.getLocalHost().getHostAddress())), 12343);
 			
 			System.out.println("Attempting to find server");
 			ds.send(dp);
-			ds.receive(dp);
-			System.out.println("Client - Server found attempting to connect");
-			socket = new Socket(dp.getAddress().getHostAddress(), 12345);
-			System.out.println("Client - connection established");
+			//ds.receive(dp); 255.255.255.255
+			//System.out.println("Client - Server found attempting to connect");
+			//socket = new Socket(dp.getAddress().getHostAddress(), 12345);
+			//System.out.println("Client - connection established");
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+	}
+	public String makeBroadcastAddress(String s) {
+		return s.substring(0, s.lastIndexOf(".")) + ".255";
 	}
 	public Socket getSocket() {
 		return socket;
