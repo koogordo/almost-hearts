@@ -24,10 +24,10 @@ public class Client {
 			
 			System.out.println("Attempting to find server");
 			ds.send(dp);
-			//ds.receive(dp); 255.255.255.255
-			//System.out.println("Client - Server found attempting to connect");
-			//socket = new Socket(dp.getAddress().getHostAddress(), 12345);
-			//System.out.println("Client - connection established");
+			ds.receive(dp); 255.255.255.255
+			System.out.println("Client - Server found attempting to connect");
+			socket = new Socket(dp.getAddress().getHostAddress(), 12345);
+			System.out.println("Client - connection established");
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
