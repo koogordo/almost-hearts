@@ -24,7 +24,7 @@ public class Client {
 			
 			System.out.println("Attempting to find server");
 			ds.send(dp);
-			ds.receive(dp); 255.255.255.255
+			ds.receive(dp);
 			System.out.println("Client - Server found attempting to connect");
 			socket = new Socket(dp.getAddress().getHostAddress(), 12345);
 			System.out.println("Client - connection established");
