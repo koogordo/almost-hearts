@@ -16,5 +16,11 @@ public class Card
 		Suit = s;
 		value = v;	
 	}
+	public String getSuit() {
+		return Suit;
+	}
+	public int getValue() {
+		return value;
+	}
 }
 
