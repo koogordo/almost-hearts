@@ -84,4 +84,27 @@ public class GameboardGui extends JFrame
 		panel_4.add(btnSubmit, BorderLayout.NORTH);
 	}
 
+	
+	
+	/*	Timer code
+	 * public class Test {
+
+    public static void main(String[] args) {
+        JFrame f = new JFrame();
+        final JDialog dialog = new JDialog(f, "Test", true);
+        Timer timer = new Timer(2000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dialog.setVisible(false);
+                dialog.dispose();
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
+
+        dialog.setVisible(true); // if modal, application will pause here
+
+        System.out.println("Dialog closed");
+    }
+}
+	 */
 }

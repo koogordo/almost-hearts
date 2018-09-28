@@ -13,26 +13,10 @@ public class Deck
 	{	
 		for(int i=2; i < 15; i++) 
 		{
-			Card temp = new Card("H",i);
-			deck.add(temp);
-		}
-		
-		for(int i=2; i < 15; i++) 
-		{
-			Card temp = new Card("C",i);
-			deck.add(temp);
-		}
-		
-		for(int i=2; i < 15; i++) 
-		{
-			Card temp = new Card("D",i);
-			deck.add(temp);
-		}
-		
-		for(int i=2; i < 15; i++) 
-		{
-			Card temp = new Card("S",i);
-			deck.add(temp);
+			deck.add(new Card("H",i));
+			deck.add(new Card("C",i));
+			deck.add(new Card("D",i));
+			deck.add(new Card("S",i));
 		}
 	}
 

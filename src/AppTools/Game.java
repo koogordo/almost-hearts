@@ -4,7 +4,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class game 
+public class Game 
 {
 	String[] playerNames = new String[3];
 	Socket[] playerSockets = new Socket[3];
@@ -14,8 +14,10 @@ public class game
 	int previousWinner;
 	int totalRounds;
 	
-	public game(String[] n, Socket[] s) {
-		
+	public Game(String[] n, Socket[] s) 
+	{
+		playerNames = n;
+		playerSockets = s;
 	}
 	public void roundWinner (ArrayList<Card> cardsPlayed)
 	{	

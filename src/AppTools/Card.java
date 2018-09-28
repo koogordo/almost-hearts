@@ -1,25 +1,24 @@
 package AppTools;
 
+import javax.swing.ImageIcon;
+
 public class Card 
 {	
 	String Suit;
 	int value;
-	
-	public Card() 
-	{
-		Suit = "";
-		value = 0;	
-	}
-	
+	ImageIcon cardImage;
 	public Card(String s, int v) 
 	{	
 		Suit = s;
 		value = v;	
+		cardImage = new ImageIcon(value + Suit + ".png");
 	}
-	public String getSuit() {
+	public String getSuit() 
+	{
 		return Suit;
 	}
-	public int getValue() {
+	public int getValue() 
+	{
 		return value;
 	}
 }
