@@ -5,17 +5,21 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+ * This class holds the shared resources that the ServerPlayer threads use.
+ * It also is how the game is controlled
+ */
 public class Game 
 {
 	String[] playerNames = new String[3];
 	Socket[] playerSockets = new Socket[3];
 	PrintStream[] out = new PrintStream[3];
-	List<Card> cardsOfRound = new ArrayList<>();
+	Card[]cardsOfRound = new Card[3];
 	int[] roundsWon = new int[3];
 	int[] totalScore = new int[3];
 	int previousWinner;
-	int turn;
+	int playerTurn;
+	int numOfTurns;
 	int totalRounds;
 	
 	public Game(String[] n, Socket[] s) 
@@ -24,7 +28,8 @@ public class Game
 		playerSockets = s;
 		for(int i = 0; i < 3; i++) //sets up the output streams for all the players and sends them the names of all the players
 		{
-			try {
+			try
+			{
 				out[i] = new PrintStream(playerSockets[i].getOutputStream());
 				out[i].println(i + " " + playerNames[0] + " " + playerNames[1] + " " + playerNames[2]);
 				
@@ -34,19 +39,34 @@ public class Game
 			}
 		}
 	}
-	public void roundWinner (ArrayList<Card> cardsPlayed)
-	{	
-		int playerWhoPlayedFirst  = previousWinner;
-		for (int i = 0; i < cardsPlayed.size(); i++)
+	public void turnPlayed(int player, String suit, int value) {
+		if(player == playerTurn)
 		{
-			if ((cardsPlayed.get(i).getSuit().equals( cardsPlayed.get(playerWhoPlayedFirst).getSuit())) && (cardsPlayed.get(i).getValue() > cardsPlayed.get(previousWinner).getValue()))
+			cardsOfRound[playerTurn] = new Card(suit, value);
+			
+			++playerTurn;
+			playerTurn %= 3;//wrap back to 0 if it hits 3
+			++numOfTurns;
+			if(numOfTurns == 3)
+			{
+				numOfTurns = 0;
+				roundWinner();
+			}
+		}
+	}
+	public void roundWinner ()
+	{	
+		int playerWhoPlayedFirst = previousWinner;
+		for (int i = 0; i < cardsOfRound.length; i++)
+		{
+			if ((cardsOfRound[i].getSuit().equals(cardsOfRound[playerWhoPlayedFirst].getSuit())) && (cardsOfRound[i].getValue() > cardsOfRound[previousWinner].getValue()))
 			{
 				previousWinner = i;
 			}
 		}
-		turn = previousWinner;
+		playerTurn = previousWinner;
 		roundsWon[previousWinner]++;
-		totalScore[previousWinner] += cardsPlayed.get(previousWinner).getValue();
+		totalScore[previousWinner] += cardsOfRound[previousWinner].getValue();
 		totalRounds++;
 		checkEndGame();
 	}
@@ -82,7 +102,8 @@ public class Game
 			//end game or whatever
 		}
 	}
-	public void broadcast(String broadcastString) {
+	public void broadcast(String broadcastString)
+	{
 		for(int i = 0; i < 3; i++) {
 			out[i].println(broadcastString);
 		}
