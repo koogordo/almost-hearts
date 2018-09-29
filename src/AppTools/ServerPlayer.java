@@ -31,7 +31,9 @@ public class ServerPlayer implements Runnable {
 				String firstToken = input.nextToken();
 				
 				switch(firstToken) {
-				
+				case "Played":
+					
+					break;
 				
 				case "Exit": System.exit(0); break;
 				default:

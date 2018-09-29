@@ -12,6 +12,7 @@ public class Game
 	int[] roundsWon = new int[3];
 	int[] totalScore = new int[3];
 	int previousWinner;
+	int turn;
 	int totalRounds;
 	
 	public Game(String[] n, Socket[] s) 
@@ -21,14 +22,15 @@ public class Game
 	}
 	public void roundWinner (ArrayList<Card> cardsPlayed)
 	{	
-		previousWinner = 0;
+		int playerWhoPlayedFirst  = previousWinner;
 		for (int i = 0; i < cardsPlayed.size(); i++)
 		{
-			if ((cardsPlayed.get(i).getSuit() == cardsPlayed.get(0).getSuit()) && (cardsPlayed.get(i).getValue() > cardsPlayed.get(previousWinner).getValue()))
+			if ((cardsPlayed.get(i).getSuit() == cardsPlayed.get(playerWhoPlayedFirst).getSuit()) && (cardsPlayed.get(i).getValue() > cardsPlayed.get(previousWinner).getValue()))
 			{
 				previousWinner = i;
 			}
 		}
+		turn = previousWinner;
 		roundsWon[previousWinner]++;
 		totalScore[previousWinner] += cardsPlayed.get(previousWinner).getValue();
 		totalRounds++;
