@@ -11,7 +11,7 @@ public class Card
 	{	
 		Suit = s;
 		value = v;	
-		cardImage = new ImageIcon(value + Suit + ".png");
+		cardImage = new ImageIcon("cardImages/"+ value + Suit + ".png");
 	}
 	public String getSuit() 
 	{
