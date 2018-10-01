@@ -1,7 +1,11 @@
 package AppTools;
 
+import java.awt.Dialog;
 import java.io.IOException;
 import java.net.*;
+
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 /*
  * Client constructor sends out a broadcast packet to any DatagramSocket receiving on port 12343
  * The contents of the sent packet is the name of the user joining (in bytes)
@@ -29,6 +33,7 @@ public class Client {
 			System.out.println("Client - Server found attempting to connect");
 			socket = new Socket(dp.getAddress().getHostAddress(), 12345);
 			System.out.println("Client - connection established");
+			makeLoadingScreen();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -41,5 +46,16 @@ public class Client {
 	}
 	public Socket getSocket() {
 		return socket;
+	}
+	public void makeLoadingScreen() {
+		JOptionPane optionPane = new JOptionPane("Waiting for other players to join...", JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+		JDialog screen = new JDialog();
+		screen.setTitle("Loading");
+		screen.setModal(true);
+		screen.setContentPane(optionPane);
+
+		screen.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		screen.pack();
+		screen.setVisible(true);
 	}
 }

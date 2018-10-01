@@ -15,10 +15,11 @@ public class GameMenu {
 	static JTextField address;
 	static JLabel namePrompt;
 	static JPanel north;
+	static JFrame frame;
     
 	public static void main(String args[]) 
 	{
-		JFrame frame = new JFrame("GameMenu");
+		frame = new JFrame("GameMenu");
 		frame.setSize(325, 200);
 		frame.setResizable(false);
 		BorderLayout layout = new BorderLayout();
@@ -71,8 +72,10 @@ public class GameMenu {
 				ExecutorService executorService = Executors.newCachedThreadPool();
 				executorService.execute(new Server());
 			}
-			Client client = new Client(name.getText(), address.getText());
+			frame.setVisible(false);
 			
+			Client client = new Client(name.getText(), address.getText());
+			//JOptionPane.showMessageDialog(null, "Something", "Waiting for Other Players", JOptionPane.INFORMATION_MESSAGE);
 			//here we use client.getSocket() function to return the socket from client
 			//and use that socket for entering the start of the game/waiting area
 		}
