@@ -12,15 +12,16 @@ import java.net.*;
  */
 public class Client {
 	Socket socket;
-	public Client(String name) {
+	public Client(String name, String addressToConnectTo) {
 		DatagramSocket ds;
+		
 		
 		try {
 			ds = new DatagramSocket(12344);
 			ds.setBroadcast(true);
 			byte[] bytesToSend = name.getBytes();
 			DatagramPacket dp = new DatagramPacket(bytesToSend, bytesToSend.length, 
-					InetAddress.getByName(makeBroadcastAddress(InetAddress.getLocalHost().getHostAddress())), 12343);
+					InetAddress.getByName(addressToConnectTo), 12343);
 			
 			System.out.println("Attempting to find server");
 			ds.send(dp);

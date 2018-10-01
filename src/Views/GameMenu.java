@@ -12,6 +12,7 @@ public class GameMenu {
 	static JButton joinExistingButton;
 	static JButton createNewButton;
 	static JTextField name;
+	static JTextField address;
 	static JLabel namePrompt;
 	static JPanel north;
     
@@ -45,6 +46,11 @@ public class GameMenu {
 		name.addKeyListener(new TextFieldHandler());
 		north.add(name);
 		
+		address = new JTextField();
+		address.addKeyListener(new TextFieldHandler());
+		north.add(address);
+		
+		
 		frame.addWindowListener(new WindowAdapter() 
 		{
 			public void windowClosing(WindowEvent e) 
@@ -65,7 +71,7 @@ public class GameMenu {
 				ExecutorService executorService = Executors.newCachedThreadPool();
 				executorService.execute(new Server());
 			}
-			Client client = new Client(name.getText());
+			Client client = new Client(name.getText(), address.getText());
 			
 			//here we use client.getSocket() function to return the socket from client
 			//and use that socket for entering the start of the game/waiting area
