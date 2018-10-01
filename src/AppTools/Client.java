@@ -15,13 +15,16 @@ import javax.swing.JOptionPane;
  * The response is received and uses the ip-address that it received from the server to 
  * attempt a TCP connection with server using the port 12345.
  */
-public class Client {
+public class Client 
+{
 	Socket socket;
-	public Client(String name, String addressToConnectTo) {
+	JDialog screen;
+	public Client(String name, String addressToConnectTo) 
+	{
 		DatagramSocket ds;
 		
-		
-		try {
+		try 
+		{
 			ds = new DatagramSocket(12344);
 			ds.setBroadcast(true);
 			byte[] bytesToSend = name.getBytes();
@@ -34,25 +37,29 @@ public class Client {
 			System.out.println("Client - Server found attempting to connect");
 			socket = new Socket(dp.getAddress().getHostAddress(), 12345);
 			System.out.println("Client - connection established");
-			makeLoadingScreen();
-			
-		} catch (IOException e) {
+			makeLoadingScreen();	
+		} 
+		catch (IOException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
-	public String makeBroadcastAddress(String s) {
+	public String makeBroadcastAddress(String s) 
+	{
 		return s.substring(0, s.lastIndexOf(".")) + ".255";
 	}
-	public Socket getSocket() {
+	public Socket getSocket() 
+	{
 		return socket;
 	}
-	public void makeLoadingScreen() {
+	public void makeLoadingScreen() 
+	{
 		final ImageIcon icon = new ImageIcon("cardImages/cardLoading.gif");
 		JOptionPane optionPane = new JOptionPane("Waiting for other players to join...", JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon, new Object[]{}, null);
-		JDialog screen = new JDialog();
-		screen.setTitle("Loading");
+		screen = new JDialog();
+		screen.setTitle("Loading...");
 		screen.setModal(true);
 		screen.setContentPane(optionPane);
 		screen.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
