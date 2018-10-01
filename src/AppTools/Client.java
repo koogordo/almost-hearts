@@ -49,7 +49,7 @@ public class Client {
 		return socket;
 	}
 	public void makeLoadingScreen() {
-		final ImageIcon icon = new ImageIcon("cardImages/loadingGif.gif");
+		final ImageIcon icon = new ImageIcon("cardImages/cardLoading.gif");
 		JOptionPane optionPane = new JOptionPane("Waiting for other players to join...", JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon, new Object[]{}, null);
 		JDialog screen = new JDialog();
 		screen.setTitle("Loading");
