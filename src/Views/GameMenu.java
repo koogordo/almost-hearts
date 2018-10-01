@@ -8,39 +8,45 @@ import javax.swing.*;
 
 import AppTools.*;
 
-public class GameMenu {
-	static JButton joinExistingButton;
-	static JButton createNewButton;
-	static JTextField name;
-	static JTextField address;
-	static JLabel namePrompt;
-	static JPanel north;
-	static JFrame frame;
+/**
+ * GameMenu.java is the main driver to initialize the program
+ * It starts up a JFrame Gui that allows the users to enter their name and connect to the game
+ */
+
+public class GameMenu 
+{
+	static JButton joinExistingButton; // Button to join and exiting game
+	static JButton createNewButton; // Button to create a new game
+	static JLabel namePrompt; // Label to inform the user to enter their name in the TextField
+	static JTextField name; // Field for the User(s) to enter their name
+	static JTextField address; // This will be removed eventually
+	static JPanel north; // JPanel for the Name to be entered
+	static JFrame frame; // JFrame
     
 	public static void main(String args[]) 
 	{
-		frame = new JFrame("GameMenu");
-		frame.setSize(325, 200);
-		frame.setResizable(false);
-		BorderLayout layout = new BorderLayout();
-		frame.setLayout(layout);
+		frame = new JFrame("GameMenu"); // Creating a new JFrame called Game Menu
+		frame.setSize(325, 200); // Setting the sixe of the frame to 325 wide x 200 high
+		frame.setResizable(false); // Do not allow the user to adjust the size of the frame
+		BorderLayout layout = new BorderLayout(); // Creating a border layout
+		frame.setLayout(layout); // Setting the layout of our frame to the border layout
 		
-		joinExistingButton = new JButton("Join existing game");
-		joinExistingButton.setEnabled(false);
-		joinExistingButton.addActionListener(new ButtonHandler());
-		frame.add(joinExistingButton, BorderLayout.EAST);
+		joinExistingButton = new JButton("Join existing game"); // Creating a button called "Join existing Game"
+		joinExistingButton.setEnabled(false); // Setting enabled to false
+		joinExistingButton.addActionListener(new ButtonHandler()); // Creating an actionListener for when the button is pressed
+		frame.add(joinExistingButton, BorderLayout.EAST); // Setting the button's location to the East side of the border layout
 		
-		createNewButton = new JButton("Create a new game");
-		createNewButton.setEnabled(false);
-		createNewButton.addActionListener(new ButtonHandler());
-		frame.add(createNewButton, BorderLayout.WEST);
+		createNewButton = new JButton("Create a new game"); // Creating a button called "Create a new Game"
+		createNewButton.setEnabled(false); // Setting enabled to false
+		createNewButton.addActionListener(new ButtonHandler()); // Creating an actionListener for when the button is pressed
+		frame.add(createNewButton, BorderLayout.WEST); // Setting the button's location to the West side of the border layout
 		
-		north = new JPanel();
-		frame.add(north, BorderLayout.NORTH);
+		north = new JPanel(); // Creating a JPanel
+		frame.add(north, BorderLayout.NORTH); // Adding a north pane that we can add multiple things to
 		north.setLayout(new GridLayout(2,1));
 		
-		namePrompt = new JLabel("Please enter your name:");
-		namePrompt.setHorizontalAlignment(SwingConstants.CENTER);
+		namePrompt = new JLabel("Please enter your name:"); // Adding a JLabel that tells the user to enter their name
+		namePrompt.setHorizontalAlignment(SwingConstants.CENTER); 
 		north.add(namePrompt);
 		
 		name = new JTextField();
@@ -66,14 +72,14 @@ public class GameMenu {
 	{
 
 		@Override
-		public void actionPerformed(ActionEvent event) {
+		public void actionPerformed(ActionEvent event) 
+		{
 			if(event.getActionCommand().equals(createNewButton.getText())) 
 			{
 				ExecutorService executorService = Executors.newCachedThreadPool();
 				executorService.execute(new Server());
 			}
 			frame.setVisible(false);
-			
 			Client client = new Client(name.getText(), address.getText());
 			//JOptionPane.showMessageDialog(null, "Something", "Waiting for Other Players", JOptionPane.INFORMATION_MESSAGE);
 			//here we use client.getSocket() function to return the socket from client
@@ -83,7 +89,6 @@ public class GameMenu {
 	}
 	private static class TextFieldHandler implements KeyListener
 	{
-
 		@Override
 		public void keyTyped(KeyEvent e) 
 		{
@@ -112,7 +117,5 @@ public class GameMenu {
 			// TODO Auto-generated method stub
 			
 		}
-		
 	}
-
 }

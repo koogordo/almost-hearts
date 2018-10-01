@@ -5,6 +5,11 @@ import java.net.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * 
+ * 
+ */
+
 public class Server implements Runnable{
 	ServerSocket server;
 	Socket[] sockets;

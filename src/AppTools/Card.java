@@ -1,7 +1,10 @@
 package AppTools;
 
 import javax.swing.ImageIcon;
-
+/**
+ * 
+ * 
+ */
 public class Card 
 {	
 	String Suit;

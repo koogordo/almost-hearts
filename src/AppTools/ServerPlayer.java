@@ -6,6 +6,11 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.StringTokenizer;
 
+/**
+ * 
+ * 
+ */
+
 public class ServerPlayer implements Runnable {
 	Socket socket;
 	Game game;
