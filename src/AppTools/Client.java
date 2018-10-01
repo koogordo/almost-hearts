@@ -4,6 +4,7 @@ import java.awt.Dialog;
 import java.io.IOException;
 import java.net.*;
 
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 /*
@@ -48,12 +49,12 @@ public class Client {
 		return socket;
 	}
 	public void makeLoadingScreen() {
-		JOptionPane optionPane = new JOptionPane("Waiting for other players to join...", JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+		final ImageIcon icon = new ImageIcon("cardImages/loadingGif.gif");
+		JOptionPane optionPane = new JOptionPane("Waiting for other players to join...", JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon, new Object[]{}, null);
 		JDialog screen = new JDialog();
 		screen.setTitle("Loading");
 		screen.setModal(true);
 		screen.setContentPane(optionPane);
-
 		screen.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		screen.pack();
 		screen.setVisible(true);
