@@ -46,16 +46,17 @@ public class GameMenu
 		north.setLayout(new GridLayout(2,1));
 		
 		namePrompt = new JLabel("Please enter your name:"); // Adding a JLabel that tells the user to enter their name
-		namePrompt.setHorizontalAlignment(SwingConstants.CENTER); 
-		north.add(namePrompt);
+		namePrompt.setHorizontalAlignment(SwingConstants.CENTER); // Setting the alignment to center
+		north.add(namePrompt); // Add namePrompt to the north border
 		
-		name = new JTextField();
-		name.addKeyListener(new TextFieldHandler());
-		north.add(name);
+		name = new JTextField(); // Creating a new JTextField
+		name.addKeyListener(new TextFieldHandler()); // 
+		north.add(name); // Add name to the north border
 		
+		// This will go BYE BYE eventually...
 		address = new JTextField();
 		address.addKeyListener(new TextFieldHandler());
-		north.add(address);
+		north.add(address); 
 		
 		
 		frame.addWindowListener(new WindowAdapter() 
@@ -65,21 +66,20 @@ public class GameMenu
 		    	System.exit(0);
 		    }
 		});
-		frame.setVisible(true);
+		frame.setVisible(true); // Set the frame's visibility to true
 	}
 	
-	private static class ButtonHandler implements ActionListener
+	private static class ButtonHandler implements ActionListener // ButtonHandler method that implements the ActionListener
 	{
-
 		@Override
-		public void actionPerformed(ActionEvent event) 
+		public void actionPerformed(ActionEvent event)
 		{
-			if(event.getActionCommand().equals(createNewButton.getText())) 
+			if(event.getActionCommand().equals(createNewButton.getText())) // if a button is pressed, do the following:
 			{
-				ExecutorService executorService = Executors.newCachedThreadPool();
-				executorService.execute(new Server());
+				ExecutorService executorService = Executors.newCachedThreadPool(); // 
+				executorService.execute(new Server()); // 
 			}
-			frame.setVisible(false);
+			frame.setVisible(false); // set the visibility to false
 			Client client = new Client(name.getText(), address.getText());
 			//JOptionPane.showMessageDialog(null, "Something", "Waiting for Other Players", JOptionPane.INFORMATION_MESSAGE);
 			//here we use client.getSocket() function to return the socket from client
@@ -87,7 +87,7 @@ public class GameMenu
 		}
 		
 	}
-	private static class TextFieldHandler implements KeyListener
+	private static class TextFieldHandler implements KeyListener // TextField Handler method to handle the Action Listener
 	{
 		@Override
 		public void keyTyped(KeyEvent e) 
