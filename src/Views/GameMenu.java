@@ -2,6 +2,8 @@ package Views;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.concurrent.*;
 import java.applet.Applet;
 import javax.swing.*;
@@ -76,8 +78,15 @@ public class GameMenu
 		{
 			if(event.getActionCommand().equals(createNewButton.getText())) // if a button is pressed, do the following:
 			{
-				ExecutorService executorService = Executors.newCachedThreadPool(); // 
-				executorService.execute(new Server()); // 
+				ExecutorService executorService = Executors.newCachedThreadPool(); //creates a thread pool
+				executorService.execute(new Server());//adds a new server thread to the thread pool
+				try {
+					address.setText(InetAddress.getLocalHost().getHostAddress());//if the person is hosting, just make the local
+						//address the parameter
+				} catch (UnknownHostException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			frame.setVisible(false); // set the visibility to false
 			Client client = new Client(name.getText(), address.getText());
