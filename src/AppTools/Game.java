@@ -32,11 +32,28 @@ public class Game
 			{
 				out[i] = new PrintStream(playerSockets[i].getOutputStream());
 				out[i].println(i + " " + playerNames[0] + " " + playerNames[1] + " " + playerNames[2]);
+				out[i].flush();
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		Deck deck = new Deck();
+		for(int i = 0; i < Math.random() * 20; i++)//shuffles deck random amount of times
+		{
+			deck.Shuffle();
+		}
+		for(int i = 0; i < 3; i++)//distributes cards to players
+		{
+			String initialCards = "";
+			for(int k = 0; k < 17; k++)
+			{
+				Card chosenCard = deck.deck.remove(0);
+				initialCards += chosenCard.Suit + chosenCard.value + " ";
+			}
+			out[i].println(initialCards);
+			out[i].flush();
 		}
 	}
 	public void turnPlayed(int player, String suit, int value) {
