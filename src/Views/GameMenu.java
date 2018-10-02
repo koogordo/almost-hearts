@@ -89,7 +89,7 @@ public class GameMenu
 				}
 			}
 			frame.setVisible(false); // set the visibility to false
-			Client client = new Client(name.getText(), address.getText());
+			Client client = new Client(name.getText());
 			//JOptionPane.showMessageDialog(null, "Something", "Waiting for Other Players", JOptionPane.INFORMATION_MESSAGE);
 			//here we use client.getSocket() function to return the socket from client
 			//and use that socket for entering the start of the game/waiting area
