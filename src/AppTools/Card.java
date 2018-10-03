@@ -1,11 +1,12 @@
 package AppTools;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 /**
  * 
  * 
  */
-public class Card 
+public class Card extends JButton
 {	
 	String Suit;
 	int value;
