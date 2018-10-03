@@ -45,7 +45,7 @@ public class Client {
 			//ds.setSoTimeout(2000);
 			
 			System.out.println("Attempting to find server");
-			//makeLoadingScreen();
+			makeLoadingScreen();
 			ds.send(packet);
 			ds.receive(packet);
 			/*Thread.sleep(1000);
@@ -113,18 +113,19 @@ public class Client {
 		//JOptionPane optionPane = new JOptionPane("Waiting for other players to join...", JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon, new Object[]{}, null);
 		//screen = new JDialog();
 		screen = new JFrame("Loading...");
+		screen.setSize(500,190);
 		screen.setResizable(false); // Do not allow the user to adjust the size of the frame
-	    //Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	    //int x = (int) ((dimension.getWidth() - screen.getWidth()) / 2);
-	    //int y = (int) ((dimension.getHeight() - screen.getHeight()) / 2);
-	    //screen.setLocation(x, y);
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - screen.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - screen.getHeight()) / 2);
+	    screen.setLocation(x, y);
 		//JPanel panel = new JPanel();
 		screen.setLayout(new FlowLayout());
 		//screen.setTitle();
 		screen.add(new JLabel(new ImageIcon("cardImages/cardLoading.gif")));
 		screen.add(new JLabel("Waiting for other players to join..."));
 		screen.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		screen.pack();
+		//screen.pack();
 		screen.setVisible(true);
 		
 	}
