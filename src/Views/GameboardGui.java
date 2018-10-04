@@ -130,12 +130,12 @@ public class GameboardGui extends JFrame implements Runnable
 		
 	}
 	public void setHand(String cards) {
+		cards = cards.toLowerCase();
 		StringTokenizer st = new StringTokenizer(cards);
 		//st.nextToken();
 		System.out.println(cards);
 		for(int i = 0; i < 17; i++) {
 			String suit = st.nextToken();
-			suit = suit.toLowerCase();
 			int number = Integer.parseInt(st.nextToken());
 			hand.add(new Card(suit, number));
 		}
