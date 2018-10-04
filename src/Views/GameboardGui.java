@@ -28,6 +28,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import java.awt.FlowLayout;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Component;
 
 /**
  * 
@@ -40,6 +47,8 @@ public class GameboardGui extends JFrame implements Runnable
 	JLabel lblPlayer_2;
 	JLabel lblPlayer_3;
 	ArrayList<Card> hand = new ArrayList<>();
+	JPanel notificationPanel;
+	JLabel notificationLabel;
 	JPanel handArea;
 	JButton submit;
 	private JPanel contentPane;
@@ -57,7 +66,6 @@ public class GameboardGui extends JFrame implements Runnable
 	 */
 	public GameboardGui(Socket socket)
 	{
-		handArea = new JPanel();
 		this.socket = socket;
 		try 
 		{
@@ -74,23 +82,35 @@ public class GameboardGui extends JFrame implements Runnable
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(3, 0, 0, 0));
+		
+		handArea = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) handArea.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		notificationPanel =  new JPanel();
+		notificationPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()/10));
 
 		JPanel panel = new JPanel();
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+		contentPane.add(notificationPanel);
+		notificationPanel.setLayout(new BoxLayout(notificationPanel, BoxLayout.Y_AXIS));
+		notificationLabel = new JLabel("notification label");
+		notificationLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		notificationPanel.add(notificationLabel);
 		contentPane.add(panel);
 		contentPane.add(handArea);
 		panel.setLayout(new GridLayout(0, 3, 0, 0));
+		panel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()/8));
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_1.setPreferredSize(new Dimension(100, 200));
+		//panel_1.setPreferredSize(new Dimension(100, 100));
 		panel.add(panel_1);
 		panel_1.setLayout(new GridLayout(2, 3, 0, 0));
 		lblPlayer_1 = new JLabel("Player 1");
 		lblPlayer_1.setVerticalAlignment(SwingConstants.TOP);
 		lblPlayer_1.setHorizontalAlignment(SwingConstants.CENTER);
 		ImageIcon unsizedIcon1 = new ImageIcon("cardImages/rearOfCard.png");
-		ImageIcon playerOneCard = new ImageIcon(unsizedIcon1.getImage().getScaledInstance(100, 200, java.awt.Image.SCALE_DEFAULT));
+		ImageIcon playerOneCard = new ImageIcon(unsizedIcon1.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_DEFAULT));
 		JLabel p1ImageHolder = new JLabel();
 		p1ImageHolder.setIcon(playerOneCard);
 		panel_1.add(lblPlayer_1);
@@ -99,14 +119,14 @@ public class GameboardGui extends JFrame implements Runnable
 		//Player two gui logic
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_2.setPreferredSize(new Dimension(100, 200));
+		//panel_2.setPreferredSize(new Dimension(100, 150));
 		panel.add(panel_2);
-		panel_2.setLayout(new GridLayout(2, 3, 0, 5));
+		panel_2.setLayout(new GridLayout(2, 3, 0, 0));
 		lblPlayer_2 = new JLabel("Player 2");
 		lblPlayer_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayer_2.setVerticalAlignment(SwingConstants.TOP);
 		ImageIcon unsizedIcon2 = new ImageIcon("cardImages/rearOfCard.png");
-		ImageIcon playerTwoCard = new ImageIcon(unsizedIcon2.getImage().getScaledInstance(100, 200, java.awt.Image.SCALE_DEFAULT));
+		ImageIcon playerTwoCard = new ImageIcon(unsizedIcon2.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_DEFAULT));
 		JLabel p2ImageHolder = new JLabel();
 		p2ImageHolder.setIcon(playerTwoCard);
 		panel_2.add(lblPlayer_2);
@@ -115,7 +135,7 @@ public class GameboardGui extends JFrame implements Runnable
 		//Player 3 logic
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_3.setPreferredSize(new Dimension(100, 200));
+		//panel_3.setPreferredSize(new Dimension(100, 150));
 		panel.add(panel_3);
 		panel_3.setLayout(new GridLayout(2, 3, 0, 0));
 		lblPlayer_3 = new JLabel("Player 3");
