@@ -131,13 +131,9 @@ public class GameboardGui extends JFrame implements Runnable
 		this.setVisible(true);
 		
 	}
-<<<<<<< HEAD
 	public void setHand(String cards) {
 		cards = cards.toLowerCase();
-=======
-	public void setHand(String cards) 
-	{
->>>>>>> 8870b9951392e9054e177bb7c857efa8b2c96a2a
+
 		StringTokenizer st = new StringTokenizer(cards);
 		//st.nextToken();
 		System.out.println(cards);
