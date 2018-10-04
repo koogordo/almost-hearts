@@ -43,8 +43,9 @@ public class Server implements Runnable
 			usernames = new String[numOfPlayers];
 			addresses = new InetAddress[numOfPlayers];
 			System.out.println(InetAddress.getLocalHost());
-			DatagramPacket dp = new DatagramPacket(new byte[100],100);
+			DatagramPacket dp;
 			for(int i = 0; i < numOfPlayers; ++i) {
+				dp = new DatagramPacket(new byte[100],100);
 				System.out.println("Server - Ready to receive request");
 				ds.receive(dp);	
 				usernames[i] = byteArrayToString(dp.getData());
