@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -216,7 +217,7 @@ public class GameboardGui extends JFrame implements Runnable
 					hand.remove(i);
 				}
 			}
-			String cardStream = "Played " + selectedCard.getSuit() + " " + selectedCard.getValue();
+			String cardStream = "Played " + " " + playerID + " " + selectedCard.getSuit() + " " + selectedCard.getValue();
 			try {
 				out.write(cardStream);
 				out.flush();
@@ -246,14 +247,14 @@ public class GameboardGui extends JFrame implements Runnable
 			lblPlayer_3.setText(st.nextToken());
 			
 			setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
-			
 			this.setVisible(true);
 			while (true) {
 				st = new StringTokenizer(in.readLine());
-				switch (st.nextToken())
+				String switchToken = st.nextToken();
+				switch (switchToken)
 				{
 				case "Played":
-				
+					
 					break;
 				case "Exit":
 					System.exit(0);

@@ -60,7 +60,7 @@ public class Game
 		if(player == playerTurn)
 		{
 			cardsOfRound[playerTurn] = new Card(suit, value);
-			
+			Broadcast(cardsOfRound[playerTurn].toString());
 			++playerTurn;
 			playerTurn %= 3;//wrap back to 0 if it hits 3
 			++numOfTurns;
@@ -119,7 +119,7 @@ public class Game
 			//end game or whatever
 		}
 	}
-	public void broadcast(String broadcastString)
+	public void Broadcast(String broadcastString)
 	{
 		for(int i = 0; i < 3; i++) {
 			out[i].println(broadcastString);

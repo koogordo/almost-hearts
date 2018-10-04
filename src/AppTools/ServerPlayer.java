@@ -37,9 +37,8 @@ public class ServerPlayer implements Runnable {
 				
 				switch(firstToken) {
 				case "Played":
-					
+					game.turnPlayed(Integer.parseInt(input.nextToken()), input.nextToken(), Integer.parseInt(input.nextToken()));
 					break;
-				
 				case "Exit": System.exit(0); break;
 				default:
 					break;
