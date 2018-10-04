@@ -29,7 +29,7 @@ public class Card extends JButton
 	}
 	
 	public String toString() {
-		return this.Suit + " " + this.value + " " + imagePath;
+		return this.Suit + " " + this.value;
 	}
 }
 

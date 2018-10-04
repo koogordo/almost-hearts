@@ -60,7 +60,7 @@ public class Game
 		if(player == playerTurn)
 		{
 			cardsOfRound[playerTurn] = new Card(suit, value);
-			Broadcast(cardsOfRound[playerTurn].toString());
+			Broadcast("Played" + " " + playerTurn + " " + cardsOfRound[playerTurn].toString());
 			
 			++playerTurn;
 			playerTurn %= 3;//wrap back to 0 if it hits 3

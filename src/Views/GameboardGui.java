@@ -49,6 +49,7 @@ public class GameboardGui extends JFrame implements Runnable
 	BufferedWriter out;
 	BufferedReader in;
 	int playerID;
+	JPanel[] playerPanels;
 	/**
 	 * Launch the application.
 	 */
@@ -125,6 +126,10 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_3.add(lblPlayer_3);
 		panel_3.add(p3ImageHolder);
 		
+		// adding player panels to array to make them easier to reference using playerID
+		playerPanels[0] = panel_1;
+		playerPanels[1] = panel_2;
+		playerPanels[2] = panel_3;
 		
 		this.pack();
 		this.setVisible(true);
@@ -255,18 +260,27 @@ public class GameboardGui extends JFrame implements Runnable
 				{
 				case "Played":
 					//set the icon in the appropriate player box to reflect the card that they showed
+					int player = Integer.parseInt(st.nextToken());
+					String suit = st.nextToken();
+					int value = Integer.parseInt(st.nextToken());
+					Card playedCard = new Card(suit,value);
+					playerPanels[player].add(playedCard);
 					break;
+					
 				case "Winner":
 					String gameWinnerName = st.nextToken();
-					//set text of game winner label
+					//TODO set text of game winner label
 					break;
+					
 				case "Round":
 					String roundWinnerName = st.nextToken();
-					// set text of round winner label
+					//TODO set text of round winner label
 					break;
+					
 				case "Exit":
 					System.exit(0);
 					break;
+					
 				default:
 					break;
 				}
