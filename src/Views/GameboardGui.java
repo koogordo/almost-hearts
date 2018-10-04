@@ -74,10 +74,11 @@ public class GameboardGui extends JFrame implements Runnable
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(2, 0, 0, 0));
+		contentPane.setLayout(new GridLayout(3, 0, 0, 0));
 
 		JPanel panel = new JPanel();
 		contentPane.add(panel);
+		contentPane.add(handArea);
 		panel.setLayout(new GridLayout(0, 3, 0, 0));
 
 		JPanel panel_1 = new JPanel();
@@ -127,7 +128,6 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_3.add(lblPlayer_3);
 		panel_3.add(p3ImageHolder);
 		
-		this.pack();
 		this.setVisible(true);	
 	}
 	public void setHand(String cards) {
