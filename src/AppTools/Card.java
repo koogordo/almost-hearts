@@ -14,6 +14,7 @@ public class Card extends JButton
 	public Card(String s, int v) 
 	{	
 		Suit = s;
+		Suit = Suit.toLowerCase();
 		value = v;	
 		cardImage = new ImageIcon("cardImages/"+ value + Suit + ".png");
 	}

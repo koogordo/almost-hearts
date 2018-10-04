@@ -51,7 +51,7 @@ public class Game
 			for(int k = 0; k < 17; k++)
 			{
 				Card chosenCard = deck.deck.remove(0);
-				initialCards += chosenCard.Suit + chosenCard.value + " ";
+				initialCards += chosenCard.Suit + " " + chosenCard.value + " ";
 			}
 			out[i].println(initialCards);
 			out[i].flush();

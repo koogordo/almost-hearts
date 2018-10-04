@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 import Views.GameboardGui;
-import Views.workingGameboardGui;
 
 public class Player implements Runnable
 {

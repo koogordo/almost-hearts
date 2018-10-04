@@ -134,14 +134,8 @@ public class GameboardGui extends JFrame implements Runnable
 		//st.nextToken();
 		System.out.println(cards);
 		for(int i = 0; i < 17; i++) {
-			String card = st.nextToken();
-			byte[] cardBytes = card.getBytes();
-			String suit = cardBytes[0] + "";
-			int number = cardBytes[1];
-			
-			if(number == 1) {
-				number = 10 + cardBytes[2];
-			}
+			String suit = st.nextToken();
+			int number = Integer.parseInt(st.nextToken());
 			hand.add(new Card(suit, number));
 		}
 		sortHand(hand);

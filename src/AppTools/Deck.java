@@ -17,10 +17,10 @@ public class Deck
 	{	
 		for(int i=2; i < 15; i++) 
 		{
-			deck.add(new Card("H",i));
-			deck.add(new Card("C",i));
-			deck.add(new Card("D",i));
-			deck.add(new Card("S",i));
+			deck.add(new Card("h",i));
+			deck.add(new Card("c",i));
+			deck.add(new Card("d",i));
+			deck.add(new Card("s",i));
 		}
 	}
 
