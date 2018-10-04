@@ -62,6 +62,7 @@ public class GameboardGui extends JFrame implements Runnable
 	BufferedWriter out;
 	BufferedReader in;
 	int playerID;
+	ImageIcon[] icons = new ImageIcon[3];
 	/**
 	 * Launch the application.
 	 */
@@ -307,18 +308,18 @@ public class GameboardGui extends JFrame implements Runnable
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			
 			//uses StringTokenizer so that it is easy to traverse the String coming in
-			StringTokenizer st = new StringTokenizer(in.readLine());
+			//StringTokenizer st = new StringTokenizer(in.readLine());
 			
-			//The first thing coming in is going to be the playersID and the names of the players (in order)
+			/*//The first thing coming in is going to be the playersID and the names of the players (in order)
 			playerID = Integer.parseInt(st.nextToken());
 			lblPlayer_1.setText(st.nextToken());
 			lblPlayer_2.setText(st.nextToken());
 			lblPlayer_3.setText(st.nextToken());
-			
-			setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
-			//setHand("c 3 d 3 c 13 d 5 c 6 c 12 c 11 c 8 d 10 s 3 s 14 h 2 s 10 s 8 d 11 d 6 d 13");
+			*/
+			//setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
+			setHand("c 3 d 3 c 13 d 5 c 6 c 12 c 11 c 8 d 10 s 3 s 14 h 2 s 10 s 8 d 11 d 6 d 13");
 			this.setVisible(true);
-			while (true) 
+			/*while (true) 
 			{
 				st = new StringTokenizer(in.readLine());
 				switch (st.nextToken())
@@ -330,7 +331,7 @@ public class GameboardGui extends JFrame implements Runnable
 					System.exit(0);
 					break;
 				}	
-			}
+			}*/
 		} 
 		catch (IOException e) 
 		{
