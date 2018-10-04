@@ -22,104 +22,99 @@ import AppTools.*;
 
 public class GameMenu 
 {
-	static JLabel gameLogo;
-	static JButton joinExistingButton; // Button to join and exiting game
-	static JButton createNewButton; // Button to create a new game
-	static JLabel namePrompt; // Label to inform the user to enter their name in the TextField
-	static JTextField name; // Field for the User(s) to enter their name
-	static JTextField address; // This will be removed eventually
-	static JPanel center;
-	static JPanel north; // JPanel for the Name to be entered
-	static JPanel south;
-	static JFrame frame; // JFrame
+	static JLabel gameLogo; // Initialize gameLogo JLabel
+	static JButton joinExistingButton; // Initialize JButton to join an existing game
+	static JButton createNewButton; // Initialize button to create a new game
+	static JLabel namePrompt; // Initialize JLabel promping the user to enter their name and IP address
+	static JTextField name; // Initialize JTextField for the user's name to be entered
+	static JTextField address; // Initialize JTextField for the IP Address to be entered
+	static JPanel center;// Initialize JPanel for Center
+	static JPanel north; // Initialize JPanel for North
+	static JPanel south; // Initialize JPanel for South
+	static JFrame frame; // Initialize JFrame
     
 	public static void main(String args[]) 
 	{
 		frame = new JFrame("GameMenu"); // Creating a new JFrame called Game Menu
-		frame.setSize(380, 380); // Setting the sixe of the frame to 325 wide x 200 high
+		frame.setSize(380, 380); // Setting the size of the frame to 325 wide x 200 high
 		frame.setResizable(false); // Do not allow the user to adjust the size of the frame
-	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
-	    frame.setLocation(x, y);
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize(); // set the dimension to the screensize
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2); // Set x to the width of the screen - the width of the frame
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2); // Set y to the height of the screen - the height of the frame
+	    frame.setLocation(x, y); // Set the frame's starting location to x, y
 		BorderLayout layout = new BorderLayout(); // Creating a border layout
 		frame.setLayout(layout); // Setting the layout of our frame to the border layout
 		
 		// NORTH with Game Logo-----------------------------------------------------------------------------
-		gameLogo = new JLabel();
-		gameLogo.setSize(200,200);
+		gameLogo = new JLabel(); // Setting gameLogo to a new JLabel
+		gameLogo.setSize(200,200); // Seting gameLogo to the size of 200, 200
 		
-		BufferedImage logo = null;
+		BufferedImage logo = null; // Initializing logo
 		try 
 		{
-		    logo = ImageIO.read(new File("cardImages/hand.png"));
-		} catch (IOException e) 
+		    logo = ImageIO.read(new File("cardImages/hand.png")); // Setting logo to the logo image
+		} 
+		catch (IOException e) // Error if image is not found
 		{
 		    e.printStackTrace();
 		}
-		Image dimg = logo.getScaledInstance(gameLogo.getWidth(), gameLogo.getHeight(), Image.SCALE_SMOOTH);
-		ImageIcon imageIcon = new ImageIcon(dimg);
-		gameLogo.setIcon(imageIcon);
-		//gameLogo.setHorizontalAlignment(SwingConstants.CENTER); // Setting the alignment to center
-		//north.add(gameLogo); // Add namePrompt to the north border
-		JPanel TopLogo = new JPanel(new FlowLayout());
-		TopLogo.add(gameLogo);
-		frame.add(BorderLayout.NORTH, TopLogo);
+		Image dimg = logo.getScaledInstance(gameLogo.getWidth(), gameLogo.getHeight(), Image.SCALE_SMOOTH); // Setting dimg to the width and height of gameLogo
+		ImageIcon imageIcon = new ImageIcon(dimg); // Setting imageIcon to the dimg
+		gameLogo.setIcon(imageIcon); // Setting gameLogo's icon to imageIcon
+		JPanel TopLogo = new JPanel(new FlowLayout()); // Setting JPanel TopLogo to flowLayout
+		TopLogo.add(gameLogo); // Adding gameLogo to the topLogo
+		frame.add(BorderLayout.NORTH, TopLogo); // Adding TopLogo to North of the frame
 		
 		// CENTER Grid with Text Boxes----------------------------------------------------------------------
-		JPanel CenterOutter = new JPanel(new FlowLayout());
-		CenterOutter.setSize(200, 200);
-		JPanel centerInfo = new JPanel(new BorderLayout());
-		JPanel topLine = new JPanel(new BorderLayout());
-		JPanel bottomLine = new JPanel(new BorderLayout());
-		//center = new JPanel(); // Creating a JPanel
-		//frame.add(center, BorderLayout.CENTER); // Adding a north pane that we can add multiple things to
-		//center.setLayout(new GridLayout(2,1));
+		JPanel CenterOutter = new JPanel(new FlowLayout()); // Setting JPanel CenterOutter to a FlowLayout
+		CenterOutter.setSize(200, 200); // Seting the size of CenterOutter to 200, 200
+		JPanel centerInfo = new JPanel(new BorderLayout()); // Setting JPanel centerInfo to Border Layout
+		JPanel topLine = new JPanel(new BorderLayout()); // Setting JPanel topLine to Border Layout
+		JPanel bottomLine = new JPanel(new BorderLayout()); // Setting JPanel bottomLine to Border Layout
 		
 		namePrompt = new JLabel("Please enter your name:"); // Adding a JLabel that tells the user to enter their name
 		namePrompt.setHorizontalAlignment(SwingConstants.CENTER); // Setting the alignment to center
 		topLine.add(BorderLayout.NORTH, namePrompt); // Add namePrompt to the north border
 		
 		name = new JTextField(); // Creating a new JTextField
-		name.addKeyListener(new TextFieldHandler()); // 
+		name.addKeyListener(new TextFieldHandler()); // Setting the keyListener of name to a new TextFieldHandler
 		topLine.add(BorderLayout.CENTER, name); // Add name to the north border
 		
 		namePrompt = new JLabel("Please enter the IP Address:"); // Adding a JLabel that tells the user to enter their name
 		namePrompt.setHorizontalAlignment(SwingConstants.CENTER); // Setting the alignment to center
 		bottomLine.add(BorderLayout.NORTH, namePrompt); // Add namePrompt to the north border
 		
-		address = new JTextField();
-		address.addKeyListener(new TextFieldHandler());
-		bottomLine.add(BorderLayout.CENTER, address); 
+		address = new JTextField(); // Creating a new JTextField
+		address.addKeyListener(new TextFieldHandler()); // Setting the keyListener of address to a new TextFieldHandler
+		bottomLine.add(BorderLayout.CENTER, address);  // adding address to Center of bottomLine
 		
-		centerInfo.add(topLine, BorderLayout.NORTH);
-		centerInfo.add(bottomLine, BorderLayout.CENTER);
+		centerInfo.add(topLine, BorderLayout.NORTH); // Adding topLine to North of CenterInfo
+		centerInfo.add(bottomLine, BorderLayout.CENTER); // Adding bottomLine to Center of CenterInfo
 		
-		CenterOutter.add(centerInfo);
-		frame.add(BorderLayout.CENTER, CenterOutter);
+		CenterOutter.add(centerInfo); // Adding centerInfo to CenterOutter
+		frame.add(BorderLayout.CENTER, CenterOutter); // Adding CenterOutter to Center of frame
 		
 		// SOUTH Grid with Text Boxes----------------------------------------------------------------------
 		south = new JPanel(); // Creating a JPanel
 		frame.add(south, BorderLayout.SOUTH); // Adding a north pane that we can add multiple things to
-		south.setLayout(new GridLayout(0,2));
+		south.setLayout(new GridLayout(0,2)); // Setting the gridLayout of south to 0,2
 		
 		//WEST
 		createNewButton = new JButton("Create a new game"); // Creating a button called "Create a new Game"
 		createNewButton.setEnabled(false); // Setting enabled to false
 		createNewButton.addActionListener(new ButtonHandler()); // Creating an actionListener for when the button is pressed
-		JPanel createNewFrame = new JPanel(new FlowLayout());
-		createNewFrame.add(createNewButton);
-		south.add(createNewFrame);
+		JPanel createNewFrame = new JPanel(new FlowLayout()); // Creating a JPanel as a FlowLayout
+		createNewFrame.add(createNewButton); // Adding createNewButton to the CreateNewFrame
+		south.add(createNewFrame); // Adding CreateNewFram to south
 		
 		//EAST
 		joinExistingButton = new JButton("Join existing game"); // Creating a button called "Join existing Game"
 		joinExistingButton.setEnabled(false); // Setting enabled to false
 		joinExistingButton.addActionListener(new ButtonHandler()); // Creating an actionListener for when the button is pressed
-		joinExistingButton.setSize(10, 10);
-		JPanel joinExistingFrame = new JPanel(new FlowLayout());
-		joinExistingFrame.add(joinExistingButton);
-		south.add(joinExistingFrame);
-		
+		joinExistingButton.setSize(10, 10); // Setting the size of joinExistingButton to 10,10
+		JPanel joinExistingFrame = new JPanel(new FlowLayout()); // Creating a JPanel with a FlowLayout
+		joinExistingFrame.add(joinExistingButton); // Adding joinExistingButton to the joinExistingFrame
+		south.add(joinExistingFrame); // Adding joinExistingFrame to south
 		
 		frame.addWindowListener(new WindowAdapter() 
 		{
@@ -141,16 +136,17 @@ public class GameMenu
 			{
 				
 				executorService.execute(new Server());//adds a new server thread to the thread pool
-				try {
+				try 
+				{
 					address.setText(InetAddress.getLocalHost().getHostAddress());//if the person is hosting, just make the local
 						//address the parameter
-				} catch (UnknownHostException e) {
-					// TODO Auto-generated catch block
+				} catch (UnknownHostException e) 
+				{
 					e.printStackTrace();
 				}
 			}
 			frame.setVisible(false); // set the visibility to false
-			Client client = new Client(name.getText(), address.getText());
+			Client client = new Client(name.getText(), address.getText()); // Setting client to the text of name and address
 			
 			GameboardGui gui = new GameboardGui(client.getSocket());
 			Thread t1 = new Thread(gui);
@@ -158,13 +154,15 @@ public class GameMenu
 		}
 		
 	}
+	
 	private static class TextFieldHandler implements KeyListener // TextField Handler method to handle the Action Listener
 	{
 		@Override
 		public void keyTyped(KeyEvent e) 
 		{
 			// TODO Auto-generated method stub
-			if(name.getText().equals("")){
+			if(name.getText().equals(""))
+			{
 				joinExistingButton.setEnabled(false);
 				createNewButton.setEnabled(false);
 			}
@@ -174,7 +172,6 @@ public class GameMenu
 				createNewButton.setEnabled(true);
 			}
 		}
-
 		@Override
 		public void keyPressed(KeyEvent e) 
 		{
