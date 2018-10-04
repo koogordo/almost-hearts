@@ -62,12 +62,13 @@ public class GameboardGui extends JFrame implements Runnable
 		try 
 		{
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-		} catch (IOException e) 
+		} 
+		catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000,800);
 		contentPane = new JPanel();
@@ -126,20 +127,26 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_3.add(lblPlayer_3);
 		panel_3.add(p3ImageHolder);
 		
-		
 		this.pack();
-		this.setVisible(true);
-		
+		this.setVisible(true);	
 	}
+<<<<<<< HEAD
+	
+=======
+<<<<<<< HEAD
+	public void setHand(String cards) {
+		cards = cards.toLowerCase();
+=======
+>>>>>>> 915b8b2496d9c0a2f8ea15c95218dce0834d3445
 	public void setHand(String cards) 
 	{
+>>>>>>> 8870b9951392e9054e177bb7c857efa8b2c96a2a
 		StringTokenizer st = new StringTokenizer(cards);
 		//st.nextToken();
 		System.out.println(cards);
 		for(int i = 0; i < 17; i++) 
 		{
 			String suit = st.nextToken();
-			suit = suit.toLowerCase();
 			int number = Integer.parseInt(st.nextToken());
 			hand.add(new Card(suit, number));
 		}
@@ -155,6 +162,7 @@ public class GameboardGui extends JFrame implements Runnable
 		submit.setEnabled(false);
 		handArea.add(submit);
 	}
+	
 	public void setPlayerNames(String names) 
 	{
 		StringTokenizer st = new StringTokenizer(names);
@@ -164,12 +172,14 @@ public class GameboardGui extends JFrame implements Runnable
 		lblPlayer_2.setText(st.nextToken());
 		lblPlayer_3.setText(st.nextToken());
 	}
+	
 	public static void sortHand(ArrayList<Card> cards) 
 	{
 		String suit = "c";
 		for(int i = 0; i < cards.size() - 1;) 
 		{
-			if (!suit.equals("")) {
+			if (!suit.equals("")) 
+			{
 				for(int k = i; k < cards.size(); k++) 
 				{
 					if(cards.get(k).getSuit().equals(suit)) 
@@ -183,7 +193,6 @@ public class GameboardGui extends JFrame implements Runnable
 			}
 			suit = nextSuit(suit);
 		}
-		
 		for(int i = 1; i < cards.size(); i++) 
 		{
 			if(cards.get(i-1).getValue() > cards.get(i).getValue() && cards.get(i-1).getSuit().equals(cards.get(i).getSuit())) {
@@ -199,12 +208,10 @@ public class GameboardGui extends JFrame implements Runnable
 		if(suit.equals("d")) return "h";
 		if(suit.equals("h")) return "s";
 		if(suit.equals("s")) return "";
-		return "";
-		
+		return "";	
 	}
 	private class selectCard implements ActionListener
 	{
-
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -212,17 +219,14 @@ public class GameboardGui extends JFrame implements Runnable
 			selectedCard = ((Card) e.getSource());
 			submit.setEnabled(true);
 		}
-		
 	}
 	private class submitButton implements ActionListener
 	{
-
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			// TODO Auto-generated method stub
-			
-			for(int i = 0; i < hand.size(); i++) {
+			for(int i = 0; i < hand.size(); i++) 
+			{
 				if(selectedCard.equals(hand.get(i))) 
 				{
 					hand.remove(i);
@@ -233,7 +237,8 @@ public class GameboardGui extends JFrame implements Runnable
 			{
 				out.write(cardStream);
 				out.flush();
-			} catch (IOException e1) 
+			} 
+			catch (IOException e1) 
 			{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -273,18 +278,13 @@ public class GameboardGui extends JFrame implements Runnable
 				case "Exit":
 					System.exit(0);
 					break;
-				
-				}
-				
+				}	
 			}
-			
-			
-			
-		} catch (IOException e) 
+		} 
+		catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 }
