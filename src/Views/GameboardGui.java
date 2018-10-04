@@ -59,9 +59,11 @@ public class GameboardGui extends JFrame implements Runnable
 	{
 		handArea = new JPanel();
 		this.socket = socket;
-		try {
+		try 
+		{
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-		} catch (IOException e) {
+		} catch (IOException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -129,18 +131,25 @@ public class GameboardGui extends JFrame implements Runnable
 		this.setVisible(true);
 		
 	}
+<<<<<<< HEAD
 	public void setHand(String cards) {
 		cards = cards.toLowerCase();
+=======
+	public void setHand(String cards) 
+	{
+>>>>>>> 8870b9951392e9054e177bb7c857efa8b2c96a2a
 		StringTokenizer st = new StringTokenizer(cards);
 		//st.nextToken();
 		System.out.println(cards);
-		for(int i = 0; i < 17; i++) {
+		for(int i = 0; i < 17; i++) 
+		{
 			String suit = st.nextToken();
 			int number = Integer.parseInt(st.nextToken());
 			hand.add(new Card(suit, number));
 		}
 		sortHand(hand);
-		for(int i = 0; i < 17; i++) {
+		for(int i = 0; i < 17; i++) 
+		{
 			handArea.add(hand.get(i));
 			hand.get(i).addActionListener(new selectCard());
 		}
@@ -150,7 +159,8 @@ public class GameboardGui extends JFrame implements Runnable
 		submit.setEnabled(false);
 		handArea.add(submit);
 	}
-	public void setPlayerNames(String names) {
+	public void setPlayerNames(String names) 
+	{
 		StringTokenizer st = new StringTokenizer(names);
 		st.nextToken();
 		
@@ -158,12 +168,16 @@ public class GameboardGui extends JFrame implements Runnable
 		lblPlayer_2.setText(st.nextToken());
 		lblPlayer_3.setText(st.nextToken());
 	}
-	public static void sortHand(ArrayList<Card> cards) {
+	public static void sortHand(ArrayList<Card> cards) 
+	{
 		String suit = "c";
-		for(int i = 0; i < cards.size() - 1;) {
+		for(int i = 0; i < cards.size() - 1;) 
+		{
 			if (!suit.equals("")) {
-				for(int k = i; k < cards.size(); k++) {
-					if(cards.get(k).getSuit().equals(suit)) {
+				for(int k = i; k < cards.size(); k++) 
+				{
+					if(cards.get(k).getSuit().equals(suit)) 
+					{
 						Card temp = cards.get(i);
 						cards.set(i, cards.get(k));
 						cards.set(k, temp);
@@ -174,7 +188,8 @@ public class GameboardGui extends JFrame implements Runnable
 			suit = nextSuit(suit);
 		}
 		
-		for(int i = 1; i < cards.size(); i++) {
+		for(int i = 1; i < cards.size(); i++) 
+		{
 			if(cards.get(i-1).getValue() > cards.get(i).getValue() && cards.get(i-1).getSuit().equals(cards.get(i).getSuit())) {
 				Card temp = cards.get(i-1);
 				cards.set(i-1, cards.get(i));
@@ -182,7 +197,8 @@ public class GameboardGui extends JFrame implements Runnable
 			}
 		}
 	}
-	public static String nextSuit(String suit) {
+	public static String nextSuit(String suit) 
+	{
 		if(suit.equals("c")) return "d";
 		if(suit.equals("d")) return "h";
 		if(suit.equals("h")) return "s";
@@ -190,44 +206,51 @@ public class GameboardGui extends JFrame implements Runnable
 		return "";
 		
 	}
-	private class selectCard implements ActionListener{
+	private class selectCard implements ActionListener
+	{
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent e) 
+		{
 			// TODO Auto-generated method stub
 			selectedCard = ((Card) e.getSource());
 			submit.setEnabled(true);
 		}
 		
 	}
-	private class submitButton implements ActionListener{
+	private class submitButton implements ActionListener
+	{
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent e) 
+		{
 			// TODO Auto-generated method stub
 			
 			for(int i = 0; i < hand.size(); i++) {
-				if(selectedCard.equals(hand.get(i))) {
+				if(selectedCard.equals(hand.get(i))) 
+				{
 					hand.remove(i);
 				}
 			}
 			String cardStream = "Played " + selectedCard.getSuit() + " " + selectedCard.getValue();
-			try {
+			try 
+			{
 				out.write(cardStream);
 				out.flush();
-			} catch (IOException e1) {
+			} catch (IOException e1) 
+			{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
-			
 			submit.setEnabled(false);
 		}
 		
 	}
-	public void run() {
+	public void run() 
+	{
 		// TODO Auto-generated method stub
-		try {
+		try 
+		{
 			//creates the input stream to read in the output from the server
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			
@@ -243,7 +266,8 @@ public class GameboardGui extends JFrame implements Runnable
 			setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
 			
 			this.setVisible(true);
-			while (true) {
+			while (true) 
+			{
 				st = new StringTokenizer(in.readLine());
 				switch (st.nextToken())
 				{
@@ -260,7 +284,8 @@ public class GameboardGui extends JFrame implements Runnable
 			
 			
 			
-		} catch (IOException e) {
+		} catch (IOException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
