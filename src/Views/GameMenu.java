@@ -136,9 +136,10 @@ public class GameMenu
 		@Override
 		public void actionPerformed(ActionEvent event)
 		{
+			ExecutorService executorService = Executors.newCachedThreadPool(); //creates a thread pool
 			if(event.getActionCommand().equals(createNewButton.getText())) // if a button is pressed, do the following:
 			{
-				ExecutorService executorService = Executors.newCachedThreadPool(); //creates a thread pool
+				
 				executorService.execute(new Server());//adds a new server thread to the thread pool
 				try {
 					address.setText(InetAddress.getLocalHost().getHostAddress());//if the person is hosting, just make the local
@@ -150,9 +151,10 @@ public class GameMenu
 			}
 			frame.setVisible(false); // set the visibility to false
 			Client client = new Client(name.getText(), null);
-			//JOptionPane.showMessageDialog(null, "Something", "Waiting for Other Players", JOptionPane.INFORMATION_MESSAGE);
-			//here we use client.getSocket() function to return the socket from client
-			//and use that socket for entering the start of the game/waiting area
+			
+			GameboardGui gui = new GameboardGui(client.getSocket());
+			Thread t1 = new Thread(gui);
+			t1.start();
 		}
 		
 	}

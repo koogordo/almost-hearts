@@ -13,7 +13,11 @@ import AppTools.Card;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -30,7 +34,7 @@ import javax.swing.border.BevelBorder;
  * 
  */
 
-public class GameboardGui extends JFrame 
+public class GameboardGui extends JFrame implements Runnable
 {
 	JLabel lblPlayer_1;
 	JLabel lblPlayer_2;
@@ -41,7 +45,9 @@ public class GameboardGui extends JFrame
 	private JPanel contentPane;
 	Card selectedCard;
 	Socket socket;
-	PrintStream out;
+	BufferedWriter out;
+	BufferedReader in;
+	int playerID;
 	/**
 	 * Launch the application.
 	 */
@@ -54,7 +60,7 @@ public class GameboardGui extends JFrame
 		handArea = new JPanel();
 		this.socket = socket;
 		try {
-			out = new PrintStream(socket.getOutputStream());
+			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -138,7 +144,7 @@ public class GameboardGui extends JFrame
 			}
 			hand.add(new Card(suit, number));
 		}
-		SortHand(hand);
+		sortHand(hand);
 		for(int i = 0; i < 17; i++) {
 			handArea.add(hand.get(i));
 			hand.get(i).addActionListener(new selectCard());
@@ -157,7 +163,7 @@ public class GameboardGui extends JFrame
 		lblPlayer_2.setText(st.nextToken());
 		lblPlayer_3.setText(st.nextToken());
 	}
-	public static void SortHand(ArrayList<Card> cards) {
+	public static void sortHand(ArrayList<Card> cards) {
 		String suit = "c";
 		for(int i = 0; i < cards.size() - 1;) {
 			if (!suit.equals("")) {
@@ -211,10 +217,57 @@ public class GameboardGui extends JFrame
 				}
 			}
 			String cardStream = "Played " + selectedCard.getSuit() + " " + selectedCard.getValue();
-			out.println(cardStream);
-			out.flush();
+			try {
+				out.write(cardStream);
+				out.flush();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			
 			submit.setEnabled(false);
+		}
+		
+	}
+	public void run() {
+		// TODO Auto-generated method stub
+		try {
+			//creates the input stream to read in the output from the server
+			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			
+			//uses StringTokenizer so that it is easy to traverse the String coming in
+			StringTokenizer st = new StringTokenizer(in.readLine());
+			
+			//The first thing coming in is going to be the playersID and the names of the players (in order)
+			playerID = Integer.parseInt(st.nextToken());
+			lblPlayer_1.setText(st.nextToken());
+			lblPlayer_2.setText(st.nextToken());
+			lblPlayer_3.setText(st.nextToken());
+			
+			setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
+			
+			this.setVisible(true);
+			while (true) {
+				st = new StringTokenizer(in.readLine());
+				switch (st.nextToken())
+				{
+				case "Played":
+				
+					break;
+				case "Exit":
+					System.exit(0);
+					break;
+				
+				}
+				
+			}
+			
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
