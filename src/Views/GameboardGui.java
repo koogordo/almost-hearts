@@ -131,8 +131,8 @@ public class GameboardGui extends JFrame implements Runnable
 	}
 	public void setHand(String cards) {
 		StringTokenizer st = new StringTokenizer(cards);
-		st.nextToken();
-		
+		//st.nextToken();
+		System.out.println(cards);
 		for(int i = 0; i < 17; i++) {
 			String card = st.nextToken();
 			byte[] cardBytes = card.getBytes();
