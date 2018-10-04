@@ -7,17 +7,11 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-
 import Views.GameboardGui;
 import Views.workingGameboardGui;
 
-/**
- * 
- * 
- */
-
-public class Player implements Runnable{
-
+public class Player implements Runnable
+{
 	int playerID;
 	String playerName;
 	List<Card> hand = new ArrayList<>();
@@ -27,9 +21,11 @@ public class Player implements Runnable{
 	
 	Socket socket;
 	BufferedReader in;
-	public Player(Socket socket, GameboardGui gui) {
+	public Player(Socket socket, GameboardGui gui) 
+	{
 		this.socket = socket;
-		try {
+		try 
+		{
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			String names = in.readLine();
 			StringTokenizer st = new StringTokenizer(names);
@@ -40,25 +36,20 @@ public class Player implements Runnable{
 			st = new StringTokenizer(cards);
 			gui.setHand(cards);
 			
-			while (true) {
+			while (true) 
+			{
 				st = new StringTokenizer(in.readLine());
-				
-				
-				
-				
-			}
-			
-		} catch (IOException e) {
+			}	
+		} 
+		catch (IOException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
-
 	@Override
-	public void run() {
+	public void run() 
+	{
 		// TODO Auto-generated method stub
-		
 	}
 }

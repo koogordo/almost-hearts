@@ -11,21 +11,21 @@ import java.util.List;
  */
 public class Game 
 {
-	String[] playerNames = new String[3];
-	Socket[] playerSockets = new Socket[3];
-	PrintStream[] out = new PrintStream[3];
-	Card[]cardsOfRound = new Card[3];
-	int[] roundsWon = new int[3];
-	int[] totalScore = new int[3];
-	int previousWinner;
-	int playerTurn;
-	int numOfTurns;
-	int totalRounds;
+	String[] playerNames = new String[3];   // Array to hold the player's names
+	Socket[] playerSockets = new Socket[3]; // Array to hold the player's sockets
+	PrintStream[] out = new PrintStream[3]; // Array to hold the Player's print streams
+	Card[]cardsOfRound = new Card[3];       // Array to hold the cards of each round
+	int[] roundsWon = new int[3];           // Array to hold the rounds won by each player
+	int[] totalScore = new int[3];          // Array to hold the total score of each player
+	int previousWinner; // Previous winner (i of PlayerNames array)
+	int playerTurn;     // Which player's turn it is
+	int numOfTurns;     // Number of Turns played in the game
+	int totalRounds;    // total rounds 
 	
 	public Game(String[] n, Socket[] s) 
 	{
-		playerNames = n;
-		playerSockets = s;
+		playerNames = n; // Player names (array of strings)
+		playerSockets = s; // Player sockets (array of strings)
 		for(int i = 0; i < 3; i++) //sets up the output streams for all the players and sends them the names of all the players
 		{
 			try
@@ -34,7 +34,8 @@ public class Game
 				out[i].println(i + " " + playerNames[0] + " " + playerNames[1] + " " + playerNames[2]);
 				out[i].flush();
 				
-			} catch (IOException e) {
+			} catch (IOException e) 
+			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -61,68 +62,70 @@ public class Game
 		{
 			cardsOfRound[playerTurn] = new Card(suit, value);
 			
-			++playerTurn;
+			++playerTurn; 
 			playerTurn %= 3;//wrap back to 0 if it hits 3
 			++numOfTurns;
 			if(numOfTurns == 3)
 			{
-				numOfTurns = 0;
-				roundWinner();
+				numOfTurns = 0; // Setting the number of turns to 0
+				roundWinner(); // Checking the round winner
 			}
 		}
 	}
-	public void roundWinner ()
+	public void roundWinner () // method to decide the round winner
 	{	
-		int playerWhoPlayedFirst = previousWinner;
+		int playerWhoPlayedFirst = previousWinner; // Setting PlayerWhoPlayedFirst to previousWinner
 		for (int i = 0; i < cardsOfRound.length; i++)
 		{
 			if ((cardsOfRound[i].getSuit().equals(cardsOfRound[playerWhoPlayedFirst].getSuit())) && (cardsOfRound[i].getValue() > cardsOfRound[previousWinner].getValue()))
 			{
-				previousWinner = i;
+				previousWinner = i; // Setting the previousWinner to i
 			}
 		}
-		playerTurn = previousWinner;
-		roundsWon[previousWinner]++;
-		totalScore[previousWinner] += cardsOfRound[previousWinner].getValue();
-		totalRounds++;
-		checkEndGame();
+		playerTurn = previousWinner; // Setting the playerTurn to the previousWinner
+		roundsWon[previousWinner]++; // Incrementing previousWinner in roundsWon
+		totalScore[previousWinner] += cardsOfRound[previousWinner].getValue(); // Adding the value of the previous Winner in the CardsOfRound array to previousWinner of the totalScore array
+		totalRounds++; // Increment totalRounds
+		checkEndGame(); //Check to see if it is the end of the game
 	}
 	
 	public int gameWinner() 
 	{
-		int WinCount = roundsWon[0];
+		int WinCount = roundsWon[0]; // 
 		int gWinner = 0;
 		for(int i = 0; i < roundsWon.length; i++) 
 		{
-			if(roundsWon[i] > WinCount) 
+			if(roundsWon[i] > WinCount) // If the rounds won of player i is greater than WinCount
 			{
-				gWinner = i;
+				gWinner = i; // Set gWinner to i
 			}
-			else if(roundsWon[i] == WinCount) 
+			else if(roundsWon[i] == WinCount) // Else if the rounds one of player i equals the Win Count
 			{
-				if(totalScore[i] > totalScore[gWinner]) 
+				if(totalScore[i] > totalScore[gWinner]) // If player i's total score is higher than current gWinner's total score
 				{
-					gWinner = i;
+					gWinner = i; // Set the game winner to i
 				}
 			}	
 		}
-		return gWinner;
+		return gWinner; // return the Game Winner
 	}
-	public void checkEndGame() 
+	
+	public void checkEndGame() // Method to check if it is the end of the game 
 	{
-		if(totalRounds == 17) 
+		if(totalRounds == 17) // If the totalRounds = 17 the game is over
 		{
-			String WinnerName = playerNames[gameWinner()];
+			String WinnerName = playerNames[gameWinner()]; // Setting WinnerName to the name of the game Winner
 			//We will have an array of the winners names
 			// P1 = [0], P2 [1] and P3 [2]
 			// prompt the users with the name of the winner
 			//end game or whatever
 		}
 	}
-	public void broadcast(String broadcastString)
+	public void broadcast(String broadcastString) // Method to broadcast a string
 	{
-		for(int i = 0; i < 3; i++) {
-			out[i].println(broadcastString);
+		for(int i = 0; i < 3; i++) 
+		{
+			out[i].println(broadcastString); // printing out the broadcastString
 		}
 	}
 }
