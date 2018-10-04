@@ -135,6 +135,7 @@ public class GameboardGui extends JFrame implements Runnable
 		System.out.println(cards);
 		for(int i = 0; i < 17; i++) {
 			String suit = st.nextToken();
+			suit = suit.toLowerCase();
 			int number = Integer.parseInt(st.nextToken());
 			hand.add(new Card(suit, number));
 		}
