@@ -254,12 +254,21 @@ public class GameboardGui extends JFrame implements Runnable
 				switch (switchToken)
 				{
 				case "Played":
-					
+					//set the icon in the appropriate player box to reflect the card that they showed
+					break;
+				case "Winner":
+					String gameWinnerName = st.nextToken();
+					//set text of game winner label
+					break;
+				case "Round":
+					String roundWinnerName = st.nextToken();
+					// set text of round winner label
 					break;
 				case "Exit":
 					System.exit(0);
 					break;
-				
+				default:
+					break;
 				}
 				
 			}

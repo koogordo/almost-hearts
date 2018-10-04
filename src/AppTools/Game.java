@@ -61,6 +61,7 @@ public class Game
 		{
 			cardsOfRound[playerTurn] = new Card(suit, value);
 			Broadcast(cardsOfRound[playerTurn].toString());
+			
 			++playerTurn;
 			playerTurn %= 3;//wrap back to 0 if it hits 3
 			++numOfTurns;
@@ -81,11 +82,13 @@ public class Game
 				previousWinner = i;
 			}
 		}
+		Broadcast("Round" + " " + playerNames[previousWinner]);
+		
 		playerTurn = previousWinner;
 		roundsWon[previousWinner]++;
 		totalScore[previousWinner] += cardsOfRound[previousWinner].getValue();
 		totalRounds++;
-		checkEndGame();
+		checkEndGame(previousWinner);
 	}
 	
 	public int gameWinner() 
@@ -108,11 +111,12 @@ public class Game
 		}
 		return gWinner;
 	}
-	public void checkEndGame() 
+	public void checkEndGame(int winner) 
 	{
 		if(totalRounds == 17) 
 		{
-			String WinnerName = playerNames[gameWinner()];
+			String winnerName = playerNames[winner];
+			Broadcast("Winner" + " " + winnerName); 
 			//We will have an array of the winners names
 			// P1 = [0], P2 [1] and P3 [2]
 			// prompt the users with the name of the winner
