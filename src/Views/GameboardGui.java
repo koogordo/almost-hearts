@@ -1,6 +1,7 @@
 package Views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -11,8 +12,11 @@ import javax.swing.border.EmptyBorder;
 import AppTools.Card;
 
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -30,6 +34,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import java.awt.FlowLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import java.awt.GridBagLayout;
@@ -165,8 +170,14 @@ public class GameboardGui extends JFrame implements Runnable
 		sortHand(hand);
 		for(int i = 0; i < 17; i++) 
 		{
+			hand.get(i).setSize(contentPane.getWidth()/10, (contentPane.getWidth()/10)*(800/500));
+			Image imagetemp = hand.get(i).getImage().getImage();
+			Image temp = imagetemp.getScaledInstance(contentPane.getWidth()/10, (contentPane.getWidth()/8)*(800/500),java.awt.Image.SCALE_SMOOTH);
+			ImageIcon tempIcon = new ImageIcon(temp);
+			hand.get(i).setIcon(tempIcon);
 			handArea.add(hand.get(i));
-			hand.get(i).addActionListener(new selectCard());
+			hand.get(i).addMouseListener(new selectCard());
+	
 		}
 		
 		submit = new JButton("Submit");
@@ -222,14 +233,42 @@ public class GameboardGui extends JFrame implements Runnable
 		if(suit.equals("s")) return "";
 		return "";	
 	}
-	private class selectCard implements ActionListener
+	private class selectCard implements MouseListener
 	{
+
 		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
+		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			if(selectedCard != null) {
+				selectedCard.setBorder(null);
+			}
 			selectedCard = ((Card) e.getSource());
+			selectedCard.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
 			submit.setEnabled(true);
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 	private class submitButton implements ActionListener
@@ -277,7 +316,7 @@ public class GameboardGui extends JFrame implements Runnable
 			lblPlayer_3.setText(st.nextToken());
 			
 			setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
-			
+			//setHand("c 3 d 3 c 13 d 5 c 6 c 12 c 11 c 8 d 10 s 3 s 14 h 2 s 10 s 8 d 11 d 6 d 13");
 			this.setVisible(true);
 			while (true) 
 			{

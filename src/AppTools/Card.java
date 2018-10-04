@@ -1,12 +1,12 @@
 package AppTools;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.JLabel;
 /**
  * 
  * 
  */
-public class Card extends JButton
+public class Card extends JLabel
 {	
 	String Suit; // Initializing the Suit of the cards
 	int value; // Initializing the value of the cards
@@ -24,6 +24,9 @@ public class Card extends JButton
 	public int getValue() // getValue Method that returns the value
 	{
 		return value;
+	}
+	public ImageIcon getImage() {
+		return cardImage;
 	}
 }
 
