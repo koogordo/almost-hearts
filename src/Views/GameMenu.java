@@ -150,7 +150,7 @@ public class GameMenu
 				}
 			}
 			frame.setVisible(false); // set the visibility to false
-			Client client = new Client(name.getText(), null);
+			Client client = new Client(name.getText(), address.getText());
 			
 			GameboardGui gui = new GameboardGui(client.getSocket());
 			Thread t1 = new Thread(gui);
