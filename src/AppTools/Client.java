@@ -113,7 +113,7 @@ public class Client {
 		//JOptionPane optionPane = new JOptionPane("Waiting for other players to join...", JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon, new Object[]{}, null);
 		//screen = new JDialog();
 		screen = new JFrame("Loading...");
-		screen.setSize(500,190);
+		screen.setSize(500,200);
 		screen.setResizable(false); // Do not allow the user to adjust the size of the frame
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 	    int x = (int) ((dimension.getWidth() - screen.getWidth()) / 2);
