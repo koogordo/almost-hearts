@@ -22,19 +22,23 @@ import javax.swing.JPanel;
  * The response is received and uses the ip-address that it received from the server to 
  * attempt a TCP connection with server using the port 12345.
  */
-public class Client {
-	Socket socket;
+public class Client 
+{
+	Socket socket; // Initializing the socket
 	ArrayList<DatagramPacket> dpArray = new ArrayList<>();
-	byte[] bytesToSend;
-	String name;
-	boolean serverNotFound = true;
-	JFrame screen;
-	DatagramPacket packet;
-	public Client(String name, String address) {
+	byte[] bytesToSend; // Initializing an array of the bytesToSend
+	String name; // Initializing a name string
+	boolean serverNotFound = true; // Setting serverNotFound to true
+	JFrame screen; // Initializing screen as a JFrame
+	DatagramPacket packet; // Initializing packet as a DatagramPacket
+	public Client(String name, String address) // Method Client that takes in name and address
+	{
 		DatagramSocket ds;
-		try {
+		try 
+		{
 			packet = new DatagramPacket(name.getBytes(), name.length(), InetAddress.getByName(address), 12343);
-		} catch (UnknownHostException e1) {
+		} catch (UnknownHostException e1) 
+		{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -49,54 +53,63 @@ public class Client {
 			ds.send(packet);
 			ds.receive(packet);
 			/*Thread.sleep(1000);
-			for (int i = 0; i < 4 && serverNotFound; i++) {
+			for (int i = 0; i < 4 && serverNotFound; i++) 
+			{
 				System.out.println(i);
 				makeDatagramPackets(i * 64);
-				for(int k = 0; k < dpArray.size(); k++) {
+				for(int k = 0; k < dpArray.size(); k++) 
+				{
 					ds.send(dpArray.remove(0));
 				}
-				try {
+				try 
+				{
 					ds.receive(receivePacket);
 					serverNotFound = false;
-				} catch(SocketTimeoutException  e) {
+				} 
+				catch(SocketTimeoutException  e) 
+				{
 					
 				}
 			}*/
-			
 			System.out.println("Client - Server found attempting to connect");
 			socket = new Socket(packet.getAddress().getHostAddress(), 12345);
 			System.out.println("Client - connection established");
 			//screen.setVisible(false);
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
-		
 	}
-	public String makeWithoutSubMaskAddress(String s) {
+	public String makeWithoutSubMaskAddress(String s) 
+	{
 		return s.substring(0, s.lastIndexOf(".")) + ".255";
 	}
 	public void makeDatagramPackets(int startingSubMask)
 	{
 		String addressWithoutSubMask = "";
-		try {
+		try 
+		{
 			 addressWithoutSubMask = InetAddress.getLocalHost().getHostAddress().substring(0, InetAddress.getLocalHost().getHostAddress().lastIndexOf("."));
 			bytesToSend = this.name.getBytes();
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (UnknownHostException e) 
+		{
 			e.printStackTrace();
 		}
 		if(startingSubMask < 255)
 		{
-			for(int i = startingSubMask; i < startingSubMask + 64; i++) {
+			for(int i = startingSubMask; i < startingSubMask + 64; i++) 
+			{
 				if(i != 0 && i != 255)
 				{
-					try {
+					try 
+					{
 						dpArray.add(new DatagramPacket(bytesToSend, bytesToSend.length, 
 								InetAddress.getByName(addressWithoutSubMask + "." + i), 12343));
-					} catch (UnknownHostException e) {
-						// TODO Auto-generated catch block
+					} 
+					catch (UnknownHostException e) 
+					{
 						e.printStackTrace();
 					}
 				}
@@ -127,6 +140,5 @@ public class Client {
 		screen.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		//screen.pack();
 		screen.setVisible(true);
-		
 	}
 }
