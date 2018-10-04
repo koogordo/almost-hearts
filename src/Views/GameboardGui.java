@@ -130,23 +130,9 @@ public class GameboardGui extends JFrame implements Runnable
 		this.pack();
 		this.setVisible(true);	
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-	
-=======
-<<<<<<< HEAD
-	public void setHand(String cards) {
-		cards = cards.toLowerCase();
-=======
->>>>>>> 915b8b2496d9c0a2f8ea15c95218dce0834d3445
-	public void setHand(String cards) 
-	{
->>>>>>> 8870b9951392e9054e177bb7c857efa8b2c96a2a
-=======
 	public void setHand(String cards) {
 		cards = cards.toLowerCase();
 
->>>>>>> 022d1149f5f26ad538863c90515f60d8b3b37cc7
 		StringTokenizer st = new StringTokenizer(cards);
 		//st.nextToken();
 		System.out.println(cards);
