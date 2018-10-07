@@ -64,7 +64,7 @@ public class GameboardGui extends JFrame implements Runnable
 	BufferedReader in;
 	int playerID;
 	ImageIcon[] icons = new ImageIcon[3];
-	JPanel[] playerPanels;
+	JPanel[] playerPanels = new JPanel[3];
 	/**
 	 * Launch the application.
 	 */
