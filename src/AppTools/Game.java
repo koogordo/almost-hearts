@@ -51,7 +51,7 @@ public class Game
 			for(int k = 0; k < 17; k++)
 			{
 				Card chosenCard = deck.deck.remove(0);
-				initialCards += chosenCard.Suit + " " + chosenCard.value + " ";
+				initialCards += chosenCard.suit + " " + chosenCard.value + " ";
 			}
 			out[i].println(initialCards);
 			out[i].flush();
@@ -61,6 +61,7 @@ public class Game
 		if(player == playerTurn)
 		{
 			cardsOfRound[playerTurn] = new Card(suit, value);
+			Broadcast("Played" + " " + playerTurn + " " + cardsOfRound[playerTurn].toString());
 			
 			++playerTurn; 
 			playerTurn %= 3;//wrap back to 0 if it hits 3
@@ -82,11 +83,14 @@ public class Game
 				previousWinner = i; // Setting the previousWinner to i
 			}
 		}
-		playerTurn = previousWinner; // Setting the playerTurn to the previousWinner
-		roundsWon[previousWinner]++; // Incrementing previousWinner in roundsWon
-		totalScore[previousWinner] += cardsOfRound[previousWinner].getValue(); // Adding the value of the previous Winner in the CardsOfRound array to previousWinner of the totalScore array
-		totalRounds++; // Increment totalRounds
-		checkEndGame(); //Check to see if it is the end of the game
+		Broadcast("Round" + " " + playerNames[previousWinner]);
+		
+		playerTurn = previousWinner;
+		roundsWon[previousWinner]++;
+		totalScore[previousWinner] += cardsOfRound[previousWinner].getValue();
+		totalRounds++;
+		checkEndGame(previousWinner);
+
 	}
 	
 	public int gameWinner() 
@@ -109,19 +113,20 @@ public class Game
 		}
 		return gWinner; // return the Game Winner
 	}
-	
-	public void checkEndGame() // Method to check if it is the end of the game 
+	public void checkEndGame(int winner) 
 	{
 		if(totalRounds == 17) // If the totalRounds = 17 the game is over
 		{
-			String WinnerName = playerNames[gameWinner()]; // Setting WinnerName to the name of the game Winner
+			String winnerName = playerNames[winner];
+			Broadcast("Winner" + " " + winnerName); 
 			//We will have an array of the winners names
 			// P1 = [0], P2 [1] and P3 [2]
 			// prompt the users with the name of the winner
 			//end game or whatever
 		}
 	}
-	public void broadcast(String broadcastString) // Method to broadcast a string
+	public void Broadcast(String broadcastString)
+
 	{
 		for(int i = 0; i < 3; i++) 
 		{

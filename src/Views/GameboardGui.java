@@ -21,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -63,6 +64,7 @@ public class GameboardGui extends JFrame implements Runnable
 	BufferedReader in;
 	int playerID;
 	ImageIcon[] icons = new ImageIcon[3];
+	JPanel[] playerPanels;
 	/**
 	 * Launch the application.
 	 */
@@ -153,8 +155,12 @@ public class GameboardGui extends JFrame implements Runnable
 		p3ImageHolder.setIcon(playerThreeCard);
 		panel_3.add(lblPlayer_3);
 		panel_3.add(p3ImageHolder);
-		
-		this.setVisible(true);	
+		// adding player panels to array to make them easier to reference using playerID
+		playerPanels[0] = panel_1;
+		playerPanels[1] = panel_2;
+		playerPanels[2] = panel_3;
+		this.pack();
+		this.setVisible(true);
 	}
 	public void setHand(String cards) {
 		cards = cards.toLowerCase();
@@ -284,9 +290,8 @@ public class GameboardGui extends JFrame implements Runnable
 					hand.remove(i);
 				}
 			}
-			String cardStream = "Played " + selectedCard.getSuit() + " " + selectedCard.getValue();
-			try 
-			{
+			String cardStream = "Played " + " " + playerID + " " + selectedCard.getSuit() + " " + selectedCard.getValue();
+			try {
 				out.write(cardStream);
 				out.flush();
 			} 
@@ -318,23 +323,44 @@ public class GameboardGui extends JFrame implements Runnable
 			*/
 			//setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
 			setHand("c 3 d 3 c 13 d 5 c 6 c 12 c 11 c 8 d 10 s 3 s 14 h 2 s 10 s 8 d 11 d 6 d 13");
+			//setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
+
 			this.setVisible(true);
 			/*while (true) 
 			{
 				st = new StringTokenizer(in.readLine());
-				switch (st.nextToken())
+				String switchToken = st.nextToken();
+				switch (switchToken)
 				{
 				case "Played":
-				
+					//set the icon in the appropriate player box to reflect the card that they showed
+					int player = Integer.parseInt(st.nextToken());
+					String suit = st.nextToken();
+					int value = Integer.parseInt(st.nextToken());
+					Card playedCard = new Card(suit,value);
+					playerPanels[player].add(playedCard);
 					break;
+					
+				case "Winner":
+					String gameWinnerName = st.nextToken();
+					//TODO set text of game winner label
+					break;
+					
+				case "Round":
+					String roundWinnerName = st.nextToken();
+					//TODO set text of round winner label
+					break;
+					
 				case "Exit":
 					System.exit(0);
+					break;				
+				default:
 					break;
-				}	
-			}*/
-		} 
-		catch (IOException e) 
-		{
+				}
+				
+			} */
+			
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

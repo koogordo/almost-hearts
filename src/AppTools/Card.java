@@ -8,18 +8,20 @@ import javax.swing.JLabel;
  */
 public class Card extends JLabel
 {	
-	String Suit; // Initializing the Suit of the cards
-	int value; // Initializing the value of the cards
-	ImageIcon cardImage; // Initializing the image of the cards
-	public Card(String s, int v)  // Method to initialize the Cards in the Deck
+	String suit;
+	int value;
+	String imagePath;
+	ImageIcon cardImage;
+	public Card(String s, int v) 
 	{	
-		Suit = s;  // Setting Suit to s
-		value = v; // Setting value to v
-		cardImage = new ImageIcon("cardImages/"+ value + Suit + ".png"); // Setting cardImage's ImageIcon to the png image
+		suit = s;
+		value = v;	
+		imagePath = "cardImages/"+ value + suit + ".png";
+		cardImage = new ImageIcon(imagePath);
 	}
 	public String getSuit() // getSuit Method the returns the suit
 	{
-		return Suit;
+		return suit;
 	}
 	public int getValue() // getValue Method that returns the value
 	{
@@ -27,6 +29,9 @@ public class Card extends JLabel
 	}
 	public ImageIcon getImage() {
 		return cardImage;
+	}
+	public String toString() {
+		return this.suit + " " + this.value;
 	}
 }
 
