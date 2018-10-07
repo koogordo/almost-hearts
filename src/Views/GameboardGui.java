@@ -113,7 +113,6 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		//panel_1.setPreferredSize(new Dimension(100, 100));
 		panel.add(panel_1);
-		panel_1.setLayout(new GridLayout(2, 3, 0, 0));
 		lblPlayer_1 = new JLabel("Player 1");
 		lblPlayer_1.setVerticalAlignment(SwingConstants.TOP);
 		lblPlayer_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -121,7 +120,8 @@ public class GameboardGui extends JFrame implements Runnable
 		ImageIcon playerOneCard = new ImageIcon(unsizedIcon1.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_DEFAULT));
 		JLabel p1ImageHolder = new JLabel();
 		p1ImageHolder.setIcon(playerOneCard);
-		panel_1.add(lblPlayer_1);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		panel_1.add(lblPlayer_1, BorderLayout.NORTH);
 		panel_1.add(p1ImageHolder);
 
 		//Player two gui logic
@@ -129,7 +129,6 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		//panel_2.setPreferredSize(new Dimension(100, 150));
 		panel.add(panel_2);
-		panel_2.setLayout(new GridLayout(2, 3, 0, 0));
 		lblPlayer_2 = new JLabel("Player 2");
 		lblPlayer_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayer_2.setVerticalAlignment(SwingConstants.TOP);
@@ -137,7 +136,8 @@ public class GameboardGui extends JFrame implements Runnable
 		ImageIcon playerTwoCard = new ImageIcon(unsizedIcon2.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_DEFAULT));
 		JLabel p2ImageHolder = new JLabel();
 		p2ImageHolder.setIcon(playerTwoCard);
-		panel_2.add(lblPlayer_2);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		panel_2.add(lblPlayer_2, BorderLayout.NORTH);
 		panel_2.add(p2ImageHolder);
 
 		//Player 3 logic
@@ -145,7 +145,6 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		//panel_3.setPreferredSize(new Dimension(100, 150));
 		panel.add(panel_3);
-		panel_3.setLayout(new GridLayout(2, 3, 0, 0));
 		lblPlayer_3 = new JLabel("Player 3");
 		lblPlayer_3.setVerticalAlignment(SwingConstants.TOP);
 		lblPlayer_3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -153,13 +152,14 @@ public class GameboardGui extends JFrame implements Runnable
 		ImageIcon playerThreeCard = new ImageIcon(unsizedIcon3.getImage().getScaledInstance(100, 200, java.awt.Image.SCALE_DEFAULT));
 		JLabel p3ImageHolder = new JLabel();
 		p3ImageHolder.setIcon(playerThreeCard);
-		panel_3.add(lblPlayer_3);
+		panel_3.setLayout(new BorderLayout(0, 0));
+		panel_3.add(lblPlayer_3, BorderLayout.NORTH);
 		panel_3.add(p3ImageHolder);
 		// adding player panels to array to make them easier to reference using playerID
 		playerPanels[0] = panel_1;
 		playerPanels[1] = panel_2;
 		playerPanels[2] = panel_3;
-		this.pack();
+	
 		this.setVisible(true);
 	}
 	public void setHand(String cards) {
