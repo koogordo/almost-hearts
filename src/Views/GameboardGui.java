@@ -159,7 +159,6 @@ public class GameboardGui extends JFrame implements Runnable
 		playerPanels[0] = panel_1;
 		playerPanels[1] = panel_2;
 		playerPanels[2] = panel_3;
-		this.pack();
 		this.setVisible(true);
 	}
 	public void setHand(String cards) {
@@ -316,7 +315,7 @@ public class GameboardGui extends JFrame implements Runnable
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			
 			//uses StringTokenizer so that it is easy to traverse the String coming in
-			//StringTokenizer st = new StringTokenizer(in.readLine());
+			StringTokenizer st = new StringTokenizer(in.readLine());
 			
 			/*//The first thing coming in is going to be the playersID and the names of the players (in order)
 			playerID = Integer.parseInt(st.nextToken());
@@ -325,11 +324,12 @@ public class GameboardGui extends JFrame implements Runnable
 			lblPlayer_3.setText(st.nextToken());
 			*/
 			//setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
-			setHand("c 3 d 3 c 13 d 5 c 6 c 12 c 11 c 8 d 10 s 3 s 14 h 2 s 10 s 8 d 11 d 6 d 13");
-			//setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
+			
+			//setHand("c 3 d 3 c 13 d 5 c 6 c 12 c 11 c 8 d 10 s 3 s 14 h 2 s 10 s 8 d 11 d 6 d 13");
+			setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
 
 			this.setVisible(true);
-			/*while (true) 
+			while (true) 
 			{
 				st = new StringTokenizer(in.readLine());
 				String switchToken = st.nextToken();
@@ -342,16 +342,19 @@ public class GameboardGui extends JFrame implements Runnable
 					int value = Integer.parseInt(st.nextToken());
 					Card playedCard = new Card(suit,value);
 					playerPanels[player].add(playedCard);
+					playerPanels[player].repaint();
 					break;
 					
 				case "Winner":
 					String gameWinnerName = st.nextToken();
-					//TODO set text of game winner label
+					this.notificationLabel.setText(gameWinnerName + " Wins the game!"); 
+					this.notificationLabel.repaint();
 					break;
 					
 				case "Round":
 					String roundWinnerName = st.nextToken();
-					//TODO set text of round winner label
+					this.notificationLabel.setText(roundWinnerName + " Wins the round!");
+					this.notificationLabel.repaint();
 					break;
 					
 				case "Exit":
@@ -361,7 +364,7 @@ public class GameboardGui extends JFrame implements Runnable
 					break;
 				}
 				
-			} */
+			} 
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
