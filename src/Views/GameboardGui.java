@@ -63,7 +63,7 @@ public class GameboardGui extends JFrame implements Runnable
 	BufferedWriter out;
 	BufferedReader in;
 	int playerID;
-	ImageIcon[] icons = new ImageIcon[3];
+	JLabel[] cardLabels = new JLabel[3];
 	JPanel[] playerPanels = new JPanel[3];
 	/**
 	 * Launch the application.
@@ -116,13 +116,10 @@ public class GameboardGui extends JFrame implements Runnable
 		lblPlayer_1 = new JLabel("Player 1");
 		lblPlayer_1.setVerticalAlignment(SwingConstants.TOP);
 		lblPlayer_1.setHorizontalAlignment(SwingConstants.CENTER);
-		ImageIcon unsizedIcon1 = new ImageIcon("cardImages/rearOfCard.png");
-		ImageIcon playerOneCard = new ImageIcon(unsizedIcon1.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_DEFAULT));
-		JLabel p1ImageHolder = new JLabel();
-		p1ImageHolder.setIcon(playerOneCard);
+		cardLabels[0] = new JLabel();
 		panel_1.setLayout(new BorderLayout(0, 0));
 		panel_1.add(lblPlayer_1, BorderLayout.NORTH);
-		panel_1.add(p1ImageHolder);
+		panel_1.add(cardLabels[0], BorderLayout.CENTER);
 
 		//Player two gui logic
 		JPanel panel_2 = new JPanel();
@@ -132,13 +129,10 @@ public class GameboardGui extends JFrame implements Runnable
 		lblPlayer_2 = new JLabel("Player 2");
 		lblPlayer_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayer_2.setVerticalAlignment(SwingConstants.TOP);
-		ImageIcon unsizedIcon2 = new ImageIcon("cardImages/rearOfCard.png");
-		ImageIcon playerTwoCard = new ImageIcon(unsizedIcon2.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_DEFAULT));
-		JLabel p2ImageHolder = new JLabel();
-		p2ImageHolder.setIcon(playerTwoCard);
+		cardLabels[1] = new JLabel();
 		panel_2.setLayout(new BorderLayout(0, 0));
 		panel_2.add(lblPlayer_2, BorderLayout.NORTH);
-		panel_2.add(p2ImageHolder);
+		panel_2.add(cardLabels[1], BorderLayout.CENTER);
 
 		//Player 3 logic
 		JPanel panel_3 = new JPanel();
@@ -148,19 +142,32 @@ public class GameboardGui extends JFrame implements Runnable
 		lblPlayer_3 = new JLabel("Player 3");
 		lblPlayer_3.setVerticalAlignment(SwingConstants.TOP);
 		lblPlayer_3.setHorizontalAlignment(SwingConstants.CENTER);
-		ImageIcon unsizedIcon3 = new ImageIcon("cardImages/rearOfCard.png");
-		ImageIcon playerThreeCard = new ImageIcon(unsizedIcon3.getImage().getScaledInstance(100, 200, java.awt.Image.SCALE_DEFAULT));
-		JLabel p3ImageHolder = new JLabel();
-		p3ImageHolder.setIcon(playerThreeCard);
+		cardLabels[2] = new JLabel();
 		panel_3.setLayout(new BorderLayout(0, 0));
 		panel_3.add(lblPlayer_3, BorderLayout.NORTH);
-		panel_3.add(p3ImageHolder);
+		panel_3.add(cardLabels[2], BorderLayout.CENTER);
 		// adding player panels to array to make them easier to reference using playerID
 		playerPanels[0] = panel_1;
 		playerPanels[1] = panel_2;
 		playerPanels[2] = panel_3;
 	
+		
 		this.setVisible(true);
+	}
+	
+	public void setRearCards() {
+		
+		ImageIcon tempIcon = new ImageIcon("cardImages/rearOfCard.png");
+		ImageIcon temp = ScaledImage(tempIcon.getImage());
+
+		for(int i = 0; i < 3; i++) {
+		
+			cardLabels[i].setIcon(temp);
+			cardLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
+			
+		}
+		this.repaint();
+		
 	}
 	public void setHand(String cards) {
 		cards = cards.toLowerCase();
@@ -307,6 +314,13 @@ public class GameboardGui extends JFrame implements Runnable
 		}
 		
 	}
+	
+	public ImageIcon ScaledImage(Image i) {
+		Image imagetemp = i;
+		Image temp = imagetemp.getScaledInstance(contentPane.getWidth()/8, (contentPane.getWidth()/6)*(800/500),java.awt.Image.SCALE_SMOOTH);
+		ImageIcon scaledImage = new ImageIcon(temp);
+		return scaledImage;
+	}
 	public void run() 
 	{
 		// TODO Auto-generated method stub
@@ -326,6 +340,7 @@ public class GameboardGui extends JFrame implements Runnable
 			*/
 			//setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
 			setHand("c 3 d 3 c 13 d 5 c 6 c 12 c 11 c 8 d 10 s 3 s 14 h 2 s 10 s 8 d 11 d 6 d 13");
+			setRearCards();
 			//setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
 
 			this.setVisible(true);
