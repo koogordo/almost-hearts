@@ -11,6 +11,7 @@ import java.util.concurrent.*;
 import java.applet.Applet;
 
 import javax.imageio.ImageIO;
+import javax.print.DocFlavor.URL;
 import javax.swing.*;
 
 import AppTools.*;
@@ -33,7 +34,7 @@ public class GameMenu
 	static JPanel south; // Initialize JPanel for South
 	static JFrame frame; // Initialize JFrame
     
-	public static void main(String args[]) 
+	public GameMenu() 
 	{
 		frame = new JFrame("GameMenu"); // Creating a new JFrame called Game Menu
 		frame.setSize(380, 380); // Setting the size of the frame to 325 wide x 200 high
@@ -52,7 +53,8 @@ public class GameMenu
 		BufferedImage logo = null; // Initializing logo
 		try 
 		{
-		    logo = ImageIO.read(new File("cardImages/hand.png")); // Setting logo to the logo image
+			java.net.URL url = this.getClass().getResource("/cardImages/hand.png");
+		    logo = ImageIO.read(url); // Setting logo to the logo image
 		} 
 		catch (IOException e) // Error if image is not found
 		{
