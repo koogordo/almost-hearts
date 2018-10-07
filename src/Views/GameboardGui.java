@@ -223,12 +223,15 @@ public class GameboardGui extends JFrame implements Runnable
 			}
 			suit = nextSuit(suit);
 		}
-		for(int i = 1; i < cards.size(); i++) 
+		for(int i = 0; i < cards.size(); i++)
 		{
-			if(cards.get(i-1).getValue() > cards.get(i).getValue() && cards.get(i-1).getSuit().equals(cards.get(i).getSuit())) {
-				Card temp = cards.get(i-1);
-				cards.set(i-1, cards.get(i));
-				cards.set(i, temp);
+			for(int k = i; k < cards.size(); k++){
+				if(cards.get(k).getValue() > cards.get(i).getValue() && cards.get(i).getSuit().equals(cards.get(k).getSuit()))
+				{
+					Card temp = cards.get(i);
+					cards.set(i, cards.get(k));
+					cards.set(k, temp);
+				}
 			}
 		}
 	}
