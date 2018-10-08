@@ -155,7 +155,7 @@ public class GameboardGui extends JFrame implements Runnable
 	
 	public void setRearCards() {
 		
-		ImageIcon tempIcon = new ImageIcon("cardImages/rearOfCard.png");
+		ImageIcon tempIcon = new ImageIcon(this.getClass().getResource("/cardImages/rearOfCard.png"));
 		ImageIcon temp = ScaledImage(tempIcon.getImage());
 
 		for(int i = 0; i < 3; i++) {

@@ -18,7 +18,7 @@ public class Card extends JLabel
 		suit = s;
 		value = v;	
 		imagePath = "cardImages/"+ value + suit + ".png";
-		cardImage = new ImageIcon(imagePath);
+		cardImage = new ImageIcon(this.getClass().getResource(imagePath));
 	}
 	public String getSuit() // getSuit Method the returns the suit
 	{
