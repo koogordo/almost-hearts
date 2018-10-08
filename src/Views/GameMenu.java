@@ -48,12 +48,12 @@ public class GameMenu
 		
 		// NORTH with Game Logo-----------------------------------------------------------------------------
 		gameLogo = new JLabel(); // Setting gameLogo to a new JLabel
-		gameLogo.setSize(200,200); // Seting gameLogo to the size of 200, 200
+		gameLogo.setSize(200,58); // Seting gameLogo to the size of 200, 200
 		
 		BufferedImage logo = null; // Initializing logo
 		try 
 		{
-			java.net.URL url = this.getClass().getResource("/cardImages/hand.png");
+			java.net.URL url = this.getClass().getResource("/cardImages/AlmostHearts.png");
 		    logo = ImageIO.read(url); // Setting logo to the logo image
 		} 
 		catch (IOException e) // Error if image is not found
