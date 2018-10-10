@@ -281,7 +281,7 @@ public class GameboardGui extends JFrame implements Runnable
 			}
 			selectedCard = ((Card) e.getSource());
 			selectedCard.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
-			submit.setEnabled(true);
+			submit.setEnabled(myTurn);
 		}
 		@Override
 		public void mouseEntered(MouseEvent arg0) { }
@@ -357,7 +357,8 @@ public class GameboardGui extends JFrame implements Runnable
 			playerLabels[0].setText(st.nextToken());
 			playerLabels[1].setText(st.nextToken());
 			playerLabels[2].setText(st.nextToken());
-
+			myTurn = (playerID == 0);
+			
 			setRearCards();
 			setHand(in.readLine());// Parses the string given into Card objects and puts it in the ArrayList hand
 
