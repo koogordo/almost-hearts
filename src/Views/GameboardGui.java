@@ -118,6 +118,7 @@ public class GameboardGui extends JFrame implements Runnable
 		playerLabels[0] = new JLabel("Player 1");
 		playerLabels[0].setVerticalAlignment(SwingConstants.TOP);
 		playerLabels[0].setHorizontalAlignment(SwingConstants.CENTER);
+		playerLabels[0].setFont(new Font("Serif", Font.PLAIN, 20));
 		cardLabels[0] = new JLabel();
 		panel_1.setLayout(new BorderLayout(0, 0));
 		panel_1.add(playerLabels[0], BorderLayout.NORTH);
@@ -131,6 +132,7 @@ public class GameboardGui extends JFrame implements Runnable
 		playerLabels[1] = new JLabel("Player 2");
 		playerLabels[1].setHorizontalAlignment(SwingConstants.CENTER);
 		playerLabels[1].setVerticalAlignment(SwingConstants.TOP);
+		playerLabels[1].setFont(new Font("Serif", Font.PLAIN, 20));
 		cardLabels[1] = new JLabel();
 		panel_2.setLayout(new BorderLayout(0, 0));
 		panel_2.add(playerLabels[1], BorderLayout.NORTH);
@@ -144,6 +146,7 @@ public class GameboardGui extends JFrame implements Runnable
 		playerLabels[2] = new JLabel("Player 3");
 		playerLabels[2].setVerticalAlignment(SwingConstants.TOP);
 		playerLabels[2].setHorizontalAlignment(SwingConstants.CENTER);
+		playerLabels[2].setFont(new Font("Serif", Font.PLAIN, 20));
 		cardLabels[2] = new JLabel();
 		panel_3.setLayout(new BorderLayout(0, 0));
 		panel_3.add(playerLabels[2], BorderLayout.NORTH);
