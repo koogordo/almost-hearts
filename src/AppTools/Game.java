@@ -113,6 +113,7 @@ public class Game
 	 * It checks by looping cardsOfRound array along with who played first and broadcasts the
 	 * winner of the round to all of the players. Then sets the winner of the round as the 
 	 * next person to start. Then increments the number of rounds that player has won, and the score
+	 * for that person.
 	 * 
 	 */
 	public void roundWinner () // method to decide the round winner
@@ -131,10 +132,14 @@ public class Game
 		roundsWon[previousWinner]++;
 		totalScore[previousWinner] += cardsOfRound[previousWinner].getValue();
 		totalRounds++;
-		checkEndGame(previousWinner);
+		checkEndGame();
 
 	}
-	
+	/*
+	 * Is called by checkEndGame and return the player id of the person who won
+	 * Loops through the roundsWon array which contains the number of rounds each player
+	 * has won and returns the id of the player who won.
+	 */
 	public int gameWinner() 
 	{
 		int WinCount = roundsWon[0]; // 
@@ -155,24 +160,32 @@ public class Game
 		}
 		return gWinner; // return the Game Winner
 	}
-	public void checkEndGame(int winner) 
+	/*
+	 * Called by round Winner.
+	 * It first checks if the number of round played has been 17 and if it has, then
+	 * broadcast the text "Winner" followed by the id of the person who won.
+	 */
+	public void checkEndGame() 
 	{
 		if(totalRounds == 17) // If the totalRounds = 17 the game is over
 		{
-			String winnerName = playerNames[winner];
-			Broadcast("Winner" + " " + winnerName); 
+			Broadcast("Winner " + gameWinner()); 
 			//We will have an array of the winners names
 			// P1 = [0], P2 [1] and P3 [2]
 			// prompt the users with the name of the winner
 			//end game or whatever
 		}
 	}
+	/*
+	 * Called by many methods which takes the string given and sends it out to each player.
+	 */
 	public void Broadcast(String broadcastString)
 
 	{
 		for(int i = 0; i < 3; i++) 
 		{
 			out[i].println(broadcastString); // printing out the broadcastString
+			out[i].flush();
 		}
 	}
 }
