@@ -12,11 +12,11 @@ import java.util.concurrent.Executors;
 
 public class Server implements Runnable
 {
-	ServerSocket server;
-	Socket[] sockets;
-	String[] usernames;
-	DatagramSocket ds;
-	InetAddress[] addresses;
+	ServerSocket server; // Initialize server of type ServerSocket
+	Socket[] sockets; // Initialize sockets of type Socket Array
+	String[] usernames; // Initialize usernames of type String Array
+	DatagramSocket ds; // Initialize ds of type DatagramSocket
+	InetAddress[] addresses; //
 	int numOfPlayers = 3;
 	/*
 	 * Class Server implements Runnable so that it is possible to make this a separate thread because the

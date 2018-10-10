@@ -59,16 +59,16 @@ public class Game
 				out[i].println(i + " " + playerNames[0] + " " + playerNames[1] + " " + playerNames[2]);
 				out[i].flush();
 				
-			} catch (IOException e) 
+			} 
+			catch (IOException e) // Catch any error(s)
 			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e.printStackTrace(); // Print out said error(s)
 			}
 		}
-		Deck deck = new Deck();
+		Deck deck = new Deck(); // Set Deck to a new deck
 		for(int i = 0; i < Math.random() * 20; i++)//shuffles deck random amount of times
 		{
-			deck.Shuffle();
+			deck.Shuffle(); // Shuffle the deck
 		}
 		for(int i = 0; i < 3; i++)//distributes cards to players
 		{
@@ -92,8 +92,9 @@ public class Game
 	 * Then increment the number of turns for the round counter by 1, if the total number
 	 * of turns for the round is 3, then reset the counter and execute the roundWinner method.
 	 */
-	public void turnPlayed(int player, String suit, int value) {
-		if(player == playerTurn)
+	public void turnPlayed(int player, String suit, int value) 
+	{
+		if(player == playerTurn) // If the player equal's the player turn
 		{
 			cardsOfRound[playerTurn] = new Card(suit, value);
 			Broadcast("Played" + " " + playerTurn + " " + cardsOfRound[playerTurn].toString());
