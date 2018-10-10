@@ -52,6 +52,7 @@ public class Client implements Runnable
 
 			System.out.println("Attempting to find server"); // Informing the user that we are attempting to find the server
 			Thread t1 = new Thread(this); // Make the loading Screen
+			t1.start();
 			ds.send(packet); // Send the packet
 			ds.receive(packet); // Receive the packet
 			System.out.println("Client - Server found attempting to connect"); // Informing the user that we are attempting to connect
