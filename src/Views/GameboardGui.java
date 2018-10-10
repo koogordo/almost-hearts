@@ -96,6 +96,7 @@ public class GameboardGui extends JFrame implements Runnable
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		notificationPanel =  new JPanel();
 		notificationPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()/10));
+		notificationPanel.setAlignmentX(CENTER_ALIGNMENT);
 
 		JPanel panel = new JPanel();
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
