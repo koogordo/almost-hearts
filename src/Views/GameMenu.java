@@ -38,7 +38,7 @@ public class GameMenu
 	private JPanel south; // Initialize JPanel for South
 	private JFrame frame; // Initialize JFrame
     
-	public GameMenu() 
+	public GameMenu() // GameMenu Method
 	{
 		frame = new JFrame("GameMenu"); // Creating a new JFrame called Game Menu
 		frame.setSize(380, 320); // Setting the size of the frame to 325 wide x 200 high
@@ -122,11 +122,11 @@ public class GameMenu
 		joinExistingFrame.add(joinExistingButton); // Adding joinExistingButton to the joinExistingFrame
 		south.add(joinExistingFrame); // Adding joinExistingFrame to south
 		
-		frame.addWindowListener(new WindowAdapter() 
+		frame.addWindowListener(new WindowAdapter()
 		{
-			public void windowClosing(WindowEvent e) 
+			public void windowClosing(WindowEvent e) // Method to close the window
 			{
-		    	System.exit(0);
+		    	System.exit(0); // Exit the window
 		    }
 		});
 		frame.setVisible(true); // Set the frame's visibility to true
@@ -144,11 +144,12 @@ public class GameMenu
 				executorService.execute(new Server());//adds a new server thread to the thread pool
 				try 
 				{
-					address.setText(InetAddress.getLocalHost().getHostAddress());//if the person is hosting, just make the local
-						//address the parameter
-				} catch (UnknownHostException e) 
+					address.setText(InetAddress.getLocalHost().getHostAddress());
+					//if the person is hosting, just make the local address the parameter
+				} 
+				catch (UnknownHostException e) 
 				{
-					e.printStackTrace();
+					e.printStackTrace(); // Print out the error
 				}
 			}
 			frame.setVisible(false); // set the visibility to false
@@ -158,7 +159,6 @@ public class GameMenu
 			Thread t1 = new Thread(gui);
 			t1.start();
 		}
-		
 	}
 	
 	private class TextFieldHandler implements KeyListener // TextField Handler method to handle the Action Listener
@@ -166,30 +166,21 @@ public class GameMenu
 		@Override
 		public void keyTyped(KeyEvent e) 
 		{
-			// TODO Auto-generated method stub
-			if(name.getText().equals(""))
+			if(name.getText().equals("")) // If the name is blank
 			{
-				joinExistingButton.setEnabled(false);
-				createNewButton.setEnabled(false);
+				createNewButton.setEnabled(false); // createNewButton is grayed out
+				joinExistingButton.setEnabled(false); // joinExistingButton is grayed out
 			}
 			else 
 			{
-				joinExistingButton.setEnabled(true);
-				createNewButton.setEnabled(true);
+				createNewButton.setEnabled(true); // createNewButton enabled
+				joinExistingButton.setEnabled(true); // joinExistingButton enabled
 			}
 		}
 		@Override
-		public void keyPressed(KeyEvent e) 
-		{
-			// TODO Auto-generated method stub
-			
-		}
-
+		public void keyPressed(KeyEvent e) { }
+		
 		@Override
-		public void keyReleased(KeyEvent e) 
-		{
-			// TODO Auto-generated method stub
-			
-		}
+		public void keyReleased(KeyEvent e) { }
 	}
 }
