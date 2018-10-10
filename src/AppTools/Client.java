@@ -48,8 +48,6 @@ public class Client implements Runnable
 		try 
 		{
 			ds = new DatagramSocket(12344);
-			//ds.setSoTimeout(2000);
-
 			System.out.println("Attempting to find server"); // Informing the user that we are attempting to find the server
 			Thread t1 = new Thread(this); // Make the loading Screen
 			t1.start();
@@ -58,7 +56,6 @@ public class Client implements Runnable
 			System.out.println("Client - Server found attempting to connect"); // Informing the user that we are attempting to connect
 			socket = new Socket(packet.getAddress().getHostAddress(), 12345); // Setting socket
 			System.out.println("Client - connection established"); // Informing the user that the connection has been established
-			//screen.setVisible(false);
 		} 
 		catch (IOException e) 
 		{
@@ -72,9 +69,8 @@ public class Client implements Runnable
 	}
 
 	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-
+	public void run() 
+	{
 		//final ImageIcon icon = new ImageIcon("cardImages/cardLoading.gif");
 		//JOptionPane optionPane = new JOptionPane("Waiting for other players to join...", JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon, new Object[]{}, null);
 		//screen = new JDialog();

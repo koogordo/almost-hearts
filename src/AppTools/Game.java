@@ -47,7 +47,7 @@ public class Game
 	 * different times. Once it is done shuffling it then sends out the cards individually
 	 * to each players hand.
 	 */
-	public Game(String[] n, Socket[] s) 
+	public Game(String[] n, Socket[] s)
 	{
 		playerNames = n; // Player names (array of strings)
 		playerSockets = s; // Player sockets (array of strings)
@@ -128,10 +128,10 @@ public class Game
 		}
 		Broadcast("Round" + " " + playerNames[previousWinner]);
 		
-		playerTurn = previousWinner;
-		roundsWon[previousWinner]++;
-		totalScore[previousWinner] += cardsOfRound[previousWinner].getValue();
-		totalRounds++;
+		playerTurn = previousWinner; // set first player to the winner of the previous round
+		roundsWon[previousWinner]++; // increment the roundsWon count of the previous winner
+		totalScore[previousWinner] += cardsOfRound[previousWinner].getValue(); // add the value of the winning card to the total score of the previous winner
+		totalRounds++; // Increment 
 		checkEndGame();
 
 	}
@@ -142,7 +142,7 @@ public class Game
 	 */
 	public int gameWinner() 
 	{
-		int WinCount = roundsWon[0]; // 
+		int WinCount = roundsWon[0];
 		int gWinner = 0;
 		for(int i = 0; i < roundsWon.length; i++) 
 		{
@@ -176,10 +176,8 @@ public class Game
 			//end game or whatever
 		}
 	}
-	/*
-	 * Called by many methods which takes the string given and sends it out to each player.
-	 */
-	public void Broadcast(String broadcastString)
+
+	public void Broadcast(String broadcastString) // Method that takes the string given and sends it out to each player
 
 	{
 		for(int i = 0; i < 3; i++) 

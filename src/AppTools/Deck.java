@@ -25,11 +25,12 @@ public class Deck
 		}
 	}
 
-	public void Shuffle() // Method to shuffle 
+	public void Shuffle() // Method to shuffle the deck
 	{
-		Collections.shuffle(deck);
+		Collections.shuffle(deck); // Shuffle the deck
 	}
-	public Card drawOneCard() {
-		return deck.remove(0);
+	public Card drawOneCard() // Method to pull a card from the deck
+	{
+		return deck.remove(0); // Returns the card object
 	}
 }
