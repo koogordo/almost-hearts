@@ -17,9 +17,9 @@ import javax.swing.*;
 import AppTools.*;
 
 /**
- * GameMenu is a small gui that takes no input for the constructor
+ * GameMenu is a small GUI that takes no input for the constructor
  * 
- * In the gui, there are 2 buttons (joinExistingButton and createNewButton) and 2 text fields (name and address).
+ * In the GUI, there are 2 buttons (joinExistingButton and createNewButton) and 2 text fields (name and address).
  * joinExistingButton takes the name and address text inside the text fields and instantiates a Client object with them.
  * createNewButton does the exact same thing as joinExistingButton except that it creates a server in a new thread
  * and replaces the address text field with it's own address.
@@ -43,7 +43,7 @@ public class GameMenu
 		frame = new JFrame("GameMenu"); // Creating a new JFrame called Game Menu
 		frame.setSize(380, 320); // Setting the size of the frame to 325 wide x 200 high
 		frame.setResizable(false); // Do not allow the user to adjust the size of the frame
-	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize(); // set the dimension to the screensize
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize(); // set the dimension to the screenSize
 	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2); // Set x to the width of the screen - the width of the frame
 	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2); // Set y to the height of the screen - the height of the frame
 	    frame.setLocation(x, y); // Set the frame's starting location to x, y
