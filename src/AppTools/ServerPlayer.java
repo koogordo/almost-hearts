@@ -16,11 +16,12 @@ import java.util.StringTokenizer;
  * sockets all at once (one for each player).
  */
 
-public class ServerPlayer implements Runnable {
-	Socket socket;
-	Game game;
-	int playerID;
-	BufferedReader in;
+public class ServerPlayer implements Runnable 
+{
+	Socket socket; // Initialize socket of type Socket
+	Game game; // Initialize game of type Game
+	int playerID; // Initialize playerID of type int
+	BufferedReader in; // Initialize in of type BufferedReader
 	/*
 	 * The constructor takes in the 3 parameters,
 	 * A reference to the socket that it is going to get input from, a reference to the
@@ -29,14 +30,17 @@ public class ServerPlayer implements Runnable {
 	 * The constructor is called in the Server class.
 	 */
 	public ServerPlayer(Socket s, Game g, int i) {
-		socket = s;
-		game = g;
-		playerID = i;
-		try {
+		socket = s; // Setting socket to s
+		game = g; // Setting game to g
+		playerID = i; // Setting playerID to i
+		try 
+		{
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// Setting in to a bufferedReader of a InputStreamReader of the inputStream of the socket
+		} 
+		catch (IOException e) // Catch any errors
+		{
+			e.printStackTrace(); // Print out said errors
 		}
 	}
 	@Override
@@ -47,14 +51,17 @@ public class ServerPlayer implements Runnable {
 	 * This method is implemented from the Runnable class and is used to make it multiple threaded.
 	 * It infinitely loops through for waiting for input from the user until the server broadcasts the exit string
 	 */
-	public void run() {
-		// TODO Auto-generated method stub
-		while (true) {
-			try {
+	public void run() 
+	{
+		while (true) 
+		{
+			try 
+			{
 				StringTokenizer input = new StringTokenizer(in.readLine());
 				String firstToken = input.nextToken();
 				
-				switch(firstToken) {
+				switch(firstToken) 
+				{
 				case "Played":
 					game.turnPlayed(Integer.parseInt(input.nextToken()), input.nextToken(), Integer.parseInt(input.nextToken()));
 					break;
@@ -64,14 +71,12 @@ public class ServerPlayer implements Runnable {
 					break;
 				default:
 					break;
-				}
-				
-				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				}	
+			} 
+			catch (IOException e) // Catch any errors
+			{
+				e.printStackTrace(); // Print out said errors
 			}
 		}
 	}
-
 }
