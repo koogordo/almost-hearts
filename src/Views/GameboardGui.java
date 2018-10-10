@@ -301,15 +301,17 @@ public class GameboardGui extends JFrame implements Runnable
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
+			System.out.println(selectedCard.getSuit() + selectedCard.getValue());
 			for (int i = 0; i < hand.size(); i++) 
 			{
-				if (selectedCard.equals(hand.get(i))) 
+				if (selectedCard.getSuit() == hand.get(i).getSuit() && selectedCard.getValue() == hand.get(i).getValue()) 
 				{
 					hand.remove(i);
 				}
 			}
 			String cardStream = "Played " + " " + playerID + " " + selectedCard.getSuit() + " "
 					+ selectedCard.getValue();
+			System.out.println(cardStream);
 			try 
 			{
 				out.write(cardStream);

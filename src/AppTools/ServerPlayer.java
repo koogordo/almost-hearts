@@ -60,6 +60,7 @@ public class ServerPlayer implements Runnable
 				StringTokenizer input = new StringTokenizer(in.readLine());
 				String firstToken = input.nextToken();
 				
+				System.out.println(firstToken);
 				switch(firstToken) 
 				{
 				case "Played":
