@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 public class Client 
 {
 	Socket socket; // Initializing the socket
-	ArrayList<DatagramPacket> dpArray = new ArrayList<>();
+	ArrayList<DatagramPacket> dpArray = new ArrayList<>(); // Setting dpArray to an arrayList
 	byte[] bytesToSend; // Initializing an array of the bytesToSend
 	String name; // Initializing a name string
 	boolean serverNotFound = true; // Setting serverNotFound to true
@@ -33,25 +33,27 @@ public class Client
 	DatagramPacket packet; // Initializing packet as a DatagramPacket
 	public Client(String name, String address) // Method Client that takes in name and address
 	{
-		DatagramSocket ds;
+		DatagramSocket ds; // Initializing ds of type DatagramSocket
 		try 
 		{
 			packet = new DatagramPacket(name.getBytes(), name.length(), InetAddress.getByName(address), 12343);
-		} catch (UnknownHostException e1) 
+			// 
+		} 
+		catch (UnknownHostException e1) 
 		{
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		screen = new JFrame("Loading...");
-		this.name = name;
-		try {
+		this.name = name; 
+		try 
+		{
 			ds = new DatagramSocket(12344);
 			//ds.setSoTimeout(2000);
 			
-			System.out.println("Attempting to find server");
-			makeLoadingScreen();
-			ds.send(packet);
-			ds.receive(packet);
+			System.out.println("Attempting to find server"); // Informing the user that we are attempting to find the server
+			makeLoadingScreen(); // Make the loading Screen
+			ds.send(packet); // Send the packet
+			ds.receive(packet); // Receive the packet
 			/*Thread.sleep(1000);
 			for (int i = 0; i < 4 && serverNotFound; i++) 
 			{
@@ -71,9 +73,9 @@ public class Client
 					
 				}
 			}*/
-			System.out.println("Client - Server found attempting to connect");
-			socket = new Socket(packet.getAddress().getHostAddress(), 12345);
-			System.out.println("Client - connection established");
+			System.out.println("Client - Server found attempting to connect"); // Informing the user that we are attempting to connect
+			socket = new Socket(packet.getAddress().getHostAddress(), 12345); // Setting socket
+			System.out.println("Client - connection established"); // Informing the user that the connection has been established
 			//screen.setVisible(false);
 		} 
 		catch (IOException e) 
@@ -82,11 +84,12 @@ public class Client
 		}
 	}
 	
-	public Socket getSocket() 
+	public Socket getSocket() // getSocket Method that returns the socket
 	{
 		return socket;
 	}
-	public void makeLoadingScreen() 
+	
+	public void makeLoadingScreen() // Method to make the loading screen
 	{
 		//final ImageIcon icon = new ImageIcon("cardImages/cardLoading.gif");
 		//JOptionPane optionPane = new JOptionPane("Waiting for other players to join...", JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon, new Object[]{}, null);
@@ -107,7 +110,9 @@ public class Client
 		//screen.pack();
 		screen.setVisible(true);
 	}
-	public JFrame getLoadingScreen() {
+	
+	public JFrame getLoadingScreen() // Method to get the loading screen
+	{
 		return screen;
 	}
 }
