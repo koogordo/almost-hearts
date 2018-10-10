@@ -48,7 +48,7 @@ import java.awt.Component;
  * 
  */
 
-public class GameboardGui extends JFrame implements Runnable
+public class GameboardGui extends JFrame implements Runnable 
 {
 	JLabel[] playerLabels;
 	ArrayList<Card> hand = new ArrayList<>();
@@ -64,38 +64,38 @@ public class GameboardGui extends JFrame implements Runnable
 	int playerID;
 	JLabel[] cardLabels = new JLabel[3];
 	JPanel[] playerPanels = new JPanel[3];
+
 	/**
 	 * Launch the application.
 	 */
-	
+
 	/**
 	 * Create the frame.
 	 */
-	public GameboardGui(Socket socket)
+	public GameboardGui(Socket socket) 
 	{
 		this.socket = socket;
 		playerLabels = new JLabel[3];
 		try 
 		{
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-		} 
-		catch (IOException e) 
+		} catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000,800);
+		setBounds(100, 100, 1000, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+
 		handArea = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) handArea.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
-		notificationPanel =  new JPanel();
-		notificationPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()/10));
+		notificationPanel = new JPanel();
+		notificationPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 10));
 		notificationPanel.setAlignmentX(CENTER_ALIGNMENT);
 
 		JPanel panel = new JPanel();
@@ -109,11 +109,11 @@ public class GameboardGui extends JFrame implements Runnable
 		contentPane.add(panel);
 		contentPane.add(handArea);
 		panel.setLayout(new GridLayout(0, 3, 0, 0));
-		panel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()/8));
+		panel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 8));
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		//panel_1.setPreferredSize(new Dimension(100, 100));
+		// panel_1.setPreferredSize(new Dimension(100, 100));
 		panel.add(panel_1);
 		playerLabels[0] = new JLabel("Player 1");
 		playerLabels[0].setVerticalAlignment(SwingConstants.TOP);
@@ -124,10 +124,10 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_1.add(playerLabels[0], BorderLayout.NORTH);
 		panel_1.add(cardLabels[0], BorderLayout.CENTER);
 
-		//Player two gui logic
+		// Player two gui logic
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		//panel_2.setPreferredSize(new Dimension(100, 150));
+		// panel_2.setPreferredSize(new Dimension(100, 150));
 		panel.add(panel_2);
 		playerLabels[1] = new JLabel("Player 2");
 		playerLabels[1].setHorizontalAlignment(SwingConstants.CENTER);
@@ -138,10 +138,10 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_2.add(playerLabels[1], BorderLayout.NORTH);
 		panel_2.add(cardLabels[1], BorderLayout.CENTER);
 
-		//Player 3 logic
+		// Player 3 logic
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		//panel_3.setPreferredSize(new Dimension(100, 150));
+		// panel_3.setPreferredSize(new Dimension(100, 150));
 		panel.add(panel_3);
 		playerLabels[2] = new JLabel("Player 3");
 		playerLabels[2].setVerticalAlignment(SwingConstants.TOP);
@@ -157,72 +157,70 @@ public class GameboardGui extends JFrame implements Runnable
 		playerPanels[2] = panel_3;
 		this.setVisible(true);
 	}
-	
-	public void setRearCards() {
-		
+
+	public void setRearCards() 
+	{
 		ImageIcon tempIcon = new ImageIcon(this.getClass().getResource("/cardImages/rearOfCard.png"));
 		ImageIcon temp = ScaledImage(tempIcon.getImage());
 
-		for(int i = 0; i < 3; i++) {
-		
+		for (int i = 0; i < 3; i++) 
+		{
 			cardLabels[i].setIcon(temp);
 			cardLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
-			
 		}
 		this.repaint();
-		
 	}
-	public void setHand(String cards) {
+
+	public void setHand(String cards) 
+	{
 		cards = cards.toLowerCase();
 
 		StringTokenizer st = new StringTokenizer(cards);
-		//st.nextToken();
+		// st.nextToken();
 		System.out.println(cards);
-		for(int i = 0; i < 17; i++) 
+		for (int i = 0; i < 17; i++) 
 		{
 			String suit = st.nextToken();
 			int number = Integer.parseInt(st.nextToken());
 			hand.add(new Card(suit, number));
 		}
 		sortHand(hand);
-		for(int i = 0; i < 17; i++) 
+		for (int i = 0; i < 17; i++) 
 		{
-			hand.get(i).setSize(contentPane.getWidth()/10, (contentPane.getWidth()/10)*(800/500));
+			hand.get(i).setSize(contentPane.getWidth() / 10, (contentPane.getWidth() / 10) * (800 / 500));
 			Image imagetemp = hand.get(i).getImage().getImage();
-			Image temp = imagetemp.getScaledInstance(contentPane.getWidth()/10, (contentPane.getWidth()/8)*(800/500),java.awt.Image.SCALE_SMOOTH);
+			Image temp = imagetemp.getScaledInstance(contentPane.getWidth() / 10,
+					(contentPane.getWidth() / 8) * (800 / 500), java.awt.Image.SCALE_SMOOTH);
 			ImageIcon tempIcon = new ImageIcon(temp);
 			hand.get(i).setIcon(tempIcon);
 			handArea.add(hand.get(i));
 			hand.get(i).addMouseListener(new selectCard());
-	
 		}
-		
 		submit = new JButton("Submit");
 		submit.addActionListener(new submitButton());
 		submit.setEnabled(false);
 		handArea.add(submit);
 	}
-	
+
 	public void setPlayerNames(String names) 
 	{
 		StringTokenizer st = new StringTokenizer(names);
 		st.nextToken();
-		
+
 		playerLabels[0].setText(st.nextToken());
 		playerLabels[1].setText(st.nextToken());
 		playerLabels[2].setText(st.nextToken());
 	}
-	
+
 	public static void sortHand(ArrayList<Card> cards) 
 	{
 		String suit = "c";
-		for(int i = 0; i < cards.size() - 1;) 
+		for (int i = 0; i < cards.size() - 1;) 
 		{
-			if (!suit.equals("")) 
-			{
-				for(int k = i; k < cards.size(); k++) 
+			if (!suit.equals("")) {
+				for (int k = i; k < cards.size(); k++) 
 				{
-					if(cards.get(k).getSuit().equals(suit)) 
+					if (cards.get(k).getSuit().equals(suit)) 
 					{
 						Card temp = cards.get(i);
 						cards.set(i, cards.get(k));
@@ -233,10 +231,12 @@ public class GameboardGui extends JFrame implements Runnable
 			}
 			suit = nextSuit(suit);
 		}
-		for(int i = 0; i < cards.size(); i++)
+		for (int i = 0; i < cards.size(); i++) 
 		{
-			for(int k = i; k < cards.size(); k++){
-				if(cards.get(k).getValue() > cards.get(i).getValue() && cards.get(i).getSuit().equals(cards.get(k).getSuit()))
+			for (int k = i; k < cards.size(); k++) 
+			{
+				if (cards.get(k).getValue() > cards.get(i).getValue()
+						&& cards.get(i).getSuit().equals(cards.get(k).getSuit())) 
 				{
 					Card temp = cards.get(i);
 					cards.set(i, cards.get(k));
@@ -245,21 +245,27 @@ public class GameboardGui extends JFrame implements Runnable
 			}
 		}
 	}
+
 	public static String nextSuit(String suit) 
 	{
-		if(suit.equals("c")) return "d";
-		if(suit.equals("d")) return "h";
-		if(suit.equals("h")) return "s";
-		if(suit.equals("s")) return "";
-		return "";	
+		if (suit.equals("c"))
+			return "d";
+		if (suit.equals("d"))
+			return "h";
+		if (suit.equals("h"))
+			return "s";
+		if (suit.equals("s"))
+			return "";
+		return "";
 	}
-	private class selectCard implements MouseListener
-	{
 
+	private class selectCard implements MouseListener 
+	{
 		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			if(selectedCard != null) {
+		public void mouseClicked(MouseEvent e) 
+		{
+			if (selectedCard != null) 
+			{
 				selectedCard.setBorder(null);
 			}
 			selectedCard = ((Card) e.getSource());
@@ -269,112 +275,95 @@ public class GameboardGui extends JFrame implements Runnable
 
 		@Override
 		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
 		}
 
 		@Override
 		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
 		}
 
 		@Override
 		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
 		}
 	}
-	private class submitButton implements ActionListener
-	{
+
+	private class submitButton implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-			for(int i = 0; i < hand.size(); i++) 
-			{
-				if(selectedCard.equals(hand.get(i))) 
-				{
+		public void actionPerformed(ActionEvent e) {
+			for (int i = 0; i < hand.size(); i++) {
+				if (selectedCard.equals(hand.get(i))) {
 					hand.remove(i);
 				}
 			}
-			String cardStream = "Played " + " " + playerID + " " + selectedCard.getSuit() + " " + selectedCard.getValue();
+			String cardStream = "Played " + " " + playerID + " " + selectedCard.getSuit() + " "
+					+ selectedCard.getValue();
 			try {
 				out.write(cardStream);
 				out.flush();
-			} 
-			catch (IOException e1) 
-			{
-				// TODO Auto-generated catch block
+			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 			submit.setEnabled(false);
 		}
-		
 	}
-	
+
 	public ImageIcon ScaledImage(Image i) {
 		Image imagetemp = i;
-		Image temp = imagetemp.getScaledInstance(contentPane.getWidth()/8, (contentPane.getWidth()/6)*(800/500),java.awt.Image.SCALE_SMOOTH);
+		Image temp = imagetemp.getScaledInstance(contentPane.getWidth() / 8, (contentPane.getWidth() / 6) * (800 / 500),
+				java.awt.Image.SCALE_SMOOTH);
 		ImageIcon scaledImage = new ImageIcon(temp);
 		return scaledImage;
 	}
-	public boolean isMyTurn(int playedPerson)
-	{
+
+	public boolean isMyTurn(int playedPerson) {
 		playedPerson++;
 		return playedPerson % 3 == playerID;
 	}
-	public void run() 
-	{
-		// TODO Auto-generated method stub
-		try 
-		{
-			//creates the input stream to read in the output from the server
+
+	public void run() {
+		try {
+			// creates the input stream to read in the output from the server
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			
-			//uses StringTokenizer so that it is easy to traverse the String coming in
+
+			// uses StringTokenizer so that it is easy to traverse the String coming in
 			StringTokenizer st = new StringTokenizer(in.readLine());
-			
-			//The first thing coming in is going to be the playersID and the names of the players (in order)
+
+			// The first thing coming in is going to be the playersID and the names of the
+			// players (in order)
 			playerID = Integer.parseInt(st.nextToken());
 			playerLabels[0].setText(st.nextToken());
 			playerLabels[1].setText(st.nextToken());
 			playerLabels[2].setText(st.nextToken());
-			
-	
-			//setHand("c 3 d 3 c 13 d 5 c 6 c 12 c 11 c 8 d 10 s 3 s 14 h 2 s 10 s 8 d 11 d 6 d 13");
+
 			setRearCards();
-			setHand(in.readLine());//Parses the string given into Card objects and puts it in the ArrayList hand
+			setHand(in.readLine());// Parses the string given into Card objects and puts it in the ArrayList hand
 
 			this.setVisible(true);
-			while (true) 
-			{
+			while (true) {
 				st = new StringTokenizer(in.readLine());
 				String switchToken = st.nextToken();
-				switch (switchToken)
-				{
+				switch (switchToken) {
 				case "Played":
-					//set the icon in the appropriate player box to reflect the card that they showed
+					// set the icon in the appropriate player box to reflect the card that they
+					// showed
 					int player = Integer.parseInt(st.nextToken());
 					String suit = st.nextToken();
 					int value = Integer.parseInt(st.nextToken());
-					Card playedCard = new Card(suit,value);
+					Card playedCard = new Card(suit, value);
 					playerPanels[player].add(playedCard);
 					playerPanels[player].repaint();
 					submit.setEnabled(isMyTurn(player));
 					break;
-					
+
 				case "Winner":
 					String gameWinnerName = st.nextToken();
-					this.notificationLabel.setText(gameWinnerName + " Wins the game!"); 
+					this.notificationLabel.setText(gameWinnerName + " Wins the game!");
 					this.notificationLabel.repaint();
 					break;
-					
+
 				case "Round":
 					int roundWinner = Integer.parseInt(st.nextToken());
 					this.notificationLabel.setText(playerLabels[roundWinner].getText() + " Wins the round!");
@@ -382,19 +371,17 @@ public class GameboardGui extends JFrame implements Runnable
 					submit.setEnabled(roundWinner == playerID);
 					setRearCards();
 					break;
-					
+
 				case "Exit":
 					System.exit(0);
-					break;				
+					break;
 				default:
 					break;
 				}
-				
-			} 
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			}
+		} catch (IOException e) // Catch any error(s)
+		{
+			e.printStackTrace(); // Print out the error(s)
 		}
 	}
 }
