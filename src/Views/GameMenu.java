@@ -17,8 +17,12 @@ import javax.swing.*;
 import AppTools.*;
 
 /**
- * GameMenu.java is the main driver to initialize the program
- * It starts up a JFrame Gui that allows the users to enter their name and connect to the game
+ * GameMenu is a small gui that takes no input for the constructor
+ * 
+ * In the gui, there are 2 buttons (joinExistingButton and createNewButton) and 2 text fields (name and address).
+ * joinExistingButton takes the name and address text inside the text fields and instantiates a Client object with them.
+ * createNewButton does the exact same thing as joinExistingButton except that it creates a server in a new thread
+ * and replaces the address text field with it's own address.
  */
 
 public class GameMenu 
@@ -48,7 +52,7 @@ public class GameMenu
 		
 		// NORTH with Game Logo-----------------------------------------------------------------------------
 		gameLogo = new JLabel(); // Setting gameLogo to a new JLabel
-		gameLogo.setSize(200,58); // Seting gameLogo to the size of 200, 200
+		gameLogo.setSize(200,58); // Seting gameLogo to the size of 200, 58
 		
 		BufferedImage logo = null; // Initializing logo
 		try 

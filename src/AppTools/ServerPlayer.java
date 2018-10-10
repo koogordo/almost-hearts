@@ -43,9 +43,9 @@ public class ServerPlayer implements Runnable {
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Runnable#run()
-	 * This method is implemented from the Runnable class and is used to make it multiple threaded.
 	 * 
-	 * It infinitely 
+	 * This method is implemented from the Runnable class and is used to make it multiple threaded.
+	 * It infinitely loops through for waiting for input from the user until the server broadcasts the exit string
 	 */
 	public void run() {
 		// TODO Auto-generated method stub

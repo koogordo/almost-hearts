@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** 
- * 
- * 
+/* 
+ * The purpose of this class is to create the cards and holds them in an ArrayList which
+ * has a function to shuffle the cards.
+ * Also includes a function for drawing a card
  */
 
 public class Deck
