@@ -113,7 +113,12 @@ public class GameboardGui extends JFrame implements Runnable
 		contentPane.add(handArea);
 		panel.setLayout(new GridLayout(0, 3, 0, 0));
 		panel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 8));
-
+		
+		//String labelName[] = {"Player 1", "Player 2", "Player 3"};
+		//String panelName[] = {"panel_1", "panel_2", "panel_3"};
+		//String VerticalAlign[] = {"TOP", "CENTER", "TOP"};
+		//String HorizontalAlign[] = {"CENTER", "TOP", "CENTER"};
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		// panel_1.setPreferredSize(new Dimension(100, 100));
