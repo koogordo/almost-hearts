@@ -81,12 +81,12 @@ public class GameboardGui extends JFrame implements Runnable
 		try 
 		{
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-		} catch (IOException e) 
+		} 
+		catch (IOException e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 800);
 		contentPane = new JPanel();
@@ -221,7 +221,8 @@ public class GameboardGui extends JFrame implements Runnable
 		String suit = "c";
 		for (int i = 0; i < cards.size() - 1;) 
 		{
-			if (!suit.equals("")) {
+			if (!suit.equals("")) 
+			{
 				for (int k = i; k < cards.size(); k++) 
 				{
 					if (cards.get(k).getSuit().equals(suit)) 
@@ -276,7 +277,6 @@ public class GameboardGui extends JFrame implements Runnable
 			selectedCard.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
 			submit.setEnabled(true);
 		}
-
 		@Override
 		public void mouseEntered(MouseEvent arg0) { }
 
@@ -308,7 +308,8 @@ public class GameboardGui extends JFrame implements Runnable
 			{
 				out.write(cardStream);
 				out.flush();
-			} catch (IOException e1) 
+			} 
+			catch (IOException e1) 
 			{
 				e1.printStackTrace();
 			}
@@ -354,7 +355,6 @@ public class GameboardGui extends JFrame implements Runnable
 			setRearCards();
 			setHand(in.readLine());// Parses the string given into Card objects and puts it in the ArrayList hand
 
-			
 			while (true) 
 			{
 				st = new StringTokenizer(in.readLine());
@@ -394,7 +394,6 @@ public class GameboardGui extends JFrame implements Runnable
 					break;
 				}
 			}
-			
 		} 
 		catch (IOException e) // Catch any error(s)
 		{

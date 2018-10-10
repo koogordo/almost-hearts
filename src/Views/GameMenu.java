@@ -60,9 +60,9 @@ public class GameMenu
 			java.net.URL url = this.getClass().getResource("/cardImages/AlmostHearts.png");
 		    logo = ImageIO.read(url); // Setting logo to the logo image
 		} 
-		catch (IOException e) // Error if image is not found
+		catch (IOException e) // Checking for errors
 		{
-		    e.printStackTrace();
+		    e.printStackTrace(); // Print out said errors
 		}
 		Image dimg = logo.getScaledInstance(gameLogo.getWidth(), gameLogo.getHeight(), Image.SCALE_SMOOTH); // Setting dimg to the width and height of gameLogo
 		ImageIcon imageIcon = new ImageIcon(dimg); // Setting imageIcon to the dimg
