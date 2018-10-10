@@ -9,10 +9,10 @@ import javax.swing.JLabel;
  */
 public class Card extends JLabel
 {	
-	String suit;
-	int value;
-	String imagePath;
-	ImageIcon cardImage;
+	private String suit;
+	private int value;
+	private String imagePath;
+	private ImageIcon cardImage;
 	public Card(String s, int v) 
 	{	
 		suit = s;
