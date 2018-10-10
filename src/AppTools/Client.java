@@ -81,41 +81,7 @@ public class Client
 			e.printStackTrace();
 		}
 	}
-	public String makeWithoutSubMaskAddress(String s) 
-	{
-		return s.substring(0, s.lastIndexOf(".")) + ".255";
-	}
-	public void makeDatagramPackets(int startingSubMask)
-	{
-		String addressWithoutSubMask = "";
-		try 
-		{
-			 addressWithoutSubMask = InetAddress.getLocalHost().getHostAddress().substring(0, InetAddress.getLocalHost().getHostAddress().lastIndexOf("."));
-			bytesToSend = this.name.getBytes();
-		} 
-		catch (UnknownHostException e) 
-		{
-			e.printStackTrace();
-		}
-		if(startingSubMask < 255)
-		{
-			for(int i = startingSubMask; i < startingSubMask + 64; i++) 
-			{
-				if(i != 0 && i != 255)
-				{
-					try 
-					{
-						dpArray.add(new DatagramPacket(bytesToSend, bytesToSend.length, 
-								InetAddress.getByName(addressWithoutSubMask + "." + i), 12343));
-					} 
-					catch (UnknownHostException e) 
-					{
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-	}
+	
 	public Socket getSocket() 
 	{
 		return socket;

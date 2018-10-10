@@ -34,6 +34,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -102,6 +103,7 @@ public class GameboardGui extends JFrame implements Runnable
 		notificationPanel.setLayout(new BoxLayout(notificationPanel, BoxLayout.Y_AXIS));
 		notificationLabel = new JLabel("notification label");
 		notificationLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		notificationLabel.setFont(new Font("Serif", Font.PLAIN, 30));
 		notificationPanel.add(notificationLabel);
 		contentPane.add(panel);
 		contentPane.add(handArea);
@@ -373,6 +375,8 @@ public class GameboardGui extends JFrame implements Runnable
 					int roundWinner = Integer.parseInt(st.nextToken());
 					this.notificationLabel.setText(playerLabels[roundWinner].getText() + " Wins the round!");
 					this.notificationLabel.repaint();
+					submit.setEnabled(roundWinner == playerID);
+					setRearCards();
 					break;
 					
 				case "Exit":
