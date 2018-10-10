@@ -340,6 +340,7 @@ public class GameboardGui extends JFrame implements Runnable
 			StringTokenizer st = new StringTokenizer(in.readLine());
 			
 			loadingScreen.setVisible(false);
+			this.setVisible(true);
 
 			// The first thing coming in is going to be the playersID and the names of the
 			// players (in order)
@@ -351,7 +352,7 @@ public class GameboardGui extends JFrame implements Runnable
 			setRearCards();
 			setHand(in.readLine());// Parses the string given into Card objects and puts it in the ArrayList hand
 
-			this.setVisible(true);
+			
 			while (true) 
 			{
 				st = new StringTokenizer(in.readLine());
