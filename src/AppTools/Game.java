@@ -98,10 +98,10 @@ public class Game
 			cardsOfRound[playerTurn] = new Card(suit, value);
 			Broadcast("Played" + " " + playerTurn + " " + cardsOfRound[playerTurn].toString());
 			
-			++playerTurn; 
+			++playerTurn; // Increment the player's turn
 			playerTurn %= 3;//wrap back to 0 if it hits 3
-			++numOfTurns;
-			if(numOfTurns == 3)
+			++numOfTurns; // Increment the number of turns
+			if(numOfTurns == 3) // If the number of turns is 3:
 			{
 				numOfTurns = 0; // Setting the number of turns to 0
 				roundWinner(); // Checking the round winner
@@ -131,8 +131,8 @@ public class Game
 		playerTurn = previousWinner; // set first player to the winner of the previous round
 		roundsWon[previousWinner]++; // increment the roundsWon count of the previous winner
 		totalScore[previousWinner] += cardsOfRound[previousWinner].getValue(); // add the value of the winning card to the total score of the previous winner
-		totalRounds++; // Increment 
-		checkEndGame();
+		totalRounds++; // Increment the totalRounds count
+		checkEndGame(); // Check if it is the end of the game
 
 	}
 	/*
