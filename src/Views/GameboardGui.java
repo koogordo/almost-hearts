@@ -67,13 +67,7 @@ public class GameboardGui extends JFrame implements Runnable
 	JFrame loadingScreen;
 	boolean myTurn = false;
 
-	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the frame.
-	 */
+	// Launch the application and create the frame.
 	public GameboardGui(Socket socket, JFrame screen) 
 	{
 		this.socket = socket;
@@ -83,10 +77,9 @@ public class GameboardGui extends JFrame implements Runnable
 		{
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 		} 
-		catch (IOException e) 
+		catch (IOException e) // Catching any errors
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace(); // Printing out said errors
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 800);
@@ -209,7 +202,7 @@ public class GameboardGui extends JFrame implements Runnable
 		this.repaint();
 	}
 
-	public void setPlayerNames(String names) 
+	public void setPlayerNames(String names)  // Method to set the player's names
 	{
 		StringTokenizer st = new StringTokenizer(names);
 		st.nextToken();
@@ -219,7 +212,7 @@ public class GameboardGui extends JFrame implements Runnable
 		playerLabels[2].setText(st.nextToken());
 	}
 
-	public static void sortHand(ArrayList<Card> cards) 
+	public static void sortHand(ArrayList<Card> cards) // Method to sort the Hand
 	{
 		String suit = "c";
 		for (int i = 0; i < cards.size() - 1;) 
@@ -254,7 +247,7 @@ public class GameboardGui extends JFrame implements Runnable
 		}
 	}
 
-	public static String nextSuit(String suit) 
+	public static String nextSuit(String suit) // Method to return the next suit
 	{
 		if (suit.equals("c"))
 			return "d";
