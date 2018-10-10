@@ -67,13 +67,7 @@ public class GameboardGui extends JFrame implements Runnable
 	JFrame loadingScreen;
 	boolean myTurn = false;
 
-	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the frame.
-	 */
+	// Launch the application and create the frame.
 	public GameboardGui(Socket socket, JFrame screen) 
 	{
 		this.socket = socket;
@@ -83,10 +77,9 @@ public class GameboardGui extends JFrame implements Runnable
 		{
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 		} 
-		catch (IOException e) 
+		catch (IOException e) // Catching any errors
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace(); // Printing out said errors
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 800);
@@ -114,11 +107,7 @@ public class GameboardGui extends JFrame implements Runnable
 		panel.setLayout(new GridLayout(0, 3, 0, 0));
 		panel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 8));
 		
-		//String labelName[] = {"Player 1", "Player 2", "Player 3"};
-		//String panelName[] = {"panel_1", "panel_2", "panel_3"};
-		//String VerticalAlign[] = {"TOP", "CENTER", "TOP"};
-		//String HorizontalAlign[] = {"CENTER", "TOP", "CENTER"};
-		
+		//Player one GUI logic
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		// panel_1.setPreferredSize(new Dimension(100, 100));
@@ -132,7 +121,7 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_1.add(playerLabels[0], BorderLayout.NORTH);
 		panel_1.add(cardLabels[0], BorderLayout.CENTER);
 
-		// Player two gui logic
+		// Player two GUI logic
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		// panel_2.setPreferredSize(new Dimension(100, 150));
@@ -146,7 +135,7 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_2.add(playerLabels[1], BorderLayout.NORTH);
 		panel_2.add(cardLabels[1], BorderLayout.CENTER);
 
-		// Player 3 logic
+		// Player 3 GUI logic
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		// panel_3.setPreferredSize(new Dimension(100, 150));
@@ -159,6 +148,7 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_3.setLayout(new BorderLayout(0, 0));
 		panel_3.add(playerLabels[2], BorderLayout.NORTH);
 		panel_3.add(cardLabels[2], BorderLayout.CENTER);
+		
 		// adding player panels to array to make them easier to reference using playerID
 		playerPanels[0] = panel_1;
 		playerPanels[1] = panel_2;
@@ -212,7 +202,7 @@ public class GameboardGui extends JFrame implements Runnable
 		this.repaint();
 	}
 
-	public void setPlayerNames(String names) 
+	public void setPlayerNames(String names)  // Method to set the player's names
 	{
 		StringTokenizer st = new StringTokenizer(names);
 		st.nextToken();
@@ -222,7 +212,7 @@ public class GameboardGui extends JFrame implements Runnable
 		playerLabels[2].setText(st.nextToken());
 	}
 
-	public static void sortHand(ArrayList<Card> cards) 
+	public static void sortHand(ArrayList<Card> cards) // Method to sort the Hand
 	{
 		String suit = "c";
 		for (int i = 0; i < cards.size() - 1;) 
@@ -257,7 +247,7 @@ public class GameboardGui extends JFrame implements Runnable
 		}
 	}
 
-	public static String nextSuit(String suit) 
+	public static String nextSuit(String suit) // Method to return the next suit
 	{
 		if (suit.equals("c"))
 			return "d";
