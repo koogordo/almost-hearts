@@ -27,16 +27,16 @@ import AppTools.*;
 
 public class GameMenu 
 {
-	static JLabel gameLogo; // Initialize gameLogo JLabel
-	static JButton joinExistingButton; // Initialize JButton to join an existing game
-	static JButton createNewButton; // Initialize button to create a new game
-	static JLabel namePrompt; // Initialize JLabel promping the user to enter their name and IP address
-	static JTextField name; // Initialize JTextField for the user's name to be entered
-	static JTextField address; // Initialize JTextField for the IP Address to be entered
-	static JPanel center;// Initialize JPanel for Center
-	static JPanel north; // Initialize JPanel for North
-	static JPanel south; // Initialize JPanel for South
-	static JFrame frame; // Initialize JFrame
+	private JLabel gameLogo; // Initialize gameLogo JLabel
+	private JButton joinExistingButton; // Initialize JButton to join an existing game
+	private JButton createNewButton; // Initialize button to create a new game
+	private JLabel namePrompt; // Initialize JLabel promping the user to enter their name and IP address
+	private JTextField name; // Initialize JTextField for the user's name to be entered
+	private JTextField address; // Initialize JTextField for the IP Address to be entered
+	private JPanel center;// Initialize JPanel for Center
+	private JPanel north; // Initialize JPanel for North
+	private JPanel south; // Initialize JPanel for South
+	private JFrame frame; // Initialize JFrame
     
 	public GameMenu() 
 	{
@@ -132,7 +132,7 @@ public class GameMenu
 		frame.setVisible(true); // Set the frame's visibility to true
 	}
 	
-	private static class ButtonHandler implements ActionListener // ButtonHandler method that implements the ActionListener
+	private class ButtonHandler implements ActionListener // ButtonHandler method that implements the ActionListener
 	{
 		@Override
 		public void actionPerformed(ActionEvent event)
@@ -161,7 +161,7 @@ public class GameMenu
 		
 	}
 	
-	private static class TextFieldHandler implements KeyListener // TextField Handler method to handle the Action Listener
+	private class TextFieldHandler implements KeyListener // TextField Handler method to handle the Action Listener
 	{
 		@Override
 		public void keyTyped(KeyEvent e) 
