@@ -107,4 +107,7 @@ public class Client
 		//screen.pack();
 		screen.setVisible(true);
 	}
+	public JFrame getLoadingScreen() {
+		return screen;
+	}
 }
