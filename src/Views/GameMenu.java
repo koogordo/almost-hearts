@@ -41,7 +41,7 @@ public class GameMenu
 	public GameMenu() 
 	{
 		frame = new JFrame("GameMenu"); // Creating a new JFrame called Game Menu
-		frame.setSize(380, 380); // Setting the size of the frame to 325 wide x 200 high
+		frame.setSize(380, 320); // Setting the size of the frame to 325 wide x 200 high
 		frame.setResizable(false); // Do not allow the user to adjust the size of the frame
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize(); // set the dimension to the screensize
 	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2); // Set x to the width of the screen - the width of the frame
@@ -52,7 +52,7 @@ public class GameMenu
 		
 		// NORTH with Game Logo-----------------------------------------------------------------------------
 		gameLogo = new JLabel(); // Setting gameLogo to a new JLabel
-		gameLogo.setSize(200,58); // Seting gameLogo to the size of 200, 58
+		gameLogo.setSize(300,150); // Seting gameLogo to the size of 200, 58
 		
 		BufferedImage logo = null; // Initializing logo
 		try 
