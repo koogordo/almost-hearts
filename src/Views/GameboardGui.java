@@ -65,6 +65,7 @@ public class GameboardGui extends JFrame implements Runnable
 	JLabel[] cardLabels = new JLabel[3];
 	JPanel[] playerPanels = new JPanel[3];
 	JFrame loadingScreen;
+	boolean myTurn = false;
 
 	/**
 	 * Launch the application.
