@@ -64,6 +64,7 @@ public class GameboardGui extends JFrame implements Runnable
 	int playerID;
 	JLabel[] cardLabels = new JLabel[3];
 	JPanel[] playerPanels = new JPanel[3];
+	JFrame loadingScreen;
 
 	/**
 	 * Launch the application.
@@ -72,9 +73,10 @@ public class GameboardGui extends JFrame implements Runnable
 	/**
 	 * Create the frame.
 	 */
-	public GameboardGui(Socket socket) 
+	public GameboardGui(Socket socket, JFrame screen) 
 	{
 		this.socket = socket;
+		loadingScreen = screen;
 		playerLabels = new JLabel[3];
 		try 
 		{
@@ -155,7 +157,7 @@ public class GameboardGui extends JFrame implements Runnable
 		playerPanels[0] = panel_1;
 		playerPanels[1] = panel_2;
 		playerPanels[2] = panel_3;
-		this.setVisible(true);
+		this.setVisible(false);
 	}
 
 	public void setRearCards() 
@@ -336,6 +338,8 @@ public class GameboardGui extends JFrame implements Runnable
 
 			// uses StringTokenizer so that it is easy to traverse the String coming in
 			StringTokenizer st = new StringTokenizer(in.readLine());
+			
+			loadingScreen.setVisible(false);
 
 			// The first thing coming in is going to be the playersID and the names of the
 			// players (in order)
@@ -387,6 +391,7 @@ public class GameboardGui extends JFrame implements Runnable
 					break;
 				}
 			}
+			
 		} 
 		catch (IOException e) // Catch any error(s)
 		{

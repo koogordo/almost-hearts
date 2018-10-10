@@ -22,7 +22,7 @@ import javax.swing.JPanel;
  * The response is received and uses the ip-address that it received from the server to 
  * attempt a TCP connection with server using the port 12345.
  */
-public class Client 
+public class Client implements Runnable
 {
 	Socket socket; // Initializing the socket
 	ArrayList<DatagramPacket> dpArray = new ArrayList<>();
@@ -49,7 +49,8 @@ public class Client
 			//ds.setSoTimeout(2000);
 			
 			System.out.println("Attempting to find server");
-			makeLoadingScreen();
+			Thread t1 = new Thread(this);
+			t1.start();
 			ds.send(packet);
 			ds.receive(packet);
 			/*Thread.sleep(1000);
@@ -86,28 +87,30 @@ public class Client
 	{
 		return socket;
 	}
-	public void makeLoadingScreen() 
-	{
+	public JFrame getLoadingScreen() {
+		return screen;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 		//final ImageIcon icon = new ImageIcon("cardImages/cardLoading.gif");
 		//JOptionPane optionPane = new JOptionPane("Waiting for other players to join...", JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon, new Object[]{}, null);
 		//screen = new JDialog();
 		screen = new JFrame("Loading...");
 		screen.setSize(500,200);
 		screen.setResizable(false); // Do not allow the user to adjust the size of the frame
-	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-	    int x = (int) ((dimension.getWidth() - screen.getWidth()) / 2);
-	    int y = (int) ((dimension.getHeight() - screen.getHeight()) / 2);
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = (int) ((dimension.getWidth() - screen.getWidth()) / 2);
+		int y = (int) ((dimension.getHeight() - screen.getHeight()) / 2);
 	    screen.setLocation(x, y);
 		//JPanel panel = new JPanel();
 		screen.setLayout(new FlowLayout());
 		//screen.setTitle();
-		screen.add(new JLabel(new ImageIcon("cardImages/cardLoading.gif")));
+		screen.add(new JLabel(new ImageIcon(this.getClass().getResource("/cardImages/cardLoading.gif"))));
 		screen.add(new JLabel("Waiting for other players to join..."));
-		screen.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		//screen.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		//screen.pack();
 		screen.setVisible(true);
-	}
-	public JFrame getLoadingScreen() {
-		return screen;
 	}
 }
