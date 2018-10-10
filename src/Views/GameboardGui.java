@@ -49,9 +49,7 @@ import java.awt.Component;
 
 public class GameboardGui extends JFrame implements Runnable
 {
-	JLabel lblPlayer_1;
-	JLabel lblPlayer_2;
-	JLabel lblPlayer_3;
+	JLabel[] playerLabels;
 	ArrayList<Card> hand = new ArrayList<>();
 	JPanel notificationPanel;
 	JLabel notificationLabel;
@@ -75,6 +73,7 @@ public class GameboardGui extends JFrame implements Runnable
 	public GameboardGui(Socket socket)
 	{
 		this.socket = socket;
+		playerLabels = new JLabel[3];
 		try 
 		{
 			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -113,12 +112,12 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		//panel_1.setPreferredSize(new Dimension(100, 100));
 		panel.add(panel_1);
-		lblPlayer_1 = new JLabel("Player 1");
-		lblPlayer_1.setVerticalAlignment(SwingConstants.TOP);
-		lblPlayer_1.setHorizontalAlignment(SwingConstants.CENTER);
+		playerLabels[0] = new JLabel("Player 1");
+		playerLabels[0].setVerticalAlignment(SwingConstants.TOP);
+		playerLabels[0].setHorizontalAlignment(SwingConstants.CENTER);
 		cardLabels[0] = new JLabel();
 		panel_1.setLayout(new BorderLayout(0, 0));
-		panel_1.add(lblPlayer_1, BorderLayout.NORTH);
+		panel_1.add(playerLabels[0], BorderLayout.NORTH);
 		panel_1.add(cardLabels[0], BorderLayout.CENTER);
 
 		//Player two gui logic
@@ -126,12 +125,12 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		//panel_2.setPreferredSize(new Dimension(100, 150));
 		panel.add(panel_2);
-		lblPlayer_2 = new JLabel("Player 2");
-		lblPlayer_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPlayer_2.setVerticalAlignment(SwingConstants.TOP);
+		playerLabels[1] = new JLabel("Player 2");
+		playerLabels[1].setHorizontalAlignment(SwingConstants.CENTER);
+		playerLabels[1].setVerticalAlignment(SwingConstants.TOP);
 		cardLabels[1] = new JLabel();
 		panel_2.setLayout(new BorderLayout(0, 0));
-		panel_2.add(lblPlayer_2, BorderLayout.NORTH);
+		panel_2.add(playerLabels[1], BorderLayout.NORTH);
 		panel_2.add(cardLabels[1], BorderLayout.CENTER);
 
 		//Player 3 logic
@@ -139,12 +138,12 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		//panel_3.setPreferredSize(new Dimension(100, 150));
 		panel.add(panel_3);
-		lblPlayer_3 = new JLabel("Player 3");
-		lblPlayer_3.setVerticalAlignment(SwingConstants.TOP);
-		lblPlayer_3.setHorizontalAlignment(SwingConstants.CENTER);
+		playerLabels[2] = new JLabel("Player 3");
+		playerLabels[2].setVerticalAlignment(SwingConstants.TOP);
+		playerLabels[2].setHorizontalAlignment(SwingConstants.CENTER);
 		cardLabels[2] = new JLabel();
 		panel_3.setLayout(new BorderLayout(0, 0));
-		panel_3.add(lblPlayer_3, BorderLayout.NORTH);
+		panel_3.add(playerLabels[2], BorderLayout.NORTH);
 		panel_3.add(cardLabels[2], BorderLayout.CENTER);
 		// adding player panels to array to make them easier to reference using playerID
 		playerPanels[0] = panel_1;
@@ -203,9 +202,9 @@ public class GameboardGui extends JFrame implements Runnable
 		StringTokenizer st = new StringTokenizer(names);
 		st.nextToken();
 		
-		lblPlayer_1.setText(st.nextToken());
-		lblPlayer_2.setText(st.nextToken());
-		lblPlayer_3.setText(st.nextToken());
+		playerLabels[0].setText(st.nextToken());
+		playerLabels[1].setText(st.nextToken());
+		playerLabels[2].setText(st.nextToken());
 	}
 	
 	public static void sortHand(ArrayList<Card> cards) 
@@ -319,6 +318,11 @@ public class GameboardGui extends JFrame implements Runnable
 		ImageIcon scaledImage = new ImageIcon(temp);
 		return scaledImage;
 	}
+	public boolean isMyTurn(int playedPerson)
+	{
+		playedPerson++;
+		return playedPerson % 3 == playerID;
+	}
 	public void run() 
 	{
 		// TODO Auto-generated method stub
@@ -332,9 +336,9 @@ public class GameboardGui extends JFrame implements Runnable
 			
 			//The first thing coming in is going to be the playersID and the names of the players (in order)
 			playerID = Integer.parseInt(st.nextToken());
-			lblPlayer_1.setText(st.nextToken());
-			lblPlayer_2.setText(st.nextToken());
-			lblPlayer_3.setText(st.nextToken());
+			playerLabels[0].setText(st.nextToken());
+			playerLabels[1].setText(st.nextToken());
+			playerLabels[2].setText(st.nextToken());
 			
 	
 			//setHand("c 3 d 3 c 13 d 5 c 6 c 12 c 11 c 8 d 10 s 3 s 14 h 2 s 10 s 8 d 11 d 6 d 13");
@@ -356,6 +360,7 @@ public class GameboardGui extends JFrame implements Runnable
 					Card playedCard = new Card(suit,value);
 					playerPanels[player].add(playedCard);
 					playerPanels[player].repaint();
+					submit.setEnabled(isMyTurn(player));
 					break;
 					
 				case "Winner":
@@ -365,8 +370,8 @@ public class GameboardGui extends JFrame implements Runnable
 					break;
 					
 				case "Round":
-					String roundWinnerName = st.nextToken();
-					this.notificationLabel.setText(roundWinnerName + " Wins the round!");
+					int roundWinner = Integer.parseInt(st.nextToken());
+					this.notificationLabel.setText(playerLabels[roundWinner].getText() + " Wins the round!");
 					this.notificationLabel.repaint();
 					break;
 					
