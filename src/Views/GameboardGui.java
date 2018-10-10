@@ -351,6 +351,7 @@ public class GameboardGui extends JFrame implements Runnable
 
 			setRearCards();
 			setHand(in.readLine());// Parses the string given into Card objects and puts it in the ArrayList hand
+			this.repaint();
 
 			
 			while (true) 
