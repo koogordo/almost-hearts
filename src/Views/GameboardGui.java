@@ -114,11 +114,7 @@ public class GameboardGui extends JFrame implements Runnable
 		panel.setLayout(new GridLayout(0, 3, 0, 0));
 		panel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 8));
 		
-		//String labelName[] = {"Player 1", "Player 2", "Player 3"};
-		//String panelName[] = {"panel_1", "panel_2", "panel_3"};
-		//String VerticalAlign[] = {"TOP", "CENTER", "TOP"};
-		//String HorizontalAlign[] = {"CENTER", "TOP", "CENTER"};
-		
+		//Player one GUI logic
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		// panel_1.setPreferredSize(new Dimension(100, 100));
@@ -132,7 +128,7 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_1.add(playerLabels[0], BorderLayout.NORTH);
 		panel_1.add(cardLabels[0], BorderLayout.CENTER);
 
-		// Player two gui logic
+		// Player two GUI logic
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		// panel_2.setPreferredSize(new Dimension(100, 150));
@@ -146,7 +142,7 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_2.add(playerLabels[1], BorderLayout.NORTH);
 		panel_2.add(cardLabels[1], BorderLayout.CENTER);
 
-		// Player 3 logic
+		// Player 3 GUI logic
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		// panel_3.setPreferredSize(new Dimension(100, 150));
@@ -159,6 +155,7 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_3.setLayout(new BorderLayout(0, 0));
 		panel_3.add(playerLabels[2], BorderLayout.NORTH);
 		panel_3.add(cardLabels[2], BorderLayout.CENTER);
+		
 		// adding player panels to array to make them easier to reference using playerID
 		playerPanels[0] = panel_1;
 		playerPanels[1] = panel_2;
