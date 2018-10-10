@@ -16,8 +16,8 @@ public class Server implements Runnable
 	Socket[] sockets; // Initialize sockets of type Socket Array
 	String[] usernames; // Initialize usernames of type String Array
 	DatagramSocket ds; // Initialize ds of type DatagramSocket
-	InetAddress[] addresses; //
-	int numOfPlayers = 3;
+	InetAddress[] addresses; // Initialize  addresses of type InetAddress Array
+	int numOfPlayers = 3; // Setting the number of players to 3
 	/*
 	 * Class Server implements Runnable so that it is possible to make this a separate thread because the
 	 * machine running the Server is also going to be a Client(player).
@@ -34,7 +34,6 @@ public class Server implements Runnable
 	@Override
 	public void run() 
 	{
-		// TODO Auto-generated method stub
 		try 
 		{
 			server = new ServerSocket(12345);
@@ -63,15 +62,13 @@ public class Server implements Runnable
 			{
 				executorService.execute(new ServerPlayer(sockets[i], game, i));
 			}
-	
 		} 
 		catch (IOException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public String byteArrayToString(byte[] b) 
+	public String byteArrayToString(byte[] b)  // Method to change a byte array to a string
 	{
 		String result = "";
 		for(int i = 0; i < b.length; ++i) 
