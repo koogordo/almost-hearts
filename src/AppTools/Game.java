@@ -7,7 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 /*
  * This class holds the shared resources that the ServerPlayer threads use.
- * It also is how the game is controlled
+ * It also is how the game is controlled with methods called from ServerPlayer to
+ * which simulates the inputs from the player.
+ * 
+ * The main purpose of this class is to get inputs called from ServerPlayer, then
+ * execute whatever is needed for that state of the game, then broadcast to all players
+ * the update that just occurred.
+ * EX: 
+ * 		ServerPlayer receives "Played 1 h 5" from GameboardGui on client side, ServerPlayer
+ * 		calls game.turnPlayed(1, h, 5) which the game class will verify that it is the
+ * 		correct persons turn, if it is the correct persons turn it will simulate that turn
+ * 		then broadcast "Played 1 h 5" to every single player.
  */
 public class Game 
 {
@@ -22,6 +32,21 @@ public class Game
 	int numOfTurns;     // Number of Turns played in the game
 	int totalRounds;    // total rounds 
 	
+	/*
+	 * This Game constructor is called once all of the sockets/players have connect and are ready
+	 * to receive input.
+	 * 
+	 * This is the main constructor for the Game class (shared resource)
+	 * The 2 parameters is the array of names for the players, and the array of sockets which
+	 * is the stream for the players.
+	 * 
+	 * Then creates output streams for the different players by using the sockets and sends
+	 * out the current player id along with the name of all of the players in order.
+	 * 
+	 * After that it creates a deck of 52 cards and shuffles it randomly between 1 and 20
+	 * different times. Once it is done shuffling it then sends out the cards individually
+	 * to each players hand.
+	 */
 	public Game(String[] n, Socket[] s) 
 	{
 		playerNames = n; // Player names (array of strings)
@@ -50,13 +75,23 @@ public class Game
 			String initialCards = "";
 			for(int k = 0; k < 17; k++)
 			{
-				Card chosenCard = deck.deck.remove(0);
-				initialCards += chosenCard.suit + " " + chosenCard.value + " ";
+				initialCards += deck.drawOneCard().toString() + " ";
 			}
 			out[i].println(initialCards);
 			out[i].flush();
 		}
 	}
+	/*
+	 * Called by the ServerPlayer.
+	 * Parameters are the player id of who called it, along with the card values.
+	 * 
+	 * The method first validates that it is indeed the correct persons turn, once it is
+	 * then add a card object with the parameters to the cardsOfRound array.
+	 * It broadcasts the play made to all of the clients then increment the turn which
+	 * wraps back to 0 once it hits 3.
+	 * Then increment the number of turns for the round counter by 1, if the total number
+	 * of turns for the round is 3, then reset the counter and execute the roundWinner method.
+	 */
 	public void turnPlayed(int player, String suit, int value) {
 		if(player == playerTurn)
 		{
@@ -73,6 +108,13 @@ public class Game
 			}
 		}
 	}
+	/*
+	 * Called by the turnPlayed method which takes no parameters.
+	 * It checks by looping cardsOfRound array along with who played first and broadcasts the
+	 * winner of the round to all of the players. Then sets the winner of the round as the 
+	 * next person to start. Then increments the number of rounds that player has won, and the score
+	 * 
+	 */
 	public void roundWinner () // method to decide the round winner
 	{	
 		int playerWhoPlayedFirst = previousWinner; // Setting PlayerWhoPlayedFirst to previousWinner
