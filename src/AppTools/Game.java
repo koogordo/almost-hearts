@@ -38,7 +38,7 @@ public class Game
 	 * 
 	 * This is the main constructor for the Game class (shared resource)
 	 * The 2 parameters is the array of names for the players, and the array of sockets which
-	 * is the stream for the players.
+	 * is the stream for the players. And is called from the Server class.
 	 * 
 	 * Then creates output streams for the different players by using the sockets and sends
 	 * out the current player id along with the name of all of the players in order.
