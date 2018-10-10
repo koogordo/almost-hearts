@@ -49,38 +49,11 @@ public class Client implements Runnable
 		{
 			ds = new DatagramSocket(12344);
 			//ds.setSoTimeout(2000);
-			
-<<<<<<< HEAD
-			System.out.println("Attempting to find server");
-			Thread t1 = new Thread(this);
-			t1.start();
-			ds.send(packet);
-			ds.receive(packet);
-=======
+
 			System.out.println("Attempting to find server"); // Informing the user that we are attempting to find the server
-			makeLoadingScreen(); // Make the loading Screen
+			Thread t1 = new Thread(this); // Make the loading Screen
 			ds.send(packet); // Send the packet
 			ds.receive(packet); // Receive the packet
->>>>>>> 8152d822ecbccc412bf043d9aac043223038475c
-			/*Thread.sleep(1000);
-			for (int i = 0; i < 4 && serverNotFound; i++) 
-			{
-				System.out.println(i);
-				makeDatagramPackets(i * 64);
-				for(int k = 0; k < dpArray.size(); k++) 
-				{
-					ds.send(dpArray.remove(0));
-				}
-				try 
-				{
-					ds.receive(receivePacket);
-					serverNotFound = false;
-				} 
-				catch(SocketTimeoutException  e) 
-				{
-					
-				}
-			}*/
 			System.out.println("Client - Server found attempting to connect"); // Informing the user that we are attempting to connect
 			socket = new Socket(packet.getAddress().getHostAddress(), 12345); // Setting socket
 			System.out.println("Client - connection established"); // Informing the user that the connection has been established
@@ -96,19 +69,11 @@ public class Client implements Runnable
 	{
 		return socket;
 	}
-<<<<<<< HEAD
-	public JFrame getLoadingScreen() {
-		return screen;
-	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-=======
-	
-	public void makeLoadingScreen() // Method to make the loading screen
-	{
->>>>>>> 8152d822ecbccc412bf043d9aac043223038475c
+
 		//final ImageIcon icon = new ImageIcon("cardImages/cardLoading.gif");
 		//JOptionPane optionPane = new JOptionPane("Waiting for other players to join...", JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon, new Object[]{}, null);
 		//screen = new JDialog();
@@ -127,13 +92,9 @@ public class Client implements Runnable
 		//screen.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		//screen.pack();
 		screen.setVisible(true);
-	}
-<<<<<<< HEAD
-=======
-	
+	}	
 	public JFrame getLoadingScreen() // Method to get the loading screen
 	{
 		return screen;
 	}
->>>>>>> 8152d822ecbccc412bf043d9aac043223038475c
 }
