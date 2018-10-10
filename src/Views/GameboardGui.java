@@ -202,6 +202,7 @@ public class GameboardGui extends JFrame implements Runnable
 		submit.addActionListener(new submitButton());
 		submit.setEnabled(false);
 		handArea.add(submit);
+		this.revalidate();
 		this.repaint();
 	}
 
