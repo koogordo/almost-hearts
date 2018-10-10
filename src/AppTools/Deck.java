@@ -12,20 +12,20 @@ import java.util.List;
 
 public class Deck
 {
-	List<Card> deck = new ArrayList<>();
+	List<Card> deck = new ArrayList<>(); // Initializing deck to an arrayList
 	
-	public Deck() 
+	public Deck() // Method to initialize the deck
 	{	
 		for(int i=2; i < 15; i++) 
 		{
-			deck.add(new Card("h",i));
-			deck.add(new Card("c",i));
-			deck.add(new Card("d",i));
-			deck.add(new Card("s",i));
+			deck.add(new Card("h",i)); // Initializing hearts cards
+			deck.add(new Card("c",i)); // Initializing clubs cards
+			deck.add(new Card("d",i)); // Initializing diamonds cards
+			deck.add(new Card("s",i)); // Initializing spades cards
 		}
 	}
 
-	public void Shuffle() 
+	public void Shuffle() // Method to shuffle 
 	{
 		Collections.shuffle(deck);
 	}
