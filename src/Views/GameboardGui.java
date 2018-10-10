@@ -274,43 +274,46 @@ public class GameboardGui extends JFrame implements Runnable
 		}
 
 		@Override
-		public void mouseEntered(MouseEvent arg0) {
-		}
+		public void mouseEntered(MouseEvent arg0) { }
 
 		@Override
-		public void mouseExited(MouseEvent arg0) {
-		}
+		public void mouseExited(MouseEvent arg0) { }
 
 		@Override
-		public void mousePressed(MouseEvent arg0) {
-		}
+		public void mousePressed(MouseEvent arg0) { }
 
 		@Override
-		public void mouseReleased(MouseEvent arg0) {
-		}
+		public void mouseReleased(MouseEvent arg0) { }
 	}
 
-	private class submitButton implements ActionListener {
+	private class submitButton implements ActionListener 
+	{
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			for (int i = 0; i < hand.size(); i++) {
-				if (selectedCard.equals(hand.get(i))) {
+		public void actionPerformed(ActionEvent e) 
+		{
+			for (int i = 0; i < hand.size(); i++) 
+			{
+				if (selectedCard.equals(hand.get(i))) 
+				{
 					hand.remove(i);
 				}
 			}
 			String cardStream = "Played " + " " + playerID + " " + selectedCard.getSuit() + " "
 					+ selectedCard.getValue();
-			try {
+			try 
+			{
 				out.write(cardStream);
 				out.flush();
-			} catch (IOException e1) {
+			} catch (IOException e1) 
+			{
 				e1.printStackTrace();
 			}
 			submit.setEnabled(false);
 		}
 	}
 
-	public ImageIcon ScaledImage(Image i) {
+	public ImageIcon ScaledImage(Image i) 
+	{
 		Image imagetemp = i;
 		Image temp = imagetemp.getScaledInstance(contentPane.getWidth() / 8, (contentPane.getWidth() / 6) * (800 / 500),
 				java.awt.Image.SCALE_SMOOTH);
@@ -318,13 +321,16 @@ public class GameboardGui extends JFrame implements Runnable
 		return scaledImage;
 	}
 
-	public boolean isMyTurn(int playedPerson) {
+	public boolean isMyTurn(int playedPerson) 
+	{
 		playedPerson++;
 		return playedPerson % 3 == playerID;
 	}
 
-	public void run() {
-		try {
+	public void run() 
+	{
+		try 
+		{
 			// creates the input stream to read in the output from the server
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
@@ -342,10 +348,12 @@ public class GameboardGui extends JFrame implements Runnable
 			setHand(in.readLine());// Parses the string given into Card objects and puts it in the ArrayList hand
 
 			this.setVisible(true);
-			while (true) {
+			while (true) 
+			{
 				st = new StringTokenizer(in.readLine());
 				String switchToken = st.nextToken();
-				switch (switchToken) {
+				switch (switchToken) 
+				{
 				case "Played":
 					// set the icon in the appropriate player box to reflect the card that they
 					// showed
@@ -379,7 +387,8 @@ public class GameboardGui extends JFrame implements Runnable
 					break;
 				}
 			}
-		} catch (IOException e) // Catch any error(s)
+		} 
+		catch (IOException e) // Catch any error(s)
 		{
 			e.printStackTrace(); // Print out the error(s)
 		}
