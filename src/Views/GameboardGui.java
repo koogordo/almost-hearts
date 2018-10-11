@@ -158,6 +158,7 @@ public class GameboardGui extends JFrame implements Runnable
 			ImageIcon tempIcon = new ImageIcon(temp);
 			hand.get(i).setIcon(tempIcon);
 			handArea.add(hand.get(i));
+			hand.get(i).setBorder(BorderFactory.createLineBorder(Color.lightGray, 3));
 			hand.get(i).addMouseListener(new selectCard());
 		}
 		submit = new JButton("Submit");
