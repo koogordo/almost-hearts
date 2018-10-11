@@ -58,9 +58,6 @@ public class GameboardGui extends JFrame implements Runnable
 		FlowLayout flowLayout = (FlowLayout) handArea.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		
-		//--------------------------------------------------------------------------------------
-		//BorderLayout Borderlayout = (BorderLayout) handArea.getLayout();
-		
 		notificationPanel = new JPanel();
 		notificationPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 10));
 		notificationPanel.setAlignmentX(CENTER_ALIGNMENT);
@@ -154,8 +151,6 @@ public class GameboardGui extends JFrame implements Runnable
 			hand.add(new Card(suit, number));
 		}
 		sortHand(hand);
-		//JPanel HandHolder = new JPanel(new FlowLayout()); // Creating a JPanel with a FlowLayout
-		//JPanel SubmitHolder = new JPanel(new FlowLayout()); // Creating a JPanel with a FlowLayout
 		for (int i = 0; i < 17; i++) 
 		{
 			hand.get(i).setSize(contentPane.getWidth() / 10, (contentPane.getWidth() / 10) * (800 / 500));
@@ -163,22 +158,15 @@ public class GameboardGui extends JFrame implements Runnable
 			Image temp = imagetemp.getScaledInstance(contentPane.getWidth() / 10,
 					(contentPane.getWidth() / 8) * (800 / 500), java.awt.Image.SCALE_SMOOTH);
 			ImageIcon tempIcon = new ImageIcon(temp);
-			//-----------------------------------
 			hand.get(i).setIcon(tempIcon);
 			handArea.add(hand.get(i));
-			//HandHolder.add(hand.get(i));
-			//handArea.add(HandHolder, BorderLayout.CENTER);
 			hand.get(i).setBorder(BorderFactory.createLineBorder(Color.lightGray, 3));
 			hand.get(i).addMouseListener(new selectCard());
 		}
-		// MOVE TO A NEW LINE ----------------------------------------------------
 		submit = new JButton("Submit");
 		submit.addActionListener(new submitButton());
 		submit.setEnabled(false);
-		//----------------------------------- Adding submit to a flow layout and the flow layout to handArea
 		handArea.add(submit);
-		//SubmitHolder.add(submit);
-		//handArea.add(SubmitHolder, BorderLayout.SOUTH);
 		this.revalidate();
 		this.repaint();
 	}
