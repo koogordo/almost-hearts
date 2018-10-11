@@ -10,7 +10,9 @@ import java.util.*;
 import AppTools.Card;
 
 /**
- * 
+ * The GameBoardGui is the is the graphical user interface for gameplay.
+ * This GUI handles all the actions a player can take along with displaying appropriate notifications
+ * for game over, winner, round over... etc. The  
  * 
  */
 
@@ -36,7 +38,7 @@ public class GameboardGui extends JFrame implements Runnable
 	private boolean myTurn = false;
 	int totalRounds = 1;    // total rounds
 
-	// Launch the application and create the frame.
+	
 	public GameboardGui(Socket socket, JFrame screen) 
 	{
 		this.socket = socket;
@@ -50,30 +52,30 @@ public class GameboardGui extends JFrame implements Runnable
 		{
 			e.printStackTrace(); // Printing out said errors
 		}
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 900);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-
+		
 		handAndSubmit = new JPanel();
-
 		handArea = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) handArea.getLayout();
-		
 		submitArea = new JPanel();
 		handAndSubmit.setLayout(new BoxLayout(handAndSubmit, BoxLayout.Y_AXIS));
-		
 		handAndSubmit.add(handArea);
 		handAndSubmit.add(submitArea);
 		submitArea.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		submitArea.setMaximumSize(new Dimension(this.getWidth(), this.getHeight()/10));
 		
-		
+		// Notification GUI logic
+		// Components for displaying appropriate messages to all players.
 		notificationPanel = new JPanel();
 		notificationPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 10));
 		notificationPanel.setAlignmentX(CENTER_ALIGNMENT);
 
+		// Base content pane logic
 		JPanel panel = new JPanel();
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		contentPane.add(notificationPanel);
@@ -87,10 +89,20 @@ public class GameboardGui extends JFrame implements Runnable
 		panel.setLayout(new GridLayout(0, 3, 0, 0)); 
 		panel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 8));
 		
+		/*
+		 * The player GUIs are main focus of the GUI, this is where all hands are played.
+		 * Each player gui follows the same design, format, and components. The have a panel 
+		 * to designate their area, a label to display their card, and a label to display their name.
+		 * following this comment block the player GUI logic will be designated by the following headers:
+		 * 
+		 * -- Player one GUI logic
+		 * -- Player two GUI logic
+		 * -- Player 3 GUI logic
+		 */
+		
 		//Player one GUI logic
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		// panel_1.setPreferredSize(new Dimension(100, 100));
 		panel.add(panel_1);
 		playerLabels[0] = new JLabel("Player 1");
 		playerLabels[0].setVerticalAlignment(SwingConstants.TOP);
@@ -104,7 +116,6 @@ public class GameboardGui extends JFrame implements Runnable
 		// Player two GUI logic
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		// panel_2.setPreferredSize(new Dimension(100, 150));
 		panel.add(panel_2);
 		playerLabels[1] = new JLabel("Player 2");
 		playerLabels[1].setHorizontalAlignment(SwingConstants.CENTER);
@@ -118,7 +129,6 @@ public class GameboardGui extends JFrame implements Runnable
 		// Player 3 GUI logic
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		// panel_3.setPreferredSize(new Dimension(100, 150));
 		panel.add(panel_3);
 		playerLabels[2] = new JLabel("Player 3");
 		playerLabels[2].setVerticalAlignment(SwingConstants.TOP);
@@ -129,7 +139,7 @@ public class GameboardGui extends JFrame implements Runnable
 		panel_3.add(playerLabels[2], BorderLayout.NORTH);
 		panel_3.add(cardLabels[2], BorderLayout.CENTER);
 		
-		// adding player panels to array to make them easier to reference using playerID
+		// Player panels get added to a string so that they are easier to reference by an ID number
 		playerPanels[0] = panel_1;
 		playerPanels[1] = panel_2;
 		playerPanels[2] = panel_3;
