@@ -16,22 +16,22 @@ import AppTools.Card;
 
 public class GameboardGui extends JFrame implements Runnable 
 {
-	JLabel[] playerLabels;
-	ArrayList<Card> hand = new ArrayList<>();
-	JPanel notificationPanel;
-	JLabel notificationLabel;
-	JPanel handArea;
-	JButton submit;
+	private JLabel[] playerLabels;
+	private ArrayList<Card> hand = new ArrayList<>();
+	private JPanel notificationPanel;
+	private JLabel notificationLabel;
+	private JPanel handArea;
+	private JButton submit;
 	private JPanel contentPane;
-	Card selectedCard;
-	Socket socket;
-	BufferedWriter out;
-	BufferedReader in;
-	int playerID;
-	JLabel[] cardLabels = new JLabel[3];
-	JPanel[] playerPanels = new JPanel[3];
-	JFrame loadingScreen;
-	boolean myTurn = false;
+	private Card selectedCard;
+	private Socket socket;
+	private BufferedWriter out;
+	private BufferedReader in;
+	private int playerID;
+	private JLabel[] cardLabels = new JLabel[3];
+	private JPanel[] playerPanels = new JPanel[3];
+	private JFrame loadingScreen;
+	private boolean myTurn = false;
 
 	// Launch the application and create the frame.
 	public GameboardGui(Socket socket, JFrame screen) 

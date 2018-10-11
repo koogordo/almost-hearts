@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Deck
 {
-	List<Card> deck = new ArrayList<>(); // Initializing deck to an arrayList
+	private List<Card> deck = new ArrayList<>(); // Initializing deck to an arrayList
 	
 	public Deck() // Method to initialize the deck
 	{	
