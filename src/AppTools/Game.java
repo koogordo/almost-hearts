@@ -124,7 +124,7 @@ public class Game
 				previousWinner = i; // Setting the previousWinner to i
 			}
 		}
-		Broadcast("Round Complete, winner is: " + playerNames[previousWinner]);
+		Broadcast("Round " + playerTurn + " " + playerNames[previousWinner]);
 		
 		playerTurn = previousWinner; // set first player to the winner of the previous round
 		roundsWon[previousWinner]++; // increment the roundsWon count of the previous winner
