@@ -2,8 +2,12 @@ package AppTools;
 
 import javax.swing.*;
 /**
+ * A simple class meant to be used as card objects throughout the entire project and extends JLabel.
+ * It extends JLabel so it possible to make the object of the card itself the component to display.
  * 
- * 
+ * The constructor takes in the suit value as a String (lower case) and the value of the card (2-15).
+ * It also grabs the image as an ImageIcon from the cardImages resource folder.
+ * The rest of the methods in the class return the suit, value, the ImageIcon, and the toString.
  */
 public class Card extends JLabel
 {	
