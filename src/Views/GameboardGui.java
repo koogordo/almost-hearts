@@ -32,7 +32,7 @@ public class GameboardGui extends JFrame implements Runnable
 	private JPanel[] playerPanels = new JPanel[3];
 	private JFrame loadingScreen;
 	private boolean myTurn = false;
-	int totalRounds;    // total rounds
+	int totalRounds = 1;    // total rounds
 
 	// Launch the application and create the frame.
 	public GameboardGui(Socket socket, JFrame screen) 
