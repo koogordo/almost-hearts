@@ -48,7 +48,7 @@ public class GameboardGui extends JFrame implements Runnable
 			e.printStackTrace(); // Printing out said errors
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 850);
+		setBounds(100, 100, 1100, 900);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
