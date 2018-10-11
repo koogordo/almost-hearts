@@ -326,10 +326,12 @@ public class GameboardGui extends JFrame implements Runnable
 		return playedPerson % 3 == playerID;
 	}
 	//---------------------------------------------------------------------------------------
+	@SuppressWarnings("deprecation")
 	private void playSound() 
 	{
 		try 
 		{
+			@SuppressWarnings("deprecation")
 			java.applet.AudioClip clip = java.applet.Applet.newAudioClip(new java.net.URL("/cardImages/jazz.mp3"));
 			clip.play();
 		} 
