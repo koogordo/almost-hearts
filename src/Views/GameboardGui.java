@@ -270,15 +270,8 @@ public class GameboardGui extends JFrame implements Runnable
 			String cardStream = "Played " + " " + playerID + " " + selectedCard.getSuit() + " "
 					+ selectedCard.getValue();
 			System.out.println(cardStream);
-			try 
-			{
-				out.write(cardStream);
-				out.flush();
-			} 
-			catch (IOException e1) 
-			{
-				e1.printStackTrace();
-			}
+			out.println(cardStream);
+			out.flush();
 			submit.setEnabled(false);
 		}
 	}
