@@ -57,8 +57,10 @@ public class GameboardGui extends JFrame implements Runnable
 		setContentPane(contentPane);
 
 		handAndSubmit = new JPanel();
+		handAndSubmit.setOpaque(false);
 
 		handArea = new JPanel();
+		handArea.setOpaque(false);
 		FlowLayout flowLayout = (FlowLayout) handArea.getLayout();
 		
 		submitArea = new JPanel();
@@ -71,10 +73,12 @@ public class GameboardGui extends JFrame implements Runnable
 		
 		
 		notificationPanel = new JPanel();
+		notificationPanel.setOpaque(false);
 		notificationPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 10));
 		notificationPanel.setAlignmentX(CENTER_ALIGNMENT);
 
 		JPanel panel = new JPanel();
+		panel.setOpaque(false);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		contentPane.add(notificationPanel);
 		notificationPanel.setLayout(new BoxLayout(notificationPanel, BoxLayout.Y_AXIS));
@@ -89,6 +93,7 @@ public class GameboardGui extends JFrame implements Runnable
 		
 		//Player one GUI logic
 		JPanel panel_1 = new JPanel();
+		panel_1.setOpaque(false);
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		// panel_1.setPreferredSize(new Dimension(100, 100));
 		panel.add(panel_1);
@@ -103,6 +108,7 @@ public class GameboardGui extends JFrame implements Runnable
 
 		// Player two GUI logic
 		JPanel panel_2 = new JPanel();
+		panel_2.setOpaque(false);
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		// panel_2.setPreferredSize(new Dimension(100, 150));
 		panel.add(panel_2);
@@ -117,6 +123,7 @@ public class GameboardGui extends JFrame implements Runnable
 
 		// Player 3 GUI logic
 		JPanel panel_3 = new JPanel();
+		panel_3.setOpaque(false);
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		// panel_3.setPreferredSize(new Dimension(100, 150));
 		panel.add(panel_3);
