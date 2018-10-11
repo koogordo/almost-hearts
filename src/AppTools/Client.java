@@ -29,6 +29,7 @@ public class Client implements Runnable
 	private boolean serverNotFound = true; // Setting serverNotFound to true
 	private JFrame screen; // Initializing screen as a JFrame
 	private DatagramPacket packet; // Initializing packet as a DatagramPacket
+	private String address; // Initialize IP address as a String
 	public Client(String name, String address) // Method Client that takes in name and address
 	{
 		DatagramSocket ds; // Initializing ds of type DatagramSocket
@@ -53,6 +54,7 @@ public class Client implements Runnable
 			System.out.println("Client - Server found attempting to connect"); // Informing the user that we are attempting to connect
 			socket = new Socket(packet.getAddress().getHostAddress(), 12345); // Setting socket
 			System.out.println("Client - connection established"); // Informing the user that the connection has been established
+			this.address = address;
 		} 
 		catch (IOException e) 
 		{
@@ -71,7 +73,7 @@ public class Client implements Runnable
 	public void run() 
 	{
 		screen = new JFrame("Loading...");
-		screen.setSize(500,200);
+		screen.setSize(500,250);
 		screen.setResizable(false); // Do not allow the user to adjust the size of the frame
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - screen.getWidth()) / 2);
@@ -80,6 +82,7 @@ public class Client implements Runnable
 		screen.setLayout(new FlowLayout());
 		screen.add(new JLabel(new ImageIcon(this.getClass().getResource("/cardImages/cardLoading.gif"))));
 		screen.add(new JLabel("Waiting for other players to join..."));
+		screen.add(new JLabel("The server address is " + this.address));
 		screen.setVisible(true);
 	}	
 	public JFrame getLoadingScreen() // Method to get the loading screen
