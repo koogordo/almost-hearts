@@ -73,7 +73,7 @@ public class Client implements Runnable
 	public void run() 
 	{
 		screen = new JFrame("Loading...");
-		screen.setSize(500,250);
+		screen.setSize(500,220);
 		screen.setResizable(false); // Do not allow the user to adjust the size of the frame
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - screen.getWidth()) / 2);
