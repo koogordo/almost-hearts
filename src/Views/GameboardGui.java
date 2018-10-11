@@ -333,8 +333,8 @@ public class GameboardGui extends JFrame implements Runnable
 					int value = Integer.parseInt(st.nextToken());
 					System.out.println("Got the played card");
 					Card playedCard = new Card(suit, value);
-					playerPanels[player].add(playedCard);
-					playerPanels[player].repaint();
+					cardLabels[player] = playedCard;
+					this.repaint();
 					submit.setEnabled(isMyTurn(player));
 					break;
 
