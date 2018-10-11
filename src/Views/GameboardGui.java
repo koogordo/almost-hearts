@@ -178,14 +178,10 @@ public class GameboardGui extends JFrame implements Runnable
 		submit = new JButton("Submit");
 		submit.addActionListener(new submitButton());
 		submit.setEnabled(false);
-<<<<<<< HEAD
 		//----------------------------------- Adding submit to a flow layout and the flow layout to handArea
 		submitArea.add(submit);
 		//SubmitHolder.add(submit);
 		//handArea.add(SubmitHolder, BorderLayout.SOUTH);
-=======
-		handArea.add(submit);
->>>>>>> d9789f70d35a0fe7d63a414df87937228ed64503
 		this.revalidate();
 		this.repaint();
 	}
