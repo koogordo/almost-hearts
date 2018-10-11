@@ -307,7 +307,20 @@ public class GameboardGui extends JFrame implements Runnable
 		playedPerson++;
 		return playedPerson % 3 == playerID;
 	}
-
+	//---------------------------------------------------------------------------------------
+	private void playSound() 
+	{
+		try 
+		{
+			java.applet.AudioClip clip = java.applet.Applet.newAudioClip(new java.net.URL("/cardImages/jazz.mp3"));
+			clip.play();
+		} 
+		catch (java.net.MalformedURLException murle) 
+		{
+			System.out.println(murle);
+		}
+	}
+	
 	public void run() 
 	{
 		try 
@@ -329,6 +342,7 @@ public class GameboardGui extends JFrame implements Runnable
 			
 			setRearCards();
 			setHand(in.readLine());// Parses the string given into Card objects and puts it in the ArrayList hand
+			playSound();
 			
 			loadingScreen.setVisible(false);
 
