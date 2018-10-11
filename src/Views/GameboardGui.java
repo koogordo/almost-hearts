@@ -21,6 +21,8 @@ public class GameboardGui extends JFrame implements Runnable
 	private JPanel notificationPanel;
 	private JLabel notificationLabel;
 	private JPanel handArea;
+	private JPanel handAndSubmit;
+	private JPanel submitArea;
 	private JButton submit;
 	private JPanel contentPane;
 	private Card selectedCard;
@@ -54,9 +56,19 @@ public class GameboardGui extends JFrame implements Runnable
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
+		handAndSubmit = new JPanel();
+
 		handArea = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) handArea.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
+		
+		submitArea = new JPanel();
+		handAndSubmit.setLayout(new BoxLayout(handAndSubmit, BoxLayout.Y_AXIS));
+		
+		handAndSubmit.add(handArea);
+		handAndSubmit.add(submitArea);
+		submitArea.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		submitArea.setMaximumSize(new Dimension(this.getWidth(), this.getHeight()/10));
+		
 		
 		//--------------------------------------------------------------------------------------
 		//BorderLayout Borderlayout = (BorderLayout) handArea.getLayout();
@@ -74,7 +86,7 @@ public class GameboardGui extends JFrame implements Runnable
 		notificationLabel.setFont(new Font("Serif", Font.PLAIN, 40));
 		notificationPanel.add(notificationLabel);
 		contentPane.add(panel);
-		contentPane.add(handArea);
+		contentPane.add(handAndSubmit);
 		panel.setLayout(new GridLayout(0, 3, 0, 0)); 
 		panel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 8));
 		
@@ -176,7 +188,7 @@ public class GameboardGui extends JFrame implements Runnable
 		submit.addActionListener(new submitButton());
 		submit.setEnabled(false);
 		//----------------------------------- Adding submit to a flow layout and the flow layout to handArea
-		handArea.add(submit);
+		submitArea.add(submit);
 		//SubmitHolder.add(submit);
 		//handArea.add(SubmitHolder, BorderLayout.SOUTH);
 		this.revalidate();
@@ -349,8 +361,8 @@ public class GameboardGui extends JFrame implements Runnable
 					break;
 
 				case "Winner":
-					String gameWinnerName = st.nextToken();
-					this.notificationLabel.setText(gameWinnerName + " wins the game!");
+					int gameWinnerName = Integer.parseInt(st.nextToken());
+					this.notificationLabel.setText(playerLabels[gameWinnerName] + " wins the game!");
 					this.notificationLabel.repaint();
 					break;
 
