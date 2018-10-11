@@ -124,9 +124,11 @@ public class Game
 				previousWinner = i; // Setting the previousWinner to i
 			}
 		}
-		Broadcast("Round " + playerTurn + " " + playerNames[previousWinner]);
 		
 		playerTurn = previousWinner; // set first player to the winner of the previous round
+		
+		Broadcast("Round " + playerTurn + " " + playerNames[previousWinner]);
+	
 		roundsWon[previousWinner]++; // increment the roundsWon count of the previous winner
 		totalScore[previousWinner] += cardsOfRound[previousWinner].getValue(); // add the value of the winning card to the total score of the previous winner
 		totalRounds++; // Increment the totalRounds count

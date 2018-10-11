@@ -358,7 +358,7 @@ public class GameboardGui extends JFrame implements Runnable
 					int roundWinner = Integer.parseInt(st.nextToken());
 					this.notificationLabel.setText(playerLabels[roundWinner].getText() + " won round " + totalRounds + "!");
 					this.notificationLabel.repaint();
-					submit.setEnabled(roundWinner == playerID);
+					myTurn = (roundWinner == playerID);
 					setRearCards();
 					totalRounds++;
 					break;
