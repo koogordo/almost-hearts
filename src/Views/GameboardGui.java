@@ -266,7 +266,7 @@ public class GameboardGui extends JFrame implements Runnable
 			{
 				if (selectedCard.getSuit() == hand.get(i).getSuit() && selectedCard.getValue() == hand.get(i).getValue()) 
 				{
-					hand.remove(i);
+					handArea.remove(hand.remove(i));
 				}
 			}
 			String cardStream = "Played " + " " + playerID + " " + selectedCard.getSuit() + " "
@@ -333,9 +333,10 @@ public class GameboardGui extends JFrame implements Runnable
 					int value = Integer.parseInt(st.nextToken());
 					System.out.println("Got the played card");
 					Card playedCard = new Card(suit, value);
-					cardLabels[player] = playedCard;
+					ImageIcon temp = ScaledImage(playedCard.getImage().getImage());
+					cardLabels[player].setIcon(temp);
+					myTurn = isMyTurn(player);
 					this.repaint();
-					submit.setEnabled(isMyTurn(player));
 					break;
 
 				case "Winner":
