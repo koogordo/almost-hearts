@@ -297,16 +297,15 @@ public class GameboardGui extends JFrame implements Runnable
 	{
 		try 
 		{
-			// creates the input stream to read in the output from the server
+			// Creates the input stream to read in the output from the server
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-			// uses StringTokenizer so that it is easy to traverse the String coming in
+			// Uses StringTokenizer so that it is easy to traverse the String coming in
 			StringTokenizer st = new StringTokenizer(in.readLine());
 			
 			this.setVisible(true);
 
-			// The first thing coming in is going to be the playersID and the names of the
-			// players (in order)
+			// The first thing coming in is going to be the playersID and the names of the players (in order)
 			playerID = Integer.parseInt(st.nextToken());
 			playerLabels[0].setText(st.nextToken());
 			playerLabels[1].setText(st.nextToken());
@@ -316,7 +315,6 @@ public class GameboardGui extends JFrame implements Runnable
 			setRearCards();
 			setHand(in.readLine());// Parses the string given into Card objects and puts it in the ArrayList hand
 			
-
 			loadingScreen.setVisible(false);
 
 			while (true) 
@@ -326,8 +324,7 @@ public class GameboardGui extends JFrame implements Runnable
 				switch (switchToken) 
 				{
 				case "Played":
-					// set the icon in the appropriate player box to reflect the card that they
-					// showed
+					// set the icon in the appropriate player box to reflect the card that they showed
 					int player = Integer.parseInt(st.nextToken());
 					String suit = st.nextToken();
 					int value = Integer.parseInt(st.nextToken());
