@@ -25,7 +25,7 @@ public class GameboardGui extends JFrame implements Runnable
 	private JPanel contentPane;
 	private Card selectedCard;
 	private Socket socket;
-	private BufferedWriter out;
+	private PrintStream out;
 	private BufferedReader in;
 	private int playerID;
 	private JLabel[] cardLabels = new JLabel[3];
@@ -41,7 +41,7 @@ public class GameboardGui extends JFrame implements Runnable
 		playerLabels = new JLabel[3];
 		try 
 		{
-			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+			out = new PrintStream(socket.getOutputStream());
 		} 
 		catch (IOException e) // Catching any errors
 		{
