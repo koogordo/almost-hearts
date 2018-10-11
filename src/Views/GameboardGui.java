@@ -32,6 +32,7 @@ public class GameboardGui extends JFrame implements Runnable
 	private JPanel[] playerPanels = new JPanel[3];
 	private JFrame loadingScreen;
 	private boolean myTurn = false;
+	int totalRounds;    // total rounds
 
 	// Launch the application and create the frame.
 	public GameboardGui(Socket socket, JFrame screen) 
@@ -339,16 +340,17 @@ public class GameboardGui extends JFrame implements Runnable
 
 				case "Winner":
 					String gameWinnerName = st.nextToken();
-					this.notificationLabel.setText(gameWinnerName + " Wins the game!");
+					this.notificationLabel.setText(gameWinnerName + " wins the game!");
 					this.notificationLabel.repaint();
 					break;
 
 				case "Round":
 					int roundWinner = Integer.parseInt(st.nextToken());
-					this.notificationLabel.setText(playerLabels[roundWinner].getText() + " Wins the round!");
+					this.notificationLabel.setText(playerLabels[roundWinner].getText() + " won round " + totalRounds);
 					this.notificationLabel.repaint();
 					submit.setEnabled(roundWinner == playerID);
 					setRearCards();
+					totalRounds++;
 					break;
 
 				case "Exit":
