@@ -1,43 +1,40 @@
 package AppTools;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
-
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 /*
- * Client constructor sends out a broadcast packet to any DatagramSocket receiving on port 12343
- * The contents of the sent packet is the name of the user joining (in bytes)
+ * Client constructor has a parameter for the name address and implements class Runnable.
+ * It then sends out a packet to the address of the user's name under port 12343.
+ * The contents of the sent packet is the name of the user joining (in bytes).
  * Then waits for a response back from the server with a receiving port 12344
  * 		(The reason for using a different port for the case that another client doesn't accidently connect to this client)
  * The response is received and uses the ip-address that it received from the server to 
  * attempt a TCP connection with server using the port 12345.
+ * 
+ * In the implemented method run, it launches a gui for the loading screen until all users are connected.
+ * In the gui, there is a JLabel that states "Waiting for other players to join..." along with a gif loading icon.
+ * The reason this implements class Runnable is so that it is possible to multi-thread the loading screen gui
+ * because Swing is not thread safe and can break when waiting for TCP responses. The gui is disabled in the
+ * GameboardGui once all 3 players have connected to the game.
  */
 public class Client implements Runnable
 {
-	Socket socket; // Initializing the socket
-	ArrayList<DatagramPacket> dpArray = new ArrayList<>(); // Setting dpArray to an arrayList
-	byte[] bytesToSend; // Initializing an array of the bytesToSend
-	String name; // Initializing a name string
-	boolean serverNotFound = true; // Setting serverNotFound to true
-	JFrame screen; // Initializing screen as a JFrame
-	DatagramPacket packet; // Initializing packet as a DatagramPacket
+	private Socket socket; // Initializing the socket
+	private ArrayList<DatagramPacket> dpArray = new ArrayList<>(); // Setting dpArray to an arrayList
+	private byte[] bytesToSend; // Initializing an array of the bytesToSend
+	private String name; // Initializing a name string
+	private boolean serverNotFound = true; // Setting serverNotFound to true
+	private JFrame screen; // Initializing screen as a JFrame
+	private DatagramPacket packet; // Initializing packet as a DatagramPacket
 	public Client(String name, String address) // Method Client that takes in name and address
 	{
 		DatagramSocket ds; // Initializing ds of type DatagramSocket
 		try 
 		{
 			packet = new DatagramPacket(name.getBytes(), name.length(), InetAddress.getByName(address), 12343);
-			// 
 		} 
 		catch (UnknownHostException e1) 
 		{
@@ -62,8 +59,10 @@ public class Client implements Runnable
 			e.printStackTrace();
 		}
 	}
-	
-	public Socket getSocket() // getSocket Method that returns the socket
+	/*
+	 * Simple public getter method meant to be used by the GameMenu to return the socket connection object
+	 */
+	public Socket getSocket()
 	{
 		return socket;
 	}
@@ -71,9 +70,6 @@ public class Client implements Runnable
 	@Override
 	public void run() 
 	{
-		//final ImageIcon icon = new ImageIcon("cardImages/cardLoading.gif");
-		//JOptionPane optionPane = new JOptionPane("Waiting for other players to join...", JOptionPane.QUESTION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon, new Object[]{}, null);
-		//screen = new JDialog();
 		screen = new JFrame("Loading...");
 		screen.setSize(500,200);
 		screen.setResizable(false); // Do not allow the user to adjust the size of the frame
@@ -81,13 +77,9 @@ public class Client implements Runnable
 		int x = (int) ((dimension.getWidth() - screen.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - screen.getHeight()) / 2);
 	    screen.setLocation(x, y);
-		//JPanel panel = new JPanel();
 		screen.setLayout(new FlowLayout());
-		//screen.setTitle();
 		screen.add(new JLabel(new ImageIcon(this.getClass().getResource("/cardImages/cardLoading.gif"))));
 		screen.add(new JLabel("Waiting for other players to join..."));
-		//screen.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		//screen.pack();
 		screen.setVisible(true);
 	}	
 	public JFrame getLoadingScreen() // Method to get the loading screen
