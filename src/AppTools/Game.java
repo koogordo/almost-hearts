@@ -1,10 +1,7 @@
 package AppTools;
 
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 /*
  * This class holds the shared resources that the ServerPlayer threads use.
  * It also is how the game is controlled with methods called from ServerPlayer to

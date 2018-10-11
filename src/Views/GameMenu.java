@@ -3,15 +3,10 @@ package Views;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.concurrent.*;
-import java.applet.Applet;
-
 import javax.imageio.ImageIO;
-import javax.print.DocFlavor.URL;
 import javax.swing.*;
 
 import AppTools.*;

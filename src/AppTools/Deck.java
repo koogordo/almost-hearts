@@ -1,8 +1,6 @@
 package AppTools;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /* 
  * The purpose of this class is to create the cards and holds them in an ArrayList which
