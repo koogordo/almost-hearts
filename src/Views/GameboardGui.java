@@ -346,7 +346,7 @@ public class GameboardGui extends JFrame implements Runnable
 
 				case "Round":
 					int roundWinner = Integer.parseInt(st.nextToken());
-					this.notificationLabel.setText(playerLabels[roundWinner].getText() + " won round " + totalRounds);
+					this.notificationLabel.setText(playerLabels[roundWinner].getText() + " won round " + totalRounds + "!");
 					this.notificationLabel.repaint();
 					submit.setEnabled(roundWinner == playerID);
 					setRearCards();
