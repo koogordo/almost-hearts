@@ -46,7 +46,7 @@ public class Server implements Runnable
 				dp = new DatagramPacket(new byte[100],100);
 				System.out.println("Server - Ready to receive request");
 				ds.receive(dp);	
-				usernames[i] = byteArrayToString(dp.getData());
+				usernames[i] = byteArrayToString(dp.getData()).replace(" ", "-");
 				addresses[i] = dp.getAddress();
 				System.out.println("Server - Received request from " + usernames[i]);
 				DatagramPacket packetToSend = new DatagramPacket("accepted".getBytes(), "accepted".length(), dp.getAddress(), 12344);

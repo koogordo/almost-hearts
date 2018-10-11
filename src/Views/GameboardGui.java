@@ -352,9 +352,9 @@ public class GameboardGui extends JFrame implements Runnable
 
 			// The first thing coming in is going to be the playersID and the names of the players (in order)
 			playerID = Integer.parseInt(st.nextToken());
-			playerLabels[0].setText(st.nextToken());
-			playerLabels[1].setText(st.nextToken());
-			playerLabels[2].setText(st.nextToken());
+			playerLabels[0].setText(st.nextToken().replace("-", " "));
+			playerLabels[1].setText(st.nextToken().replace("-", " "));
+			playerLabels[2].setText(st.nextToken().replace("-", " "));
 			myTurn = (playerID == 0);
 			
 			setRearCards();
