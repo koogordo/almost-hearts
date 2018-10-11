@@ -60,7 +60,9 @@ public class GameboardGui extends JFrame implements Runnable
 		setContentPane(contentPane);
 		
 		handAndSubmit = new JPanel();
+		handAndSubmit.setOpaque(false);
 		handArea = new JPanel();
+		handArea.setOpaque(false);
 		FlowLayout flowLayout = (FlowLayout) handArea.getLayout();
 		submitArea = new JPanel();
 		handAndSubmit.setLayout(new BoxLayout(handAndSubmit, BoxLayout.Y_AXIS));
@@ -72,11 +74,13 @@ public class GameboardGui extends JFrame implements Runnable
 		// Notification GUI logic
 		// Components for displaying appropriate messages to all players.
 		notificationPanel = new JPanel();
+		notificationPanel.setOpaque(false);
 		notificationPanel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 10));
 		notificationPanel.setAlignmentX(CENTER_ALIGNMENT);
 
 		// Base content pane logic
 		JPanel panel = new JPanel();
+		panel.setOpaque(false);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		contentPane.add(notificationPanel);
 		notificationPanel.setLayout(new BoxLayout(notificationPanel, BoxLayout.Y_AXIS));
@@ -102,6 +106,7 @@ public class GameboardGui extends JFrame implements Runnable
 		
 		//Player one GUI logic
 		JPanel panel_1 = new JPanel();
+		panel_1.setOpaque(false);
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_1);
 		playerLabels[0] = new JLabel("Player 1");
@@ -115,6 +120,7 @@ public class GameboardGui extends JFrame implements Runnable
 
 		// Player two GUI logic
 		JPanel panel_2 = new JPanel();
+		panel_2.setOpaque(false);
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_2);
 		playerLabels[1] = new JLabel("Player 2");
@@ -128,6 +134,7 @@ public class GameboardGui extends JFrame implements Runnable
 
 		// Player 3 GUI logic
 		JPanel panel_3 = new JPanel();
+		panel_3.setOpaque(false);
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_3);
 		playerLabels[2] = new JLabel("Player 3");
