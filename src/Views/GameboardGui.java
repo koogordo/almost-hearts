@@ -303,8 +303,8 @@ public class GameboardGui extends JFrame implements Runnable
 			// uses StringTokenizer so that it is easy to traverse the String coming in
 			StringTokenizer st = new StringTokenizer(in.readLine());
 			
-			loadingScreen.setVisible(false);
 			this.setVisible(true);
+			loadingScreen.setVisible(false);
 
 			// The first thing coming in is going to be the playersID and the names of the
 			// players (in order)
@@ -329,6 +329,7 @@ public class GameboardGui extends JFrame implements Runnable
 					int player = Integer.parseInt(st.nextToken());
 					String suit = st.nextToken();
 					int value = Integer.parseInt(st.nextToken());
+					System.out.println("Got the played card");
 					Card playedCard = new Card(suit, value);
 					playerPanels[player].add(playedCard);
 					playerPanels[player].repaint();
