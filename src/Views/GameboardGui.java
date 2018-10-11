@@ -12,7 +12,8 @@ import AppTools.Card;
 /**
  * The GameBoardGui is the is the graphical user interface for gameplay.
  * This GUI handles all the actions a player can take along with displaying appropriate notifications
- * for game over, winner, round over... etc. The  
+ * for game over, winner, round over... etc. The gameboard GUI also handles the communication between the
+ * players and the server.  
  * 
  */
 
