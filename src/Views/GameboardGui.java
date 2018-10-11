@@ -233,7 +233,8 @@ public class GameboardGui extends JFrame implements Runnable
 		{
 			if (selectedCard != null) 
 			{
-				selectedCard.setBorder(null);
+				selectedCard.setBorder(BorderFactory.createLineBorder(Color.lightGray, 3));
+				//selectedCard.setBorder(null);
 			}
 			selectedCard = ((Card) e.getSource());
 			selectedCard.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
