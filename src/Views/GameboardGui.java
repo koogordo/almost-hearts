@@ -70,7 +70,7 @@ public class GameboardGui extends JFrame implements Runnable
 		notificationPanel.add(notificationLabel);
 		contentPane.add(panel);
 		contentPane.add(handArea);
-		panel.setLayout(new GridLayout(0, 3, 0, 0));
+		panel.setLayout(new GridLayout(0, 3, 0, 0)); 
 		panel.setPreferredSize(new Dimension(this.getWidth(), this.getHeight() / 8));
 		
 		//Player one GUI logic
@@ -161,6 +161,7 @@ public class GameboardGui extends JFrame implements Runnable
 			hand.get(i).setBorder(BorderFactory.createLineBorder(Color.lightGray, 3));
 			hand.get(i).addMouseListener(new selectCard());
 		}
+		// MOVE TO A NEW LINE ----------------------------------------------------
 		submit = new JButton("Submit");
 		submit.addActionListener(new submitButton());
 		submit.setEnabled(false);
