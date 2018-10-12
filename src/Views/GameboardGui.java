@@ -154,8 +154,14 @@ public class GameboardGui extends JFrame implements Runnable
 		this.setVisible(false);
 	}
 
+	
 	public void setRearCards() 
 	{
+		/*
+		 * setRearCards() is a method that will set the three card icons to show the backs of cards by default
+		 * this provides an immediate indication has to how the gameboard is going to be structured right away,
+		 * by making it clear as to where the cards should show up when played.
+		 */
 		ImageIcon tempIcon = new ImageIcon(this.getClass().getResource("/cardImages/rearOfCard.png"));
 		ImageIcon temp = ScaledImage(tempIcon.getImage());
 
@@ -169,18 +175,28 @@ public class GameboardGui extends JFrame implements Runnable
 
 	public void setHand(String cards) 
 	{
+		/*
+		 * At the beginning of each round players are dealt a hand. The hand is displayed at the bottom of the screen
+		 * each card is displayed a JLabel. This method is used to set the image icon on each label to display the cards
+		 * of the player.
+		 */
 		cards = cards.toLowerCase();
-
+		
+		// Cards are sent to and from the server as a string
+		// This string gets processed into cards by passing the values to instantiate new card objects
+		// The cards themselves, inherit from JLabel making it very easy to add them to panel once instantiated.
 		StringTokenizer st = new StringTokenizer(cards);
-		// st.nextToken();
-		System.out.println(cards);
 		for (int i = 0; i < 17; i++) 
 		{
 			String suit = st.nextToken();
 			int number = Integer.parseInt(st.nextToken());
 			hand.add(new Card(suit, number));
 		}
+		
+		// Each players hand is sorted to satisfy users who like to have their hands ordered.
 		sortHand(hand);
+		
+		// The image icon for each card is scaled so that it can fit nicely into the gui.
 		for (int i = 0; i < 17; i++) 
 		{
 			hand.get(i).setSize(contentPane.getWidth() / 10, (contentPane.getWidth() / 10) * (800 / 500));
@@ -193,11 +209,15 @@ public class GameboardGui extends JFrame implements Runnable
 			hand.get(i).setBorder(BorderFactory.createLineBorder(Color.lightGray, 3));
 			hand.get(i).addMouseListener(new selectCard());
 		}
+		
+		
 		submit = new JButton("Submit");
 		submit.addActionListener(new submitButton());
 		submit.setEnabled(false);
-		//----------------------------------- Adding submit to a flow layout and the flow layout to handArea
+		
+		//Adding submit to a flow layout and the flow layout to handArea
 		submitArea.add(submit);
+		
 		//SubmitHolder.add(submit);
 		//handArea.add(SubmitHolder, BorderLayout.SOUTH);
 		this.revalidate();
@@ -205,7 +225,12 @@ public class GameboardGui extends JFrame implements Runnable
 	}
 
 	public void setPlayerNames(String names)  // Method to set the player's names
-	{
+	{ 
+		/*
+		 * Player names, like the cards, are received from the server as a single string.
+		 * In this method the string is parsed for each individual name and the appropriate
+		 * label for each player is set to display their name
+		 */
 		StringTokenizer st = new StringTokenizer(names);
 		st.nextToken();
 
@@ -214,8 +239,13 @@ public class GameboardGui extends JFrame implements Runnable
 		playerLabels[2].setText(st.nextToken());
 	}
 
-	public static void sortHand(ArrayList<Card> cards) // Method to sort the Hand
+	public static void sortHand(ArrayList<Card> cards) 
 	{
+		/*
+		 * This is the method that is used to sort the player hands, it sorts the cards first by suit
+		 * and then sorts the groups of suits by value. This leaves the player with a nicely ordered hand
+		 */
+		
 		String suit = "c";
 		for (int i = 0; i < cards.size() - 1;) 
 		{
@@ -249,8 +279,14 @@ public class GameboardGui extends JFrame implements Runnable
 		}
 	}
 
-	public static String nextSuit(String suit) // Method to return the next suit
+	public static String nextSuit(String suit)
 	{
+		/*
+		 * This method dictates the order of the suits. In other words, it returns the suits in the order 
+		 * that they should be sorted. This method handles this by returning the first letter of each suit in 
+		 * alphabetical order
+		 */
+		
 		if (suit.equals("c"))
 			return "d";
 		if (suit.equals("d"))
@@ -264,6 +300,14 @@ public class GameboardGui extends JFrame implements Runnable
 
 	private class selectCard implements MouseListener 
 	{
+		/*
+		 * This is the mouse event listener. It is only set up to listen for one type of mouse event
+		 * and that is the moused clicked event. We want the players to be able to select a card without actually
+		 * submitting their turn. This listener is set up so that it outlines the card that is selected by the player
+		 * so that they can see it on the GUI. It also sets the backend selectedCard value which can be sent to the server
+		 * as soon as the submit button is clicked.
+		 */
+		
 		@Override
 		public void mouseClicked(MouseEvent e) 
 		{
@@ -291,6 +335,11 @@ public class GameboardGui extends JFrame implements Runnable
 
 	private class submitButton implements ActionListener 
 	{
+		/*
+		 * An button listener that that implements a method upon clicking that removes a played card from the 
+		 * players hand so that it no longer shows up in their hand area. A move string is then consructed and is sent
+		 * to the server to be processed.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -302,6 +351,8 @@ public class GameboardGui extends JFrame implements Runnable
 					handArea.remove(hand.remove(i));
 				}
 			}
+			
+			// Move string - a string representation of the player move so it can be easily transmitted
 			String cardStream = "Played " + " " + playerID + " " + selectedCard.getSuit() + " "
 					+ selectedCard.getValue();
 			System.out.println(cardStream);
@@ -313,6 +364,10 @@ public class GameboardGui extends JFrame implements Runnable
 
 	public ImageIcon ScaledImage(Image i) 
 	{
+		/*
+		 * A method for scaling the images on image icons so they remain proportional to the screen and so that
+		 * they can fit nicely on the GUI
+		 */
 		Image imagetemp = i;
 		Image temp = imagetemp.getScaledInstance(contentPane.getWidth() / 8, (contentPane.getWidth() / 6) * (800 / 500),
 				java.awt.Image.SCALE_SMOOTH);
@@ -322,6 +377,7 @@ public class GameboardGui extends JFrame implements Runnable
 
 	public boolean isMyTurn(int playedPerson) 
 	{
+		// A method for determining whether or not a players turn is up.
 		playedPerson++;
 		return playedPerson % 3 == playerID;
 	}
@@ -343,6 +399,13 @@ public class GameboardGui extends JFrame implements Runnable
 	
 	public void run() 
 	{
+		/*
+		 * This thread handles all gameplay tasks that require passing information to the ServerPlayer
+		 * The general structure of the logic is represented by a case statement. Their are 4 main categories
+		 * of actions that might have to be submitted and in our case statement we have one case for each category.
+		 * This thread uses streams sent via sockets to report events happening on the client side to the server.
+		 * 
+		 */
 		try 
 		{
 			// Creates the input stream to read in the output from the server
@@ -361,18 +424,30 @@ public class GameboardGui extends JFrame implements Runnable
 			myTurn = (playerID == 0);
 			
 			setRearCards();
-			setHand(in.readLine());// Parses the string given into Card objects and puts it in the ArrayList hand
+			
+			// Parses the string given into Card objects and puts it in the ArrayList hand
+			setHand(in.readLine());
+			
+			// Method for initiating game music
 			playSound();
 			
+			// Display the loading screen as we are waiting for players to connect/join
 			loadingScreen.setVisible(false);
 
 			while (true) 
 			{
+				/* 
+				 * While true creates in infinite loop which allows this threads sockets to listen constantly
+				 * and respond or act when necessary. The information that they are receiving is coming from the Game.
+				 * All the different message types carry info that can be used to make some change on the gameboard.
+				 */
 				st = new StringTokenizer(in.readLine());
 				String switchToken = st.nextToken();
 				switch (switchToken) 
 				{
 				case "Played":
+					// Messages that come in with a "Played" header are handled here
+					
 					// set the icon in the appropriate player box to reflect the card that they showed
 					int player = Integer.parseInt(st.nextToken());
 					String suit = st.nextToken();
@@ -386,13 +461,19 @@ public class GameboardGui extends JFrame implements Runnable
 					break;
 
 				case "Winner":
+					// Messages that come in with a "Winner" header are handled here
 					int gameWinnerName = Integer.parseInt(st.nextToken());
+					
+					// Set notification to display the game winning players name
 					this.notificationLabel.setText(playerLabels[gameWinnerName] + " wins the game!");
 					this.notificationLabel.repaint();
 					break;
 
 				case "Round":
+					// Messages that come in with a "Round" header are handled here
 					int roundWinner = Integer.parseInt(st.nextToken());
+					
+					// Set notification to display the round winning players name
 					this.notificationLabel.setText(playerLabels[roundWinner].getText() + " won round " + totalRounds + "!");
 					this.notificationLabel.repaint();
 					myTurn = (roundWinner == playerID);
@@ -401,6 +482,7 @@ public class GameboardGui extends JFrame implements Runnable
 					break;
 
 				case "Exit":
+					// Messages that come in with a "Round" header are handled here
 					System.exit(0);
 					break;
 				default:
