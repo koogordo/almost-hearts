@@ -483,12 +483,9 @@ public class GameboardGui extends JFrame implements Runnable
 					break;
 
 				case "Exit":
-<<<<<<< HEAD
 					int personWhoQuit = Integer.parseInt(st.nextToken());
 					JOptionPane.showMessageDialog(null, playerLabels[personWhoQuit].getText() + " has left the game");
-=======
 					// Messages that come in with a "Round" header are handled here
->>>>>>> 907be8ee64a107795823c9d1a23a180ee378838c
 					System.exit(0);
 					break;
 				default:
