@@ -53,7 +53,6 @@ public class GameboardGui extends JFrame implements Runnable
 			e.printStackTrace(); // Printing out said errors
 		}
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 900);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -400,6 +399,8 @@ public class GameboardGui extends JFrame implements Runnable
 					break;
 
 				case "Exit":
+					int personWhoQuit = Integer.parseInt(st.nextToken());
+					JOptionPane.showMessageDialog(null, playerLabels[personWhoQuit].getText() + " has left the game");
 					System.exit(0);
 					break;
 				default:
