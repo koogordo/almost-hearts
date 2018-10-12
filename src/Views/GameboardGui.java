@@ -2,6 +2,9 @@ package Views;
 
 import java.awt.*;
 import java.awt.event.*;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.io.*;
@@ -382,19 +385,18 @@ public class GameboardGui extends JFrame implements Runnable
 		return playedPerson % 3 == playerID;
 	}
 	//---------------------------------------------------------------------------------------
-	@SuppressWarnings("deprecation")
 	private void playSound() 
 	{
-		try 
-		{
-			@SuppressWarnings("deprecation")
-			java.applet.AudioClip clip = java.applet.Applet.newAudioClip(new java.net.URL("/cardImages/jazz.mp3"));
-			clip.play();
-		} 
-		catch (java.net.MalformedURLException murle) 
-		{
-			System.out.println(murle);
-		}
+	    try
+	    {
+	        Clip clip = AudioSystem.getClip();
+	        clip.open(AudioSystem.getAudioInputStream(new File("/cardImages/jazz.wav")));
+	        clip.start();
+	    }
+	    catch (Exception e)
+	    {
+	        e.printStackTrace(System.out);
+	    }
 	}
 	
 	public void run() 
