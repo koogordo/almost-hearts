@@ -62,6 +62,9 @@ public class Game
 				e.printStackTrace(); // Print out said error(s)
 			}
 		}
+		distributeCards();
+	}
+	public void distributeCards() {
 		Deck deck = new Deck(); // Set Deck to a new deck
 		for(int i = 0; i < Math.random() * 20; i++)//shuffles deck random amount of times
 		{
@@ -176,9 +179,22 @@ public class Game
 			//end game or whatever
 		}
 	}
+	public void resetGame()
+	{
+		Broadcast("Reset");
+		for(int i = 0; i < 3; i++)
+		{
+			roundsWon[i] = 0;
+			totalScore[i] = 0;
+		}
+		previousWinner = 0;
+		numOfTurns = 0;
+		playerTurn = 0;
+		totalRounds = 0;
+		distributeCards();
+	}
 
 	public void Broadcast(String broadcastString) // Method that takes the string given and sends it out to each player
-
 	{
 		for(int i = 0; i < 3; i++) 
 		{
