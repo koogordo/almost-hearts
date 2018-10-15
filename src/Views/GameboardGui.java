@@ -234,7 +234,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		//newGamePanel.add(newGameBtn);
 		
 		newGameFrame.add(newGamePanel);
-		newGameFrame.setVisible(true);
+		newGameFrame.setVisible(false);
 	}
 
 	public void setRearCards() {
@@ -514,8 +514,7 @@ public class GameboardGui extends JFrame implements Runnable {
 
 			// Display the loading screen as we are waiting for players to connect/join
 			loadingScreen.setVisible(false);
-			newGameFrame.setVisible(true);
-
+			newGameFrame.setVisible(false);
 			while (true) {
 				/* 
 				 * While true creates in infinite loop which allows this threads sockets to listen constantly
@@ -544,7 +543,6 @@ public class GameboardGui extends JFrame implements Runnable {
 				case "Winner":
 					// Messages that come in with a "Winner" header are handled here
 					int gameWinnerName = Integer.parseInt(st.nextToken());
-
 					// Set notification to display the game winning players name
 					this.notificationLabel.setText(playerLabels[gameWinnerName].getText() + " wins the game!");
 					this.notificationLabel.repaint();
