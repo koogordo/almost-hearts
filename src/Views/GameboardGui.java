@@ -232,7 +232,7 @@ public class GameboardGui extends JFrame implements Runnable
 		}
 		
 		
-		submit = new JButton("Submit");
+		submit = new JButton("Play Card");
 		submit.addActionListener(new submitButton());
 		submit.setEnabled(false);
 		
