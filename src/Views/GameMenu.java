@@ -20,8 +20,7 @@ import AppTools.*;
  * and replaces the address text field with it's own address.
  */
 
-public class GameMenu 
-{
+public class GameMenu {
 	private JLabel gameLogo; // Initialize gameLogo JLabel
 	private JButton joinExistingButton; // Initialize JButton to join an existing game
 	private JButton createNewButton; // Initialize button to create a new game
@@ -33,8 +32,7 @@ public class GameMenu
 	private JPanel south; // Initialize JPanel for South
 	private JFrame frame; // Initialize JFrame
     
-	public GameMenu() // GameMenu Method
-	{
+	public GameMenu() { // GameMenu Method
 		frame = new JFrame("GameMenu"); // Creating a new JFrame called Game Menu
 		frame.setSize(380, 320); // Setting the size of the frame to 325 wide x 200 high
 		frame.setResizable(false); // Do not allow the user to adjust the size of the frame
@@ -50,13 +48,10 @@ public class GameMenu
 		gameLogo.setSize(300,150); // Seting gameLogo to the size of 200, 58
 		
 		BufferedImage logo = null; // Initializing logo
-		try 
-		{
+		try {
 			java.net.URL url = this.getClass().getResource("/cardImages/AlmostHearts.png");
 		    logo = ImageIO.read(url); // Setting logo to the logo image
-		} 
-		catch (IOException e) // Checking for errors
-		{
+		} catch (IOException e) { // Checking for errors
 		    e.printStackTrace(); // Print out said errors
 		}
 		Image dimg = logo.getScaledInstance(gameLogo.getWidth(), gameLogo.getHeight(), Image.SCALE_SMOOTH); // Setting dimg to the width and height of gameLogo
@@ -117,33 +112,24 @@ public class GameMenu
 		joinExistingFrame.add(joinExistingButton); // Adding joinExistingButton to the joinExistingFrame
 		south.add(joinExistingFrame); // Adding joinExistingFrame to south
 		
-		frame.addWindowListener(new WindowAdapter()
-		{
-			public void windowClosing(WindowEvent e) // Method to close the window
-			{
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) { // Method to close the window
 		    	System.exit(0); // Exit the window
 		    }
 		});
 		frame.setVisible(true); // Set the frame's visibility to true
 	}
 	
-	private class ButtonHandler implements ActionListener // ButtonHandler method that implements the ActionListener
-	{
+	private class ButtonHandler implements ActionListener { // ButtonHandler method that implements the ActionListener
 		@Override
-		public void actionPerformed(ActionEvent event)
-		{
+		public void actionPerformed(ActionEvent event) {
 			ExecutorService executorService = Executors.newCachedThreadPool(); //creates a thread pool
-			if(event.getActionCommand().equals(createNewButton.getText())) // if a button is pressed, do the following:
-			{
-				
+			if(event.getActionCommand().equals(createNewButton.getText())) { // if a button is pressed, do the following:				
 				executorService.execute(new Server());//adds a new server thread to the thread pool
-				try 
-				{
+				try {
 					address.setText(InetAddress.getLocalHost().getHostAddress());
 					//if the person is hosting, just make the local address the parameter
-				} 
-				catch (UnknownHostException e) 
-				{
+				} catch (UnknownHostException e) {
 					e.printStackTrace(); // Print out the error
 				}
 			}
@@ -157,18 +143,14 @@ public class GameMenu
 		}
 	}
 	
-	private class TextFieldHandler implements KeyListener // TextField Handler method to handle the Action Listener
-	{
+	private class TextFieldHandler implements KeyListener { // TextField Handler method to handle the Action Listener
 		@Override
-		public void keyTyped(KeyEvent e) 
-		{
-			if(name.getText().equals("")) // If the name is blank
-			{
+		public void keyTyped(KeyEvent e) {
+			if(name.getText().equals("")) { // If the name is blank
 				createNewButton.setEnabled(false); // createNewButton is grayed out
 				joinExistingButton.setEnabled(false); // joinExistingButton is grayed out
 			}
-			else 
-			{
+			else {
 				createNewButton.setEnabled(true); // createNewButton enabled
 				joinExistingButton.setEnabled(true); // joinExistingButton enabled
 			}
