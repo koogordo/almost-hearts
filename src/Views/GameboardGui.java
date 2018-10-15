@@ -168,8 +168,10 @@ public class GameboardGui extends JFrame implements Runnable {
 		//exitSection.setSize(200, 200);
 		
 		newGameBtn = new JButton("New Game");
+		newGameBtn.setSize(100, 50);
 		newGameBtn.addActionListener(new newGameOrQuitBtn());
 		quitBtn = new JButton("Exit");
+		quitBtn.setSize(100, 50);
 		quitBtn.addActionListener(new newGameOrQuitBtn());
 		playAgainMessage = new JLabel("Would you like to play again?");
 		
@@ -180,7 +182,6 @@ public class GameboardGui extends JFrame implements Runnable {
 		newGameFrame.add(newGamePanel);
 		newGameFrame.setVisible(false);
 	}
-
 
 	public void setRearCards() {
 		/*
