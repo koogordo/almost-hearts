@@ -230,13 +230,6 @@ public class GameboardGui extends JFrame implements Runnable {
 			hand.get(i).addMouseListener(new selectCard());
 		}
 
-		submit = new JButton("Play Card");
-		submit.addActionListener(new submitButton());
-		submit.setEnabled(false);
-
-		//Adding submit to a flow layout and the flow layout to handArea
-		submitArea.add(submit);
-
 		//SubmitHolder.add(submit);
 		//handArea.add(SubmitHolder, BorderLayout.SOUTH);
 		this.revalidate();
@@ -445,7 +438,12 @@ public class GameboardGui extends JFrame implements Runnable {
 
 			// Parses the string given into Card objects and puts it in the ArrayList hand
 			setHand(in.readLine());
+			submit = new JButton("Play Card");
+			submit.addActionListener(new submitButton());
+			submit.setEnabled(false);
 
+			//Adding submit to a flow layout and the flow layout to handArea
+			submitArea.add(submit);
 			// Method for initiating game music
 			//playSound();---------------------------------------------------------------------------------------------
 
@@ -507,6 +505,9 @@ public class GameboardGui extends JFrame implements Runnable {
 					break;
 				case "Reset":
 					newGameFrame.setVisible(false);
+					totalRounds = 0;
+					this.notificationLabel.setText(playerLabels[0].getText() + "'s Turn");
+					myTurn = (playerID == 0);
 					setRearCards();
 					setHand(in.readLine());
 					break;
