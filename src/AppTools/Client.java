@@ -33,6 +33,7 @@ public class Client implements Runnable
 	public Client(String name, String address) // Method Client that takes in name and address
 	{
 		DatagramSocket ds; // Initializing ds of type DatagramSocket
+		this.name = name;
 		try 
 		{
 			packet = new DatagramPacket(name.getBytes(), name.length(), InetAddress.getByName(address), 12343);
@@ -42,7 +43,6 @@ public class Client implements Runnable
 			e1.printStackTrace();
 		}
 		screen = new JFrame("Loading...");
-		this.name = name; 
 		try 
 		{
 			ds = new DatagramSocket(12344);
