@@ -23,10 +23,7 @@ import java.awt.*;
 public class Client implements Runnable
 {
 	private Socket socket; // Initializing the socket
-	private ArrayList<DatagramPacket> dpArray = new ArrayList<>(); // Setting dpArray to an arrayList
-	private byte[] bytesToSend; // Initializing an array of the bytesToSend
 	private String name; // Initializing a name string
-	private boolean serverNotFound = true; // Setting serverNotFound to true
 	private JFrame screen; // Initializing screen as a JFrame
 	private DatagramPacket packet; // Initializing packet as a DatagramPacket
 	private String address; // Initialize IP address as a String
