@@ -28,6 +28,8 @@ public class GameboardGui extends JFrame implements Runnable {
 	private JPanel handArea;
 	private JPanel handAndSubmit;
 	private JPanel submitArea;
+	private JPanel newGameSection;
+	private JPanel exitSection;
 	private JButton submit;
 	private JPanel contentPane;
 	private Card selectedCard;
@@ -159,6 +161,12 @@ public class GameboardGui extends JFrame implements Runnable {
 		newGameFrame.setBounds(100, 100, 400, 400);
 		newGamePanel = new JPanel();
 		newGamePanel.setLayout(new GridLayout(2,2));
+		
+		//newGameSection = new JPanel(new FlowLayout());
+		//newGameSection.setSize(200, 200);
+		//exitSection = new JPanel(new FlowLayout());
+		//exitSection.setSize(200, 200);
+		
 		newGameBtn = new JButton("New Game");
 		newGameBtn.addActionListener(new newGameOrQuitBtn());
 		quitBtn = new JButton("Exit");
