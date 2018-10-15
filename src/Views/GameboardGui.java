@@ -162,7 +162,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		newGamePanel = new JPanel();
 		newGamePanel.setLayout(new BorderLayout());
 		playAgainMessage = new JLabel("Would you like to play again?");
-		newGamePanel.add(quitBtn, BorderLayout.NORTH);
+		newGamePanel.add(playAgainMessage, BorderLayout.NORTH);
 		
 		newGameBtn = new JButton("New Game");
 		//newGameBtn.setSize(100, 50);
@@ -170,7 +170,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		newGameSection = new JPanel(new FlowLayout());
 		newGameSection.setSize(100, 50);
 		newGameSection.add(newGameBtn);
-		newGamePanel.add(newGameSection, BorderLayout.EAST);
+		newGamePanel.add(newGameSection, BorderLayout.WEST);
 		
 		quitBtn = new JButton("Exit");
 		//quitBtn.setSize(100, 50);
@@ -178,7 +178,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		exitSection = new JPanel(new FlowLayout());
 		exitSection.setSize(100, 50);
 		exitSection.add(quitBtn);
-		newGamePanel.add(exitSection, BorderLayout.WEST);
+		newGamePanel.add(exitSection, BorderLayout.EAST);
 		
 		//newGamePanel.add(playAgainMessage);
 		//newGamePanel.add(newGameBtn);
