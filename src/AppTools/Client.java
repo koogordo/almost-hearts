@@ -34,6 +34,7 @@ public class Client implements Runnable
 	{
 		DatagramSocket ds; // Initializing ds of type DatagramSocket
 		this.name = name;
+		this.address = address;
 		try 
 		{
 			packet = new DatagramPacket(name.getBytes(), name.length(), InetAddress.getByName(address), 12343);
@@ -54,7 +55,7 @@ public class Client implements Runnable
 			System.out.println("Client - Server found attempting to connect"); // Informing the user that we are attempting to connect
 			socket = new Socket(packet.getAddress().getHostAddress(), 12345); // Setting socket
 			System.out.println("Client - connection established"); // Informing the user that the connection has been established
-			this.address = address;
+			
 		} 
 		catch (IOException e) 
 		{
