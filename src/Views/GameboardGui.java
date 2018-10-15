@@ -423,6 +423,7 @@ public class GameboardGui extends JFrame implements Runnable {
 			switch(btnText) {
 			case "New Game" :
 				out.println("Reset");
+				out.flush();
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e1) {
@@ -431,13 +432,16 @@ public class GameboardGui extends JFrame implements Runnable {
 				}
 				break;
 			case "Exit":
-				loadingScreen.setVisible(true);
+				out.println("Exit");
+				out.flush();
 				break;
 			}
 
 		}
 
 	}
+	
+
 
 	public ImageIcon ScaledImage(Image i) {
 		/*
