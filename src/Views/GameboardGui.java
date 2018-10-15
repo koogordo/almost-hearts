@@ -156,6 +156,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		this.setVisible(false);
 
 		newGameFrame = new JFrame();
+		newGameFrame.setBounds(100, 100, 400, 400);
 		newGamePanel = new JPanel();
 		newGamePanel.setLayout(new GridLayout(2,2));
 		newGameBtn = new JButton("New Game");
@@ -464,6 +465,7 @@ public class GameboardGui extends JFrame implements Runnable {
 					ImageIcon temp = ScaledImage(playedCard.getImage().getImage());
 					cardLabels[player].setIcon(temp);
 					myTurn = isMyTurn(player);
+					this.notificationLabel.setText(playerLabels[++player%3].getText() + "'s Turn");
 					this.repaint();
 					break;
 
@@ -472,7 +474,7 @@ public class GameboardGui extends JFrame implements Runnable {
 					int gameWinnerName = Integer.parseInt(st.nextToken());
 
 					// Set notification to display the game winning players name
-					this.notificationLabel.setText(playerLabels[gameWinnerName] + " wins the game!");
+					this.notificationLabel.setText(playerLabels[gameWinnerName].getText() + " wins the game!");
 					this.notificationLabel.repaint();
 
 					newGameFrame.setVisible(true);
@@ -485,6 +487,12 @@ public class GameboardGui extends JFrame implements Runnable {
 					// Set notification to display the round winning players name
 					this.notificationLabel.setText(playerLabels[roundWinner].getText() + " won round " + totalRounds + "!");
 					this.notificationLabel.repaint();
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					myTurn = (roundWinner == playerID);
 					setRearCards();
 					totalRounds++;
