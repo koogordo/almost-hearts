@@ -459,6 +459,7 @@ public class GameboardGui extends JFrame implements Runnable {
 
 			//Adding submit to a flow layout and the flow layout to handArea
 			submitArea.add(submit);
+			this.notificationLabel.setText(playerLabels[0].getText() + "'s Turn");
 			this.revalidate();
 			this.repaint();
 			
