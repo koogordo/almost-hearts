@@ -39,6 +39,11 @@ public class GameboardGui extends JFrame implements Runnable
 	private JLabel[] cardLabels = new JLabel[3];
 	private JPanel[] playerPanels = new JPanel[3];
 	private JFrame loadingScreen;
+	private JFrame newGameFrame;
+	private JPanel newGamePanel;
+	private JButton newGameBtn;
+	private JButton quitBtn;
+	private JLabel playAgainMessage;
 	private boolean myTurn = false;
 	int totalRounds = 1;    // total rounds
 
@@ -154,6 +159,20 @@ public class GameboardGui extends JFrame implements Runnable
 		playerPanels[1] = panel_2;
 		playerPanels[2] = panel_3;
 		this.setVisible(false);
+		
+		newGameFrame = new JFrame();
+		newGamePanel = new JPanel();
+		newGamePanel.setLayout(new GridLayout(2,2));
+		newGameBtn = new JButton("New Game");
+		newGameBtn.addActionListener(new newGameOrQuitBtn());
+		quitBtn = new JButton("Exit");
+		quitBtn.addActionListener(new newGameOrQuitBtn());
+		playAgainMessage = new JLabel("Would you like to play again?");
+		newGamePanel.add(newGameBtn);
+		newGamePanel.add(quitBtn);
+		newGamePanel.add(playAgainMessage);
+		newGameFrame.add(newGamePanel);
+		newGameFrame.setVisible(false);
 	}
 
 	
@@ -363,6 +382,32 @@ public class GameboardGui extends JFrame implements Runnable
 			submit.setEnabled(false);
 		}
 	}
+	
+	private class newGameOrQuitBtn implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			JButton source = (JButton) e.getSource();
+			String btnText = source.getText();
+			switch(btnText) {
+			case "New Game" :
+				out.println("Reset");
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				break;
+			case "Exit":
+				loadingScreen.setVisible(true);
+				break;
+			}
+			
+		}
+		
+	}
 
 	public ImageIcon ScaledImage(Image i) 
 	{
@@ -468,6 +513,8 @@ public class GameboardGui extends JFrame implements Runnable
 					// Set notification to display the game winning players name
 					this.notificationLabel.setText(playerLabels[gameWinnerName] + " wins the game!");
 					this.notificationLabel.repaint();
+					
+					newGameFrame.setVisible(true);
 					break;
 
 				case "Round":
