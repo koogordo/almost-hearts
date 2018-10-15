@@ -20,8 +20,7 @@ import java.awt.*;
  * because Swing is not thread safe and can break when waiting for TCP responses. The gui is disabled in the
  * GameboardGui once all 3 players have connected to the game.
  */
-public class Client implements Runnable
-{
+public class Client implements Runnable {
 	private Socket socket; // Initializing the socket
 	private String name; // Initializing a name string
 	private JFrame screen; // Initializing screen as a JFrame
@@ -29,22 +28,17 @@ public class Client implements Runnable
 	private String address; // Initialize IP address as a String
 	private JFrame gameMenu;
 	private DatagramSocket ds; // Initializing ds of type DatagramSocket
-	public Client(String name, String address, JFrame gameMenu) // Method Client that takes in name and address
-	{
+	public Client(String name, String address, JFrame gameMenu) { // Method Client that takes in name and address
 		this.name = name;
 		this.address = address;
 		this.gameMenu = gameMenu;
-		try 
-		{
+		try {
 			packet = new DatagramPacket(name.getBytes(), name.length(), InetAddress.getByName(address), 12343);
-		} 
-		catch (UnknownHostException e1) 
-		{
+		} catch (UnknownHostException e1) {
 			e1.printStackTrace();
 		}
 		screen = new JFrame("Loading...");
-		try 
-		{
+		try {
 			ds = new DatagramSocket(12344);
 			ds.setSoTimeout(5000);
 			System.out.println("Attempting to find server"); // Informing the user that we are attempting to find the server
@@ -56,9 +50,7 @@ public class Client implements Runnable
 			socket = new Socket(packet.getAddress().getHostAddress(), 12345); // Setting socket
 			System.out.println("Client - connection established"); // Informing the user that the connection has been established
 			
-		}
-		catch (IOException e) 
-		{
+		} catch (IOException e) {
 			screen.setVisible(false);
 			ds.close();
 			JOptionPane.showMessageDialog(null, "Could not connect to address " + this.address);
@@ -68,14 +60,12 @@ public class Client implements Runnable
 	/*
 	 * Simple public getter method meant to be used by the GameMenu to return the socket connection object
 	 */
-	public Socket getSocket()
-	{
+	public Socket getSocket() {
 		return socket;
 	}
 
 	@Override
-	public void run() 
-	{
+	public void run() {
 		screen = new JFrame("Loading...");
 		screen.setSize(500,250);
 		screen.setResizable(false); // Do not allow the user to adjust the size of the frame
@@ -89,8 +79,7 @@ public class Client implements Runnable
 		screen.add(new JLabel("The server address is " + this.address));
 		screen.setVisible(true);
 	}	
-	public JFrame getLoadingScreen() // Method to get the loading screen
-	{
+	public JFrame getLoadingScreen() { // Method to get the loading screen
 		return screen;
 	}
 }

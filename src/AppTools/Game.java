@@ -16,8 +16,7 @@ import java.net.Socket;
  * 		correct persons turn, if it is the correct persons turn it will simulate that turn
  * 		then broadcast "Played 1 h 5" to every single player.
  */
-public class Game 
-{
+public class Game {
 	String[] playerNames = new String[3];   // Array to hold the player's names
 	Socket[] playerSockets = new Socket[3]; // Array to hold the player's sockets
 	PrintStream[] out = new PrintStream[3]; // Array to hold the Player's print streams
@@ -56,9 +55,7 @@ public class Game
 				out[i].println(i + " " + playerNames[0] + " " + playerNames[1] + " " + playerNames[2]);
 				out[i].flush();
 				
-			} 
-			catch (IOException e) // Catch any error(s)
-			{
+			} catch (IOException e) { // Catch any error(s)
 				e.printStackTrace(); // Print out said error(s)
 			}
 		}
@@ -66,15 +63,12 @@ public class Game
 	}
 	public void distributeCards() {
 		Deck deck = new Deck(); // Set Deck to a new deck
-		for(int i = 0; i < Math.random() * 20; i++)//shuffles deck random amount of times
-		{
+		for(int i = 0; i < Math.random() * 20; i++) { //shuffles deck random amount of times
 			deck.Shuffle(); // Shuffle the deck
 		}
-		for(int i = 0; i < 3; i++)//distributes cards to players
-		{
+		for(int i = 0; i < 3; i++) { //distributes cards to players
 			String initialCards = "";
-			for(int k = 0; k < 17; k++)
-			{
+			for(int k = 0; k < 17; k++) {
 				initialCards += deck.drawOneCard().toString() + " ";
 			}
 			out[i].println(initialCards);
@@ -92,18 +86,15 @@ public class Game
 	 * Then increment the number of turns for the round counter by 1, if the total number
 	 * of turns for the round is 3, then reset the counter and execute the roundWinner method.
 	 */
-	public void turnPlayed(int player, String suit, int value) 
-	{
-		if(player == playerTurn) // If the player equal's the player turn
-		{
+	public void turnPlayed(int player, String suit, int value) {
+		if(player == playerTurn) { // If the player equal's the player turn
 			cardsOfRound[playerTurn] = new Card(suit, value);
 			Broadcast("Played" + " " + playerTurn + " " + cardsOfRound[playerTurn].toString());
 			
 			++playerTurn; // Increment the player's turn
 			playerTurn %= 3;//wrap back to 0 if it hits 3
 			++numOfTurns; // Increment the number of turns
-			if(numOfTurns == 3) // If the number of turns is 3:
-			{
+			if(numOfTurns == 3) { // If the number of turns is 3:
 				numOfTurns = 0; // Setting the number of turns to 0
 				roundWinner(); // Checking the round winner
 			}
@@ -117,13 +108,10 @@ public class Game
 	 * for that person.
 	 * 
 	 */
-	public void roundWinner () // method to decide the round winner
-	{	
+	public void roundWinner () { // method to decide the round winner
 		int playerWhoPlayedFirst = previousWinner; // Setting PlayerWhoPlayedFirst to previousWinner
-		for (int i = 0; i < cardsOfRound.length; i++)
-		{
-			if ((cardsOfRound[i].getSuit().equals(cardsOfRound[playerWhoPlayedFirst].getSuit())) && (cardsOfRound[i].getValue() > cardsOfRound[previousWinner].getValue()))
-			{
+		for (int i = 0; i < cardsOfRound.length; i++) {
+			if ((cardsOfRound[i].getSuit().equals(cardsOfRound[playerWhoPlayedFirst].getSuit())) && (cardsOfRound[i].getValue() > cardsOfRound[previousWinner].getValue())) {
 				previousWinner = i; // Setting the previousWinner to i
 			}
 		}
@@ -136,27 +124,21 @@ public class Game
 		totalScore[previousWinner] += cardsOfRound[previousWinner].getValue(); // add the value of the winning card to the total score of the previous winner
 		totalRounds++; // Increment the totalRounds count
 		checkEndGame(); // Check if it is the end of the game
-
 	}
 	/*
 	 * Is called by checkEndGame and return the player id of the person who won
 	 * Loops through the roundsWon array which contains the number of rounds each player
 	 * has won and returns the id of the player who won.
 	 */
-	public int gameWinner() 
-	{
+	public int gameWinner() {
 		int WinCount = roundsWon[0];
 		int gWinner = 0;
-		for(int i = 0; i < roundsWon.length; i++) 
-		{
-			if(roundsWon[i] > WinCount) // If the rounds won of player i is greater than WinCount
-			{
+		for(int i = 0; i < roundsWon.length; i++) {
+			if(roundsWon[i] > WinCount) { // If the rounds won of player i is greater than WinCount
 				gWinner = i; // Set gWinner to i
 			}
-			else if(roundsWon[i] == WinCount) // Else if the rounds one of player i equals the Win Count
-			{
-				if(totalScore[i] > totalScore[gWinner]) // If player i's total score is higher than current gWinner's total score
-				{
+			else if(roundsWon[i] == WinCount) { // Else if the rounds one of player i equals the Win Count
+				if(totalScore[i] > totalScore[gWinner]) { // If player i's total score is higher than current gWinner's total score
 					gWinner = i; // Set the game winner to i
 				}
 			}	
@@ -168,10 +150,8 @@ public class Game
 	 * It first checks if the number of round played has been 17 and if it has, then
 	 * broadcast the text "Winner" followed by the id of the person who won.
 	 */
-	public void checkEndGame() 
-	{
-		if(totalRounds == 17) // If the totalRounds = 17 the game is over
-		{
+	public void checkEndGame() {
+		if(totalRounds == 17) { // If the totalRounds = 17 the game is over
 			Broadcast("Winner " + gameWinner()); 
 			//We will have an array of the winners names
 			// P1 = [0], P2 [1] and P3 [2]
@@ -179,11 +159,10 @@ public class Game
 			//end game or whatever
 		}
 	}
-	public void resetGame()
-	{
+
+	public void resetGame() {
 		Broadcast("Reset");
-		for(int i = 0; i < 3; i++)
-		{
+		for(int i = 0; i < 3; i++) {
 			roundsWon[i] = 0;
 			totalScore[i] = 0;
 		}
@@ -201,10 +180,8 @@ public class Game
 		}
 	}
 
-	public void Broadcast(String broadcastString) // Method that takes the string given and sends it out to each player
-	{
-		for(int i = 0; i < 3; i++) 
-		{
+	public void Broadcast(String broadcastString) { // Method that takes the string given and sends it out to each player
+		for(int i = 0; i < 3; i++) {
 			out[i].println(broadcastString); // printing out the broadcastString
 			out[i].flush();
 		}

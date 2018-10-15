@@ -6,10 +6,8 @@ import Views.GameMenu;
  * Purpose is for CS410
  * This class is where it starts the rest of the program
  */
-public class Driver 
-{
-	public static void main(String[] args) 
-	{
+public class Driver {
+	public static void main(String[] args) {
 		GameMenu menu = new GameMenu();
 	}
 } 

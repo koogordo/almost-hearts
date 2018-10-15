@@ -9,8 +9,7 @@ import java.util.concurrent.*;
  * 
  */
 
-public class Server implements Runnable
-{
+public class Server implements Runnable {
 	ServerSocket server; // Initialize server of type ServerSocket
 	Socket[] sockets; // Initialize sockets of type Socket Array
 	String[] usernames; // Initialize usernames of type String Array
@@ -31,10 +30,8 @@ public class Server implements Runnable
 	 * 
 	 */
 	@Override
-	public void run()
-	{
-		try 
-		{
+	public void run() {
+		try {
 			server = new ServerSocket(12345);
 			ds = new DatagramSocket(12343);
 			sockets = new Socket[numOfPlayers];
@@ -57,21 +54,16 @@ public class Server implements Runnable
 			
 			Game game = new Game(usernames, sockets);
 			ExecutorService executorService = Executors.newCachedThreadPool();
-			for (int i = 0; i < numOfPlayers; i++) 
-			{
+			for (int i = 0; i < numOfPlayers; i++) {
 				executorService.execute(new ServerPlayer(sockets[i], game, i));
 			}
-		} 
-		catch (IOException e) 
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	public String byteArrayToString(byte[] b)  // Method to change a byte array to a string
-	{
+	public String byteArrayToString(byte[] b) {// Method to change a byte array to a string
 		String result = "";
-		for(int i = 0; i < b.length; ++i) 
-		{
+		for(int i = 0; i < b.length; ++i) {
 			result += (char) b[i];
 		}
 		return result;
