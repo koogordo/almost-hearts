@@ -436,6 +436,7 @@ public class GameboardGui extends JFrame implements Runnable {
 
 			//Adding submit to a flow layout and the flow layout to handArea
 			submitArea.add(submit);
+			this.repaint();
 			// Method for initiating game music
 			//playSound();---------------------------------------------------------------------------------------------
 
