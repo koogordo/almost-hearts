@@ -27,11 +27,13 @@ public class Client implements Runnable
 	private JFrame screen; // Initializing screen as a JFrame
 	private DatagramPacket packet; // Initializing packet as a DatagramPacket
 	private String address; // Initialize IP address as a String
-	public Client(String name, String address) // Method Client that takes in name and address
+	private JFrame gameMenu;
+	private DatagramSocket ds; // Initializing ds of type DatagramSocket
+	public Client(String name, String address, JFrame gameMenu) // Method Client that takes in name and address
 	{
-		DatagramSocket ds; // Initializing ds of type DatagramSocket
 		this.name = name;
 		this.address = address;
+		this.gameMenu = gameMenu;
 		try 
 		{
 			packet = new DatagramPacket(name.getBytes(), name.length(), InetAddress.getByName(address), 12343);
@@ -44,6 +46,7 @@ public class Client implements Runnable
 		try 
 		{
 			ds = new DatagramSocket(12344);
+			ds.setSoTimeout(5000);
 			System.out.println("Attempting to find server"); // Informing the user that we are attempting to find the server
 			Thread t1 = new Thread(this); // Make the loading Screen
 			t1.start();
@@ -53,10 +56,13 @@ public class Client implements Runnable
 			socket = new Socket(packet.getAddress().getHostAddress(), 12345); // Setting socket
 			System.out.println("Client - connection established"); // Informing the user that the connection has been established
 			
-		} 
+		}
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			screen.setVisible(false);
+			ds.close();
+			JOptionPane.showMessageDialog(null, "Could not connect to address " + this.address);
+			gameMenu.setVisible(true);
 		}
 	}
 	/*

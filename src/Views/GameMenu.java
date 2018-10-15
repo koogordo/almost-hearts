@@ -148,11 +148,12 @@ public class GameMenu
 				}
 			}
 			frame.setVisible(false); // set the visibility to false
-			Client client = new Client(name.getText(), address.getText()); // Setting client to the text of name and address
-			
-			GameboardGui gui = new GameboardGui(client.getSocket(), client.getLoadingScreen());
-			Thread t1 = new Thread(gui);
-			t1.start();
+			Client client = new Client(name.getText(), address.getText(), frame); // Setting client to the text of name and address
+			if(!frame.isVisible()) {
+				GameboardGui gui = new GameboardGui(client.getSocket(), client.getLoadingScreen());
+				Thread t1 = new Thread(gui);
+				t1.start();
+			}
 		}
 	}
 	

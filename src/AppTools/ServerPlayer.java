@@ -65,7 +65,7 @@ public class ServerPlayer implements Runnable
 					game.turnPlayed(Integer.parseInt(input.nextToken()), input.nextToken(), Integer.parseInt(input.nextToken()));
 					break;
 				case "Reset":
-					game.resetGame();
+					game.resetGame(playerID);
 					break;
 				case "Exit": 
 					game.Broadcast("Exit");
@@ -78,6 +78,7 @@ public class ServerPlayer implements Runnable
 			catch (IOException e) // Catch any errors
 			{
 				e.printStackTrace(); // Print out said errors
+				System.out.println("Lost connection to " + playerID);
 			}
 		}
 	}

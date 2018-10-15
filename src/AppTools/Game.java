@@ -179,9 +179,9 @@ public class Game
 			//end game or whatever
 		}
 	}
-	public void resetGame()
+	public void resetGame(int p)
 	{
-		Broadcast("Reset");
+		Broadcast("Reset " + p);
 		for(int i = 0; i < 3; i++)
 		{
 			roundsWon[i] = 0;
