@@ -160,25 +160,29 @@ public class GameboardGui extends JFrame implements Runnable {
 		newGameFrame = new JFrame();
 		newGameFrame.setBounds(100, 100, 400, 400);
 		newGamePanel = new JPanel();
-		newGamePanel.setLayout(new GridLayout(2,2));
-		
-		//newGameSection = new JPanel(new FlowLayout());
-		//newGameSection.setSize(200, 200);
-		//exitSection = new JPanel(new FlowLayout());
-		//exitSection.setSize(200, 200);
+		newGamePanel.setLayout(new BorderLayout());
+		playAgainMessage = new JLabel("Would you like to play again?");
+		newGamePanel.add(quitBtn, BorderLayout.NORTH);
 		
 		newGameBtn = new JButton("New Game");
-		newGameBtn.setSize(100, 50);
+		//newGameBtn.setSize(100, 50);
 		newGameBtn.addActionListener(new newGameOrQuitBtn());
+		newGameSection = new JPanel(new FlowLayout());
+		newGameSection.setSize(100, 50);
+		newGameSection.add(newGameBtn);
+		newGamePanel.add(newGameSection, BorderLayout.EAST);
+		
 		quitBtn = new JButton("Exit");
-		quitBtn.setSize(100, 50);
+		//quitBtn.setSize(100, 50);
 		quitBtn.addActionListener(new newGameOrQuitBtn());
-		playAgainMessage = new JLabel("Would you like to play again?");
+		exitSection = new JPanel(new FlowLayout());
+		exitSection.setSize(100, 50);
+		exitSection.add(quitBtn);
+		newGamePanel.add(exitSection, BorderLayout.WEST);
 		
-		newGamePanel.add(newGameBtn);
-		newGamePanel.add(quitBtn);
+		//newGamePanel.add(playAgainMessage);
+		//newGamePanel.add(newGameBtn);
 		
-		newGamePanel.add(playAgainMessage);
 		newGameFrame.add(newGamePanel);
 		newGameFrame.setVisible(false);
 	}
@@ -455,6 +459,7 @@ public class GameboardGui extends JFrame implements Runnable {
 
 			// Display the loading screen as we are waiting for players to connect/join
 			loadingScreen.setVisible(false);
+			newGameFrame.setVisible(true);
 
 			while (true) {
 				/* 
