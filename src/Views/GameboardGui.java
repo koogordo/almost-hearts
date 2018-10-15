@@ -529,7 +529,7 @@ public class GameboardGui extends JFrame implements Runnable
 					totalRounds++;
 					break;
 				case "Reset":
-					//disable gui for the reset option here
+					newGameFrame.setVisible(false);
 					setRearCards();
 					setHand(in.readLine());
 					break;
