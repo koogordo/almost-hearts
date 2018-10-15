@@ -475,7 +475,7 @@ public class GameboardGui extends JFrame implements Runnable
 			setHand(in.readLine());
 			
 			// Method for initiating game music
-			playSound();
+			//playSound();
 			
 			// Display the loading screen as we are waiting for players to connect/join
 			loadingScreen.setVisible(false);
