@@ -158,7 +158,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		this.setVisible(false);
 
 		newGameFrame = new JFrame();
-		newGameFrame.setBounds(100, 100, 400, 400);
+		newGameFrame.setSize(200, 200);
 		newGamePanel = new JPanel();
 		newGamePanel.setLayout(new BorderLayout());
 		playAgainMessage = new JLabel("Would you like to play again?");
