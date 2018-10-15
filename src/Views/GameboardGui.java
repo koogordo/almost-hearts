@@ -158,7 +158,14 @@ public class GameboardGui extends JFrame implements Runnable {
 		this.setVisible(false);
 
 		newGameFrame = new JFrame();
-		newGameFrame.setSize(200, 200);
+		newGameFrame.setSize(200, 100);
+		
+		newGameFrame.setResizable(false); // Do not allow the user to adjust the size of the frame
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize(); // set the dimension to the screenSize
+	    int x = (int) ((dimension.getWidth() - newGameFrame.getWidth()) / 2); // Set x to the width of the screen - the width of the frame
+	    int y = (int) ((dimension.getHeight() - newGameFrame.getHeight()) / 2); // Set y to the height of the screen - the height of the frame
+	    newGameFrame.setLocation(x, y); // Set the frame's starting location to x, y
+		
 		newGamePanel = new JPanel();
 		newGamePanel.setLayout(new BorderLayout());
 		playAgainMessage = new JLabel("Would you like to play again?");
