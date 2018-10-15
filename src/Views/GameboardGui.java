@@ -2,7 +2,9 @@ package Views;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -30,6 +32,8 @@ public class GameboardGui extends JFrame implements Runnable {
 	private JPanel submitArea;
 	private JPanel newGameSection;
 	private JPanel exitSection;
+	private JPanel NorthStuff;
+	private JPanel CenterStuff;
 	private JButton submit;
 	private JPanel contentPane;
 	private Card selectedCard;
@@ -45,6 +49,7 @@ public class GameboardGui extends JFrame implements Runnable {
 	private JButton newGameBtn;
 	private JButton quitBtn;
 	private JLabel playAgainMessage;
+	private JLabel gameLogo; // Initialize gameLogo JLabel
 	private boolean myTurn = false;
 	int totalRounds = 1;    // total rounds
 
@@ -157,8 +162,8 @@ public class GameboardGui extends JFrame implements Runnable {
 		playerPanels[2] = panel_3;
 		this.setVisible(false);
 
-		newGameFrame = new JFrame();
-		newGameFrame.setSize(200, 100);
+		newGameFrame = new JFrame("Do you want to play again?");
+		newGameFrame.setSize(500, 300);
 		
 		newGameFrame.setResizable(false); // Do not allow the user to adjust the size of the frame
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize(); // set the dimension to the screenSize
@@ -168,31 +173,59 @@ public class GameboardGui extends JFrame implements Runnable {
 		
 		newGamePanel = new JPanel();
 		newGamePanel.setLayout(new BorderLayout());
+		
+		gameLogo = new JLabel(); // Setting gameLogo to a new JLabel
+		gameLogo.setSize(150,100); // Seting gameLogo to the size of 200, 58
+		
+		NorthStuff = new JPanel();
+		NorthStuff.setLayout(new BorderLayout());
+		newGamePanel.add(NorthStuff, BorderLayout.NORTH);
+		
+		BufferedImage logo = null; // Initializing logo
+		try {
+			java.net.URL url = this.getClass().getResource("/cardImages/AlmostHearts.png");
+		    logo = ImageIO.read(url); // Setting logo to the logo image
+		} catch (IOException e) { // Checking for errors
+		    e.printStackTrace(); // Print out said errors
+		}
+		Image dimg = logo.getScaledInstance(gameLogo.getWidth(), gameLogo.getHeight(), Image.SCALE_SMOOTH); // Setting dimg to the width and height of gameLogo
+		ImageIcon imageIcon = new ImageIcon(dimg); // Setting imageIcon to the dimg
+		gameLogo.setIcon(imageIcon); // Setting gameLogo's icon to imageIcon
+		JPanel TopLogo = new JPanel(new FlowLayout()); // Setting JPanel TopLogo to flowLayout
+		TopLogo.add(gameLogo); // Adding gameLogo to the topLogo
+		NorthStuff.add(BorderLayout.NORTH, TopLogo); // Adding TopLogo to North of the frame
+		
 		playAgainMessage = new JLabel("Would you like to play again?");
+		playAgainMessage.setFont(new Font("Arial", Font.BOLD, 30));
 		playAgainMessage.setHorizontalAlignment(SwingConstants.CENTER);
-		newGamePanel.add(playAgainMessage, BorderLayout.NORTH);
+		NorthStuff.add(playAgainMessage, BorderLayout.CENTER);
+		
+		CenterStuff = new JPanel();
+		CenterStuff.setLayout(new BorderLayout());
+		newGamePanel.add(CenterStuff, BorderLayout.CENTER);
 		
 		newGameBtn = new JButton("New Game");
-		//newGameBtn.setSize(100, 50);
+		newGameBtn.setFont(new Font("Arial", Font.BOLD, 20));
 		newGameBtn.addActionListener(new newGameOrQuitBtn());
 		newGameSection = new JPanel(new FlowLayout());
 		newGameSection.setSize(100, 50);
 		newGameSection.add(newGameBtn);
-		newGamePanel.add(newGameSection, BorderLayout.WEST);
+		CenterStuff.add(newGameSection, BorderLayout.NORTH);
+		
 		
 		quitBtn = new JButton("Exit");
-		//quitBtn.setSize(100, 50);
+		quitBtn.setFont(new Font("Arial", Font.BOLD, 20));
 		quitBtn.addActionListener(new newGameOrQuitBtn());
 		exitSection = new JPanel(new FlowLayout());
 		exitSection.setSize(100, 50);
 		exitSection.add(quitBtn);
-		newGamePanel.add(exitSection, BorderLayout.EAST);
+		CenterStuff.add(exitSection, BorderLayout.CENTER);
 		
 		//newGamePanel.add(playAgainMessage);
 		//newGamePanel.add(newGameBtn);
 		
 		newGameFrame.add(newGamePanel);
-		newGameFrame.setVisible(false);
+		newGameFrame.setVisible(true);
 	}
 
 	public void setRearCards() {
