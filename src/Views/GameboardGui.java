@@ -172,8 +172,10 @@ public class GameboardGui extends JFrame implements Runnable {
 		quitBtn = new JButton("Exit");
 		quitBtn.addActionListener(new newGameOrQuitBtn());
 		playAgainMessage = new JLabel("Would you like to play again?");
+		
 		newGamePanel.add(newGameBtn);
 		newGamePanel.add(quitBtn);
+		
 		newGamePanel.add(playAgainMessage);
 		newGameFrame.add(newGamePanel);
 		newGameFrame.setVisible(false);
