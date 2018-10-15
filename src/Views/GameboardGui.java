@@ -65,7 +65,15 @@ public class GameboardGui extends JFrame implements Runnable {
 		}
 
 		setBounds(100, 100, 1100, 900);
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e)
+		    {
+				out.println("Exit");
+				out.flush();
+		    }
+		});
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(41,158,48));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
@@ -115,7 +123,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		 */
 
 		//Player one GUI logic
-		JPanel panel_1 = new JPanel();
+		JPanel panel_1 = new ImagePanel("/cardImages/woodWallpaper.jpg");
 		panel_1.setOpaque(false);
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_1);
@@ -129,7 +137,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		panel_1.add(cardLabels[0], BorderLayout.CENTER);
 
 		// Player two GUI logic
-		JPanel panel_2 = new JPanel();
+		JPanel panel_2 = new ImagePanel("/cardImages/woodWallpaper.jpg");
 		panel_2.setOpaque(false);
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_2);
@@ -143,7 +151,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		panel_2.add(cardLabels[1], BorderLayout.CENTER);
 
 		// Player 3 GUI logic
-		JPanel panel_3 = new JPanel();
+		JPanel panel_3 = new ImagePanel("/cardImages/woodWallpaper.jpg");
 		panel_3.setOpaque(false);
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_3);
@@ -160,7 +168,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		playerPanels[0] = panel_1;
 		playerPanels[1] = panel_2;
 		playerPanels[2] = panel_3;
-		this.setVisible(false);
+		this.setVisible(true);
 
 		newGameFrame = new JFrame("Do you want to play again?");
 		newGameFrame.setSize(500, 300);
@@ -194,6 +202,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		JPanel TopLogo = new JPanel(new FlowLayout()); // Setting JPanel TopLogo to flowLayout
 		TopLogo.add(gameLogo); // Adding gameLogo to the topLogo
 		NorthStuff.add(BorderLayout.NORTH, TopLogo); // Adding TopLogo to North of the frame
+		
 		
 		playAgainMessage = new JLabel("Would you like to play again?");
 		playAgainMessage.setFont(new Font("Arial", Font.BOLD, 30));
@@ -578,5 +587,24 @@ public class GameboardGui extends JFrame implements Runnable {
 		} catch (IOException e) { // Catch any error(s)
 			e.printStackTrace(); // Print out the error(s)
 		}
+	}
+	public class ImagePanel extends JPanel{
+
+	    private BufferedImage image;
+
+	    public ImagePanel(String location) {
+	       try {                
+	          image = ImageIO.read(this.getClass().getResource(location));
+	       } catch (IOException ex) {
+	            // handle exception...
+	       }
+	    }
+
+	    @Override
+	    protected void paintComponent(Graphics g) {
+	        super.paintComponent(g);
+	        g.drawImage(image, 0, 0, this); // see javadoc for more info on the parameters            
+	    }
+
 	}
 }
