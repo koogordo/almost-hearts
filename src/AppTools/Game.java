@@ -179,9 +179,9 @@ public class Game
 			//end game or whatever
 		}
 	}
-	public void resetGame(int p)
+	public void resetGame()
 	{
-		Broadcast("Reset " + p);
+		Broadcast("Reset");
 		for(int i = 0; i < 3; i++)
 		{
 			roundsWon[i] = 0;
@@ -192,6 +192,13 @@ public class Game
 		playerTurn = 0;
 		totalRounds = 0;
 		distributeCards();
+	}
+	
+	public void quitGame(int p)
+	{
+		for(int i = 0; i < 3; i++)
+		{
+		}
 	}
 
 	public void Broadcast(String broadcastString) // Method that takes the string given and sends it out to each player

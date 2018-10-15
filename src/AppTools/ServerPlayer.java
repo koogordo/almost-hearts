@@ -65,7 +65,7 @@ public class ServerPlayer implements Runnable
 					game.turnPlayed(Integer.parseInt(input.nextToken()), input.nextToken(), Integer.parseInt(input.nextToken()));
 					break;
 				case "Reset":
-					game.resetGame(playerID);
+					game.resetGame();
 					break;
 				case "Exit": 
 					game.Broadcast("Exit");
