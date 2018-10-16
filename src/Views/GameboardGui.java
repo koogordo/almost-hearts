@@ -168,7 +168,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		playerPanels[0] = panel_1;
 		playerPanels[1] = panel_2;
 		playerPanels[2] = panel_3;
-		this.setVisible(true);
+		
 
 		newGameFrame = new JFrame();
 		newGameFrame.setSize(450, 250);
