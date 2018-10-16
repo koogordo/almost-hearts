@@ -72,11 +72,19 @@ public class GameboardGui extends JFrame implements Runnable {
 				out.flush();
 		    }
 		});
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(41,158,48));
+
+		//panel.add(panel_1);
+		
+		contentPane = new ImagePanel("/cardImages/greenlogo.jpg");
+		contentPane.setOpaque(false);
+		contentPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		//contentPane = new JPanel();
+		//contentPane.setBackground(new Color(41,158,48)); // Green Color ---------------------------------
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
+		
 		handAndSubmit = new JPanel();
 		handAndSubmit.setOpaque(false);
 		handArea = new JPanel();
@@ -178,7 +186,7 @@ public class GameboardGui extends JFrame implements Runnable {
 	    int x = (int) ((dimension.getWidth() - newGameFrame.getWidth()) / 2); // Set x to the width of the screen - the width of the frame
 	    int y = (int) ((dimension.getHeight() - newGameFrame.getHeight()) / 2); // Set y to the height of the screen - the height of the frame
 	    newGameFrame.setLocation(x, y); // Set the frame's starting location to x, y
-		
+		// New or Exit Game Option Panel ------------------------------------------------------------------
 		newGamePanel = new JPanel();
 		newGamePanel.setLayout(new BorderLayout());
 		
