@@ -234,7 +234,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		//newGamePanel.add(newGameBtn);
 		
 		newGameFrame.add(newGamePanel);
-		newGameFrame.setVisible(true);
+		newGameFrame.setVisible(false);
 	}
 
 	public void setRearCards() {
@@ -513,7 +513,7 @@ public class GameboardGui extends JFrame implements Runnable {
 
 			// Display the loading screen as we are waiting for players to connect/join
 			loadingScreen.setVisible(false);
-			newGameFrame.setVisible(false);
+			newGameFrame.setVisible(true);
 			while (true) {
 				/* 
 				 * While true creates in infinite loop which allows this threads sockets to listen constantly

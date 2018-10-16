@@ -60,7 +60,7 @@ public class ServerPlayer implements Runnable {
 					game.resetGame();
 					break;
 				case "Exit": 
-					game.Broadcast("Exit");
+					game.Broadcast("Exit " + playerID);
 					break;
 				default:
 					break;
