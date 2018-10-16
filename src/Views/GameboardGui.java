@@ -5,6 +5,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -72,8 +73,6 @@ public class GameboardGui extends JFrame implements Runnable {
 				out.flush();
 		    }
 		});
-
-		//panel.add(panel_1);
 		
 		contentPane = new ImagePanel("/cardImages/greenlogo.jpg");
 		contentPane.setOpaque(false);
@@ -84,7 +83,6 @@ public class GameboardGui extends JFrame implements Runnable {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		
 		handAndSubmit = new JPanel();
 		handAndSubmit.setOpaque(false);
 		handArea = new JPanel();
@@ -112,6 +110,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		notificationPanel.setLayout(new BoxLayout(notificationPanel, BoxLayout.Y_AXIS));
 		notificationLabel = new JLabel("notification label");
 		notificationLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		notificationLabel.setForeground(Color.white);
 		notificationLabel.setFont(new Font("Serif", Font.PLAIN, 40));
 		notificationPanel.add(notificationLabel);
 		contentPane.add(panel);
@@ -471,9 +470,21 @@ public class GameboardGui extends JFrame implements Runnable {
 	//---------------------------------------------------------------------------------------
 	private void playSound() {
 		try{
+			// from a wave File
+			File soundFile = new File("/cardImages/jazz.wav");
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+			
+			// can read from a disk file and also a file contained inside a JAR (used for distribution)
+			// recommended
+			
+			//URL url = this.getClass().getClassLoader().getResource("eatfood.wav");
+			//AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+
 			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(new File("/cardImages/jazz.wav")));
-			clip.start();
+			clip.open(audioIn);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			//if (clip.isRunning()) clip.stop();
+			System.out.println("System Playing Music");
 		} catch (Exception e) {
 			e.printStackTrace(System.out);
 		}
@@ -513,13 +524,14 @@ public class GameboardGui extends JFrame implements Runnable {
 			submit.setEnabled(false);
 
 			//Adding submit to a flow layout and the flow layout to handArea
+			//submitArea.setOpaque(true); //--------------------------------------------------
 			submitArea.add(submit);
 			this.notificationLabel.setText(playerLabels[0].getText() + "'s Turn");
 			this.revalidate();
 			this.repaint();
 			
 			// Method for initiating game music
-			//playSound();---------------------------------------------------------------------------------------------
+			playSound();//---------------------------------------------------------------------------------------------
 
 			// Display the loading screen as we are waiting for players to connect/join
 			loadingScreen.setVisible(false);
