@@ -597,7 +597,7 @@ public class GameboardGui extends JFrame implements Runnable {
 			e.printStackTrace(); // Print out the error(s)
 		}
 	}
-	public class ImagePanel extends JPanel{
+	public class ImagePanel extends JPanel {
 
 	    private BufferedImage image;
 
