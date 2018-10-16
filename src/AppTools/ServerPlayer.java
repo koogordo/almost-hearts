@@ -61,7 +61,6 @@ public class ServerPlayer implements Runnable {
 					break;
 				case "Exit": 
 					game.Broadcast("Exit");
-					System.exit(0);
 					break;
 				default:
 					break;

@@ -234,7 +234,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		//newGamePanel.add(newGameBtn);
 		
 		newGameFrame.add(newGamePanel);
-		newGameFrame.setVisible(false);
+		newGameFrame.setVisible(true);
 	}
 
 	public void setRearCards() {
