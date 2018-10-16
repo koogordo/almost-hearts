@@ -498,6 +498,7 @@ public class GameboardGui extends JFrame implements Runnable {
 			// Parses the string given into Card objects and puts it in the ArrayList hand
 			setHand(in.readLine());
 			submit = new JButton("Play Card");
+			submit.setFont(new Font("Arial", Font.BOLD, 30)); //------------------------------------------------------
 			submit.addActionListener(new submitButton());
 			submit.setEnabled(false);
 
