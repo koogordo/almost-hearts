@@ -170,8 +170,8 @@ public class GameboardGui extends JFrame implements Runnable {
 		playerPanels[2] = panel_3;
 		
 
-		newGameFrame = new JFrame("Do you want to play again?");
-		newGameFrame.setSize(500, 300);
+		newGameFrame = new JFrame();
+		newGameFrame.setSize(450, 250);
 		
 		newGameFrame.setResizable(false); // Do not allow the user to adjust the size of the frame
 	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize(); // set the dimension to the screenSize
@@ -183,7 +183,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		newGamePanel.setLayout(new BorderLayout());
 		
 		gameLogo = new JLabel(); // Setting gameLogo to a new JLabel
-		gameLogo.setSize(150,100); // Seting gameLogo to the size of 200, 58
+		gameLogo.setSize(200,100); // Seting gameLogo to the size of 200, 58
 		
 		NorthStuff = new JPanel();
 		NorthStuff.setLayout(new BorderLayout());
