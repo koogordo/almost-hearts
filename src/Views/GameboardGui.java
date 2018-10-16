@@ -441,8 +441,6 @@ public class GameboardGui extends JFrame implements Runnable {
 
 	}
 	
-
-
 	public ImageIcon ScaledImage(Image i) {
 		/*
 		 * A method for scaling the images on image icons so they remain proportional to the screen and so that
