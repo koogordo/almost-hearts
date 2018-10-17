@@ -128,6 +128,8 @@ public class GameboardGui extends JFrame implements Runnable {
 		 * -- Player two GUI logic
 		 * -- Player 3 GUI logic
 		 */
+		
+		
 
 		//Player one GUI logic
 		JPanel panel_1 = new JPanel();
@@ -135,6 +137,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_1);
 		playerLabels[0] = new JLabel("Player 1");
+		playerLabels[0].setForeground(Color.WHITE);
 		playerLabels[0].setVerticalAlignment(SwingConstants.TOP);
 		playerLabels[0].setHorizontalAlignment(SwingConstants.CENTER);
 		playerLabels[0].setFont(new Font("Serif", Font.PLAIN, 25));
@@ -149,6 +152,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_2);
 		playerLabels[1] = new JLabel("Player 2");
+		playerLabels[1].setForeground(Color.WHITE);
 		playerLabels[1].setHorizontalAlignment(SwingConstants.CENTER);
 		playerLabels[1].setVerticalAlignment(SwingConstants.TOP);
 		playerLabels[1].setFont(new Font("Serif", Font.PLAIN, 25));
@@ -163,6 +167,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_3);
 		playerLabels[2] = new JLabel("Player 3");
+		playerLabels[2].setForeground(Color.WHITE);
 		playerLabels[2].setVerticalAlignment(SwingConstants.TOP);
 		playerLabels[2].setHorizontalAlignment(SwingConstants.CENTER);
 		playerLabels[2].setFont(new Font("Serif", Font.PLAIN, 25));
@@ -311,9 +316,11 @@ public class GameboardGui extends JFrame implements Runnable {
 		StringTokenizer st = new StringTokenizer(names);
 		st.nextToken();
 
+
 		playerLabels[0].setText(st.nextToken());
 		playerLabels[1].setText(st.nextToken());
 		playerLabels[2].setText(st.nextToken());
+
 	}
 
 	public static void sortHand(ArrayList<Card> cards) {
@@ -474,25 +481,27 @@ public class GameboardGui extends JFrame implements Runnable {
 	}
 	//---------------------------------------------------------------------------------------
 	private void playSound() {
-		try{
-			// from a wave File
-			File soundFile = new File("/cardImages/jazz.wav");
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-			
-			// can read from a disk file and also a file contained inside a JAR (used for distribution)
-			// recommended
-			
-			//URL url = this.getClass().getClassLoader().getResource("eatfood.wav");
-			//AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioIn);
-			clip.loop(Clip.LOOP_CONTINUOUSLY);
-			//if (clip.isRunning()) clip.stop();
-			System.out.println("System Playing Music");
-		} catch (Exception e) {
-			e.printStackTrace(System.out);
-		}
+//		try{
+//			// from a wave File
+//			File soundFile = new File("/cardImages/jazz.wav");
+//			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+//			
+//			// can read from a disk file and also a file contained inside a JAR (used for distribution)
+//			// recommended
+//			
+//			//URL url = this.getClass().getClassLoader().getResource("eatfood.wav");
+//			//AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+//
+//			Clip clip = AudioSystem.getClip();
+//			clip.open(audioIn);
+//			clip.loop(Clip.LOOP_CONTINUOUSLY);
+//			//if (clip.isRunning()) clip.stop();
+//			System.out.println("System Playing Music");
+//		} catch (Exception e) {
+//			e.printStackTrace(System.out);
+//		}
+		
+		
 	}
 
 	public void run() {
