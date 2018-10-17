@@ -103,7 +103,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		notificationPanel.setAlignmentX(CENTER_ALIGNMENT);
 
 		// Base content pane logic
-		JPanel panel = new JPanel();
+		JPanel panel = new ImagePanel("/cardImages/woodWallpaper.jpg");
 		panel.setOpaque(false);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		contentPane.add(notificationPanel);
@@ -130,7 +130,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		 */
 
 		//Player one GUI logic
-		JPanel panel_1 = new ImagePanel("/cardImages/woodWallpaper.jpg");
+		JPanel panel_1 = new JPanel();
 		panel_1.setOpaque(false);
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_1);
@@ -144,7 +144,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		panel_1.add(cardLabels[0], BorderLayout.CENTER);
 
 		// Player two GUI logic
-		JPanel panel_2 = new ImagePanel("/cardImages/woodWallpaper.jpg");
+		JPanel panel_2 = new JPanel();
 		panel_2.setOpaque(false);
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_2);
@@ -158,7 +158,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		panel_2.add(cardLabels[1], BorderLayout.CENTER);
 
 		// Player 3 GUI logic
-		JPanel panel_3 = new ImagePanel("/cardImages/woodWallpaper.jpg");
+		JPanel panel_3 = new JPanel();
 		panel_3.setOpaque(false);
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.add(panel_3);
@@ -243,7 +243,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		newGameFrame.add(newGamePanel);
 		newGameFrame.setVisible(false);
 		
-		this.setVisible(true);//erase later, only used for temporary use
+		//this.setVisible(true);//erase later, only used for temporary use
 	}
 
 	public void setRearCards() {
@@ -461,6 +461,11 @@ public class GameboardGui extends JFrame implements Runnable {
 		ImageIcon scaledImage = new ImageIcon(temp);
 		return scaledImage;
 	}
+	
+	public Image ScaledPanelImage(Image i) {
+		Image temp = i.getScaledInstance(this.getWidth(), this.getHeight(), java.awt.Image.SCALE_SMOOTH);
+		return temp;
+	}
 
 	public boolean isMyTurn(int playedPerson) {
 		// A method for determining whether or not a players turn is up.
@@ -614,6 +619,7 @@ public class GameboardGui extends JFrame implements Runnable {
 	public class ImagePanel extends JPanel {
 
 	    private BufferedImage image;
+	    private Image scaledImage;
 
 	    public ImagePanel(String location) {
 	       try {                
@@ -621,12 +627,13 @@ public class GameboardGui extends JFrame implements Runnable {
 	       } catch (IOException ex) {
 	            // handle exception...
 	       }
+	       scaledImage = ScaledPanelImage(image);
 	    }
 
 	    @Override
 	    protected void paintComponent(Graphics g) {
 	        super.paintComponent(g);
-	        g.drawImage(image, 0, 0, this); // see javadoc for more info on the parameters            
+	        g.drawImage(scaledImage, 0, 0, this); // see javadoc for more info on the parameters            
 	    }
 
 	}
