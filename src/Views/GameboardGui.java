@@ -382,7 +382,7 @@ public class GameboardGui extends JFrame implements Runnable {
 				//selectedCard.setBorder(null);
 			}
 			selectedCard = ((Card) e.getSource());
-			selectedCard.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3));
+			selectedCard.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 3));
 			submit.setEnabled(myTurn);
 		}
 		@Override
@@ -529,7 +529,7 @@ public class GameboardGui extends JFrame implements Runnable {
 			submit.setEnabled(false);
 
 			//Adding submit to a flow layout and the flow layout to handArea
-			//submitArea.setOpaque(true); //--------------------------------------------------
+			submitArea.setOpaque(false); //--------------------------------------------------
 			submitArea.add(submit);
 			this.notificationLabel.setText(playerLabels[0].getText() + "'s Turn");
 			this.revalidate();
