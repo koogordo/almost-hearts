@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.io.*;
 import java.net.Socket;
+import java.net.URL;
 import java.util.*;
 import AppTools.Card;
 
@@ -481,27 +482,27 @@ public class GameboardGui extends JFrame implements Runnable {
 	}
 	//---------------------------------------------------------------------------------------
 	private void playSound() {
-//		try{
-//			// from a wave File
-//			File soundFile = new File("/cardImages/jazz.wav");
-//			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-//			
-//			// can read from a disk file and also a file contained inside a JAR (used for distribution)
-//			// recommended
-//			
-//			//URL url = this.getClass().getClassLoader().getResource("eatfood.wav");
-//			//AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-//
-//			Clip clip = AudioSystem.getClip();
-//			clip.open(audioIn);
-//			clip.loop(Clip.LOOP_CONTINUOUSLY);
-//			//if (clip.isRunning()) clip.stop();
-//			System.out.println("System Playing Music");
-//		} catch (Exception e) {
-//			e.printStackTrace(System.out);
-//		}
-		
-		
+
+		try{
+			// from a wave File
+			File soundFile = new File("/cardImages/jazz.wav");
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+			
+			// can read from a disk file and also a file contained inside a JAR (used for distribution)
+			// recommended
+			
+			//URL url = this.getClass().getClassLoader().getResource("/cardImages/jazz.wav");
+			//AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioIn);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			
+			//if (clip.isRunning()) clip.stop();
+			System.out.println("System Playing Music");
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
 	}
 
 	public void run() {
