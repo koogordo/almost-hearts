@@ -480,31 +480,7 @@ public class GameboardGui extends JFrame implements Runnable {
 		playedPerson++;
 		return playedPerson % 3 == playerID;
 	}
-	//---------------------------------------------------------------------------------------
-	private void playSound() {
-
-		try{
-			// from a wave File
-			File soundFile = new File("/cardImages/jazz.wav");
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-			
-			// can read from a disk file and also a file contained inside a JAR (used for distribution)
-			// recommended
-			
-			//URL url = this.getClass().getClassLoader().getResource("/cardImages/jazz.wav");
-			//AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-
-			Clip clip = AudioSystem.getClip();
-			clip.open(audioIn);
-			clip.loop(Clip.LOOP_CONTINUOUSLY);
-			
-			//if (clip.isRunning()) clip.stop();
-			System.out.println("System Playing Music");
-		} catch (Exception e) {
-			e.printStackTrace(System.out);
-		}
-	}
-
+	
 	public void run() {
 		/*
 		 * This thread handles all gameplay tasks that require passing information to the ServerPlayer
@@ -534,20 +510,17 @@ public class GameboardGui extends JFrame implements Runnable {
 			// Parses the string given into Card objects and puts it in the ArrayList hand
 			setHand(in.readLine());
 			submit = new JButton("Play Card");
-			submit.setFont(new Font("Arial", Font.BOLD, 30)); //------------------------------------------------------
+			submit.setFont(new Font("Arial", Font.BOLD, 30)); 
 			submit.addActionListener(new submitButton());
 			submit.setEnabled(false);
 
 			//Adding submit to a flow layout and the flow layout to handArea
-			submitArea.setOpaque(false); //--------------------------------------------------
+			submitArea.setOpaque(false); 
 			submitArea.add(submit);
 			this.notificationLabel.setText(playerLabels[0].getText() + "'s Turn");
 			this.revalidate();
 			this.repaint();
 			
-			// Method for initiating game music
-			playSound();//---------------------------------------------------------------------------------------------
-
 			// Display the loading screen as we are waiting for players to connect/join
 			loadingScreen.setVisible(false);
 			newGameFrame.setVisible(false);
